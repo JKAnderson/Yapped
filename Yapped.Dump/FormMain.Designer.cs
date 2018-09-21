@@ -31,6 +31,7 @@
             System.Windows.Forms.Label lblRegulation;
             System.Windows.Forms.Label lblOutput;
             System.Windows.Forms.Label label3;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.txtRegulation = new System.Windows.Forms.TextBox();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.btnBrowseRegulation = new System.Windows.Forms.Button();
@@ -157,6 +158,7 @@
             this.Controls.Add(this.txtRegulation);
             this.Controls.Add(lblOutput);
             this.Controls.Add(lblRegulation);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.Text = "Yapped.Dump <version>";
             this.ResumeLayout(false);

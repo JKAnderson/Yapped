@@ -1,19 +1,18 @@
 ﻿using SoulsFormats;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Diagnostics;
 using System.IO;
-using System.Linq;
+using System.Media;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Yapped
 {
     public partial class FormMain : Form
     {
+        private const string UPDATE_URL = "";
         private static Properties.Settings settings = Properties.Settings.Default;
 
         private string regulationPath;
@@ -43,10 +42,26 @@ namespace Yapped
             if (LoadLayouts())
             {
                 LoadRegulation();
-                dgvParams.ClearSelection();
-                dgvParams.Rows[settings.SelectedParam].Selected = true;
-                dgvRows.ClearSelection();
-                dgvRows.Rows[settings.SelectedRow].Selected = true;
+
+                if (settings.SelectedParam >= dgvParams.Rows.Count)
+                    settings.SelectedParam = 0;
+
+                if (dgvParams.Rows.Count > 0)
+                {
+                    dgvParams.ClearSelection();
+                    dgvParams.Rows[settings.SelectedParam].Selected = true;
+                    dgvParams.CurrentCell = dgvParams.SelectedCells[0];
+                }
+
+                if (settings.SelectedRow >= dgvRows.Rows.Count)
+                    settings.SelectedRow = 0;
+
+                if (dgvRows.Rows.Count > 0)
+                {
+                    dgvRows.ClearSelection();
+                    dgvRows.Rows[settings.SelectedRow].Selected = true;
+                    dgvRows.CurrentCell = dgvRows.SelectedCells[0];
+                }
             }
         }
 
@@ -65,8 +80,10 @@ namespace Yapped
             }
 
             settings.RegulationPath = regulationPath;
-            settings.SelectedParam = dgvParams.SelectedCells[0].RowIndex;
-            settings.SelectedRow = dgvRows.SelectedCells[0].RowIndex;
+            if (dgvParams.SelectedCells.Count > 0)
+                settings.SelectedParam = dgvParams.SelectedCells[0].RowIndex;
+            if (dgvRows.SelectedCells.Count > 0)
+                settings.SelectedRow = dgvRows.SelectedCells[0].RowIndex;
         }
 
         private bool LoadLayouts()
@@ -79,12 +96,12 @@ namespace Yapped
             }
             else
             {
-                foreach (string path in Directory.GetFiles("Layouts", "*.txt"))
+                foreach (string path in Directory.GetFiles("Layouts", "*.xml"))
                 {
                     string paramID = Path.GetFileNameWithoutExtension(path);
                     try
                     {
-                        PARAM64.Layout layout = new PARAM64.Layout(File.ReadAllText(path));
+                        PARAM64.Layout layout = PARAM64.Layout.ReadXMLFile(path);
                         layouts[paramID] = layout;
                     }
                     catch (Exception ex)
@@ -159,29 +176,14 @@ namespace Yapped
             }
         }
 
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ofdRegulation.InitialDirectory = Path.GetDirectoryName(regulationPath);
-            }
-            catch
-            {
-                ofdRegulation.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game";
-            }
-
-            if (ofdRegulation.ShowDialog() == DialogResult.OK)
-            {
-                regulationPath = ofdRegulation.FileName;
-                LoadRegulation();
-            }
-        }
-
         private void dgvParams_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvParams.SelectedCells.Count > 0)
             {
                 ParamFile paramFile = (ParamFile)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
+                if (dgvCells.FirstDisplayedCell != null && dgvCells.Rows.Count > 0)
+                    dgvCells.FirstDisplayedScrollingRowIndex = 0;
+
                 dgvRows.DataSource = paramFile;
                 dgvRows.DataMember = "Rows";
             }
@@ -191,6 +193,10 @@ namespace Yapped
         {
             if (dgvRows.SelectedCells.Count > 0)
             {
+                int cellDisplayIndex = 0;
+                if (dgvCells.FirstDisplayedCell != null)
+                    cellDisplayIndex = dgvCells.FirstDisplayedScrollingRowIndex;
+
                 PARAM64.Row row = (PARAM64.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
                 List<PARAM64.Cell> cells = new List<PARAM64.Cell>();
                 foreach (PARAM64.Cell cell in row.Cells)
@@ -199,57 +205,17 @@ namespace Yapped
                         cells.Add(cell);
                 }
                 dgvCells.DataSource = cells;
-            }
-        }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            BND4 bnd = Core.ReadRegulation(regulationPath, out bool encrypted);
-            foreach (BND4.File file in bnd.Files)
-            {
-                foreach (DataGridViewRow paramRow in dgvParams.Rows)
-                {
-                    ParamFile paramFile = (ParamFile)paramRow.DataBoundItem;
-                    if (Path.GetFileNameWithoutExtension(file.Name) == paramFile.Name)
-                        file.Bytes = paramFile.Param.Write();
-                }
+                if (dgvCells.Rows.Count > 0)
+                    dgvCells.FirstDisplayedScrollingRowIndex = cellDisplayIndex;
             }
-            Core.WriteRegulation(regulationPath, encrypted, bnd);
         }
 
         private void dgvCells_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             PARAM64.Cell paramCell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             DataGridViewCell dgvCell = dgvCells.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            string type = paramCell.Type;
-            string value = dgvCell.Value.ToString();
-
-            if (type == "s8")
-                paramCell.Value = sbyte.Parse(value);
-            else if (type == "u8")
-                paramCell.Value = byte.Parse(value);
-            else if (type == "x8")
-                paramCell.Value = Convert.ToByte(value, 16);
-            else if (type == "s16")
-                paramCell.Value = short.Parse(value);
-            else if (type == "u16")
-                paramCell.Value = ushort.Parse(value);
-            else if (type == "x16")
-                paramCell.Value = Convert.ToUInt16(value, 16);
-            else if (type == "s32")
-                paramCell.Value = int.Parse(value);
-            else if (type == "u32")
-                paramCell.Value = uint.Parse(value);
-            else if (type == "x32")
-                paramCell.Value = Convert.ToUInt32(value, 16);
-            else if (type == "f32")
-                paramCell.Value = float.Parse(value);
-            else if (type == "b8" || type == "b32")
-                paramCell.Value = bool.Parse(value);
-            else if (type.StartsWith("fixstr"))
-                paramCell.Value = value;
-            else
-                throw new NotImplementedException("Cannot convert cell type.");
+            paramCell.Value = PARAM64.Layout.ParseParamValue(paramCell.Type, dgvCell.Value.ToString());
         }
 
         private void dgvCells_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -381,6 +347,204 @@ namespace Yapped
                     e.Value = $"0x{e.Value:X4}";
                 else if (cell.Type == "x32")
                     e.Value = $"0x{e.Value:X8}";
+            }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ofdRegulation.InitialDirectory = Path.GetDirectoryName(regulationPath);
+            }
+            catch
+            {
+                ofdRegulation.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game";
+            }
+
+            if (ofdRegulation.ShowDialog() == DialogResult.OK)
+            {
+                regulationPath = ofdRegulation.FileName;
+                LoadRegulation();
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BND4 bnd = Core.ReadRegulation(regulationPath, out bool encrypted);
+            foreach (BND4.File file in bnd.Files)
+            {
+                foreach (DataGridViewRow paramRow in dgvParams.Rows)
+                {
+                    ParamFile paramFile = (ParamFile)paramRow.DataBoundItem;
+                    if (Path.GetFileNameWithoutExtension(file.Name) == paramFile.Name)
+                        file.Bytes = paramFile.Param.Write();
+                }
+            }
+            Core.WriteRegulation(regulationPath, encrypted, bnd);
+        }
+
+        private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(regulationPath + ".bak"))
+            {
+                DialogResult choice = MessageBox.Show("Are you sure you want to restore the backup?",
+                    "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (choice == DialogResult.Yes)
+                {
+                    try
+                    {
+                        File.Delete(regulationPath);
+                        File.Move(regulationPath + ".bak", regulationPath);
+                        LoadRegulation();
+                        SystemSounds.Asterisk.Play();
+                    }
+                    catch (Exception ex)
+                    {
+                        ShowError($"Failed to restore backup\r\n\r\n{regulationPath}.bak\r\n\r\n{ex}");
+                    }
+                }
+            }
+            else
+            {
+                ShowError($"There is no backup to restore at:\r\n\r\n{regulationPath}.bak");
+            }
+        }
+
+        private void exploreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(Path.GetDirectoryName(regulationPath));
+            }
+            catch
+            {
+                SystemSounds.Hand.Play();
+            }
+        }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ParamFile paramFile = (ParamFile)dgvRows.DataSource;
+            PARAM64.Row row = new PARAM64.Row(0, "", paramFile.Layout);
+            paramFile.Param.Rows.Add(row);
+
+            // Force refresh
+            dgvRows.DataSource = null;
+            dgvRows.DataSource = paramFile;
+            dgvRows.DataMember = "Rows";
+            dgvRows.ClearSelection();
+            dgvRows.Rows[dgvRows.Rows.Count - 1].Selected = true;
+            dgvRows.CurrentCell = dgvRows.SelectedCells[0];
+        }
+
+        private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult choice = MessageBox.Show("Are you sure you want to delete this row?",
+                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (choice == DialogResult.Yes)
+            {
+                ParamFile paramFile = (ParamFile)dgvRows.DataSource;
+                int rowIndex = dgvRows.SelectedCells[0].RowIndex;
+                if (rowIndex == 0)
+                    rowIndex = 1;
+                PARAM64.Row row = (PARAM64.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
+                paramFile.Param.Rows.Remove(row);
+
+                // Force refresh7
+                dgvRows.DataSource = null;
+                dgvRows.DataSource = paramFile;
+                dgvRows.DataMember = "Rows";
+
+                if (dgvRows.Rows.Count > 0)
+                {
+                    dgvRows.ClearSelection();
+                    dgvRows.Rows[rowIndex - 1].Selected = true;
+                    dgvRows.CurrentCell = dgvRows.SelectedCells[0];
+                }
+            }
+        }
+
+        private void importNamesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<ParamFile> paramFiles = (List<ParamFile>)dgvParams.DataSource;
+            foreach (ParamFile paramFile in paramFiles)
+            {
+                if (File.Exists($"Names\\{paramFile.Name}.txt"))
+                {
+                    var names = new Dictionary<long, string>();
+                    string nameStr = File.ReadAllText($"Names\\{paramFile.Name}.txt");
+                    foreach (string line in Regex.Split(nameStr, @"\s*[\r\n]+\s*"))
+                    {
+                        if (line.Length > 0)
+                        {
+                            Match match = Regex.Match(line, @"^(\d+) (.+)$");
+                            long id = long.Parse(match.Groups[1].Value);
+                            string name = match.Groups[2].Value;
+                            names[id] = name;
+                        }
+                    }
+
+                    foreach (PARAM64.Row row in paramFile.Param.Rows)
+                    {
+                        if (names.ContainsKey(row.ID))
+                            row.Name = names[row.ID];
+                    }
+                }
+            }
+
+            // Force refresh rows
+            if (dgvRows.DataSource != null)
+            {
+                ParamFile paramFile = (ParamFile)dgvRows.DataSource;
+                dgvRows.DataSource = null;
+                dgvRows.DataSource = paramFile;
+                dgvRows.DataMember = "Rows";
+            }
+        }
+
+        private void dgvRows_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // ID
+            if (e.ColumnIndex == 0)
+            {
+                bool parsed = int.TryParse((string)e.FormattedValue, out int value);
+                if (!parsed || value < 0)
+                {
+                    ShowError("Row ID must be a positive integer.\r\nEnter a valid number or press Esc to cancel.");
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void exportNamesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<ParamFile> paramFiles = (List<ParamFile>)dgvParams.DataSource;
+            foreach (ParamFile paramFile in paramFiles)
+            {
+                StringBuilder sb = new StringBuilder();
+                foreach (PARAM64.Row row in paramFile.Param.Rows)
+                {
+                    string name = (row.Name ?? "").Trim();
+                    if (name != "")
+                    {
+                        sb.AppendLine($"{row.ID} {name}");
+                    }
+                }
+
+                try
+                {
+                    File.WriteAllText($"Names\\{paramFile.Name}.txt", sb.ToString());
+                }
+                catch (Exception ex)
+                {
+                    ShowError($"Failed to write name file: {paramFile.Name}.txt\r\n\r\n{ex}");
+                    break;
+                }
             }
         }
     }
