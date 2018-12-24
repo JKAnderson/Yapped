@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layout>
+  <entry>
+    <name>HitEffectSeId (160 ints)</name>
+    <type>dummy8</type>
+    <size>640</size>
+  </entry>
+</layout>

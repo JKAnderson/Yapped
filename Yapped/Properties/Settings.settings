@@ -17,14 +17,20 @@
     <Setting Name="RegulationPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game\Data0.bdt</Value>
     </Setting>
-    <Setting Name="SplitterDistance" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">243</Value>
+    <Setting Name="SplitterDistance1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">250</Value>
     </Setting>
     <Setting Name="SelectedParam" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="SelectedRow" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="VerifyRowDeletion" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SplitterDistance2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">249</Value>
     </Setting>
   </Settings>
 </SettingsFile>

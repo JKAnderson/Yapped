@@ -1,0 +1,43 @@
+0 Test -- テストデータ
+1 Without arts -- アーツなし
+10 Bare hands: None -- 素手：なし
+70 Large Shield: Right hand arts trigger -- 大盾：右手アーツ発動
+80 Medium Shield: Right hand arts trigger -- 中盾：右手アーツ発動
+90 Small Shield: Paris -- 小盾：パリィ
+91 Medium Shield: Paris -- 中盾：パリィ
+99 Dagger: Paris -- 短剣：パリィ
+100 Dagger: Strong Rock Step -- 短剣：強ロックステップ
+200 Straight Sword: Poised -- 直剣：構え
+300 Large Sword: Poised -- 大剣：構え
+400 Oversized Sword: Depression -- 特大剣：踏み込み
+500 Stabbing Sword: Poised -- 刺剣：構え
+600 Song Sword: Rotate -- 曲剣：回転
+700 The Sword: Spinning -- 大曲剣：回転
+900 Axe: War cry -- 斧：ウォークライ
+1000 Great axe: War cry -- 大斧：ウォークライ
+1001 Dragon King's axe: Shockwave -- 竜王の斧：衝撃波
+1100 Hammered: Patience -- 槌：我慢
+1200 Otsuchi: Patience -- 大槌：我慢
+1300 Spear: Charge -- 槍：チャージ
+1400 Axe Spear: Rotation -- 斧槍：回転
+1500 Sickle: Headshot -- 鎌：ヘッドショット
+1600 Whip: Something of a war cry -- 鞭：ウォークライ的な何か
+1700 Fist: Strong Rock Step -- 拳：強ロックステップ
+1800 Nail: Headshot -- 爪：ヘッドショット
+1900 Small bow: Fire -- 小弓：連射
+1901 Small bow: Penetrating -- 小弓：貫通
+2000 Miyakonojo: Penetrating -- 大弓：貫通
+2200 Cane: strengthening Magic -- 杖：魔法強化
+2300 Talisman: Endure the chanting -- タリスマン：我慢詠唱
+2400 Fire of Magic: Flame Enhancement -- 呪術の火：炎強化
+2500 Bi-dagger: Strong rock Step -- 双短剣：強ロックステップ
+2600 Twin-Straight Sword: rotation -- 双直剣：回転
+2700 Hyperbolic Sword: rotation -- 双曲剣：回転
+2710 Hyperbolic Sword: Kieran: Rotation -- 双曲剣：キアラン：回転
+2720 Hyperbolic Sword: Tracker: Rotation -- 双曲剣：追跡者：回転
+2800 Twin Swords: Poised -- 双刀：構え
+2900 Twin Spear: Charge -- 双槍：チャージ
+3000 Twin Ax: Rotation -- 双斧：回転
+3100 Double Mallet: Rotation -- 双槌：回転
+3200 Medium Shield: Bash -- 中盾：バッシュ
+3300 Big Shield: Bash -- 大盾：バッシュ

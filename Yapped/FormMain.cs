@@ -1,34 +1,40 @@
-﻿using SoulsFormats;
+﻿using Semver;
+using SoulsFormats;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using CellType = SoulsFormats.PARAM64.CellType;
 
 namespace Yapped
 {
     public partial class FormMain : Form
     {
-        private const string UPDATE_URL = "";
+        private const string UPDATE_URL = "https://www.nexusmods.com/darksouls3/mods/306?tab=files";
         private static Properties.Settings settings = Properties.Settings.Default;
 
         private string regulationPath;
         private Dictionary<string, PARAM64.Layout> layouts;
+        private BindingSource rowSource;
 
         public FormMain()
         {
             InitializeComponent();
-
             layouts = new Dictionary<string, PARAM64.Layout>();
+            rowSource = new BindingSource();
+            rowSource.DataMember = "Rows";
+            dgvRows.DataSource = rowSource;
             dgvParams.AutoGenerateColumns = false;
             dgvRows.AutoGenerateColumns = false;
             dgvCells.AutoGenerateColumns = false;
         }
 
-        private void FormMain_Load(object sender, EventArgs e)
+        private async void FormMain_Load(object sender, EventArgs e)
         {
             Text = "Yapped " + Application.ProductVersion;
             Location = settings.WindowLocation;
@@ -38,6 +44,9 @@ namespace Yapped
                 WindowState = FormWindowState.Maximized;
 
             regulationPath = settings.RegulationPath;
+            verifyDeletionsToolStripMenuItem.Checked = settings.VerifyRowDeletion;
+            splitContainer2.SplitterDistance = settings.SplitterDistance2;
+            splitContainer1.SplitterDistance = settings.SplitterDistance1;
 
             if (LoadLayouts())
             {
@@ -63,6 +72,18 @@ namespace Yapped
                     dgvRows.CurrentCell = dgvRows.SelectedCells[0];
                 }
             }
+
+            Octokit.GitHubClient gitHubClient = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("Yapped"));
+            try
+            {
+                Octokit.Release release = await gitHubClient.Repository.Release.GetLatest("JKAnderson", "Yapped");
+                if (SemVersion.Parse(release.TagName) > Application.ProductVersion)
+                {
+                    updateToolStripMenuItem.Visible = true;
+                }
+            }
+            // Oh well.
+            catch { }
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -80,6 +101,10 @@ namespace Yapped
             }
 
             settings.RegulationPath = regulationPath;
+            settings.VerifyRowDeletion = verifyDeletionsToolStripMenuItem.Checked;
+            settings.SplitterDistance2 = splitContainer2.SplitterDistance;
+            settings.SplitterDistance1 = splitContainer1.SplitterDistance;
+
             if (dgvParams.SelectedCells.Count > 0)
                 settings.SelectedParam = dgvParams.SelectedCells[0].RowIndex;
             if (dgvRows.SelectedCells.Count > 0)
@@ -118,7 +143,7 @@ namespace Yapped
             BND4 bnd;
             try
             {
-                bnd = Core.ReadRegulation(regulationPath);
+                bnd = SFUtil.DecryptDS3Regulation(regulationPath);
             }
             catch (Exception ex)
             {
@@ -184,27 +209,24 @@ namespace Yapped
                 if (dgvCells.FirstDisplayedCell != null && dgvCells.Rows.Count > 0)
                     dgvCells.FirstDisplayedScrollingRowIndex = 0;
 
-                dgvRows.DataSource = paramFile;
-                dgvRows.DataMember = "Rows";
+                rowSource.DataSource = paramFile;
             }
         }
 
         private void dgvRows_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvRows.SelectedCells.Count > 0)
+            if (dgvRows.SelectedCells.Count == 0)
+            {
+                dgvCells.DataSource = null;
+            }
+            else
             {
                 int cellDisplayIndex = 0;
                 if (dgvCells.FirstDisplayedCell != null)
                     cellDisplayIndex = dgvCells.FirstDisplayedScrollingRowIndex;
 
                 PARAM64.Row row = (PARAM64.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
-                List<PARAM64.Cell> cells = new List<PARAM64.Cell>();
-                foreach (PARAM64.Cell cell in row.Cells)
-                {
-                    if (!cell.Type.StartsWith("dummy8"))
-                        cells.Add(cell);
-                }
-                dgvCells.DataSource = cells;
+                dgvCells.DataSource = row.Cells.Where(cell => cell.Type != CellType.dummy8).ToArray();
 
                 if (dgvCells.Rows.Count > 0)
                     dgvCells.FirstDisplayedScrollingRowIndex = cellDisplayIndex;
@@ -225,10 +247,10 @@ namespace Yapped
 
             PARAM64.Cell paramCell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             DataGridViewCell dgvCell = dgvCells.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            string type = paramCell.Type;
+            CellType type = paramCell.Type;
             string value = e.FormattedValue.ToString();
 
-            if (type == "s8")
+            if (type == CellType.s8)
             {
                 if (!sbyte.TryParse(value, out _))
                 {
@@ -236,7 +258,7 @@ namespace Yapped
                     ShowError("Invalid value for signed byte.");
                 }
             }
-            else if (type == "u8")
+            else if (type == CellType.u8)
             {
                 if (!byte.TryParse(value, out _))
                 {
@@ -244,7 +266,7 @@ namespace Yapped
                     ShowError("Invalid value for unsigned byte.");
                 }
             }
-            else if (type == "x8")
+            else if (type == CellType.x8)
             {
                 try
                 {
@@ -256,7 +278,7 @@ namespace Yapped
                     ShowError("Invalid value for hex byte.");
                 }
             }
-            else if (type == "s16")
+            else if (type == CellType.s16)
             {
                 if (!short.TryParse(value, out _))
                 {
@@ -264,7 +286,7 @@ namespace Yapped
                     ShowError("Invalid value for signed short.");
                 }
             }
-            else if (type == "u16")
+            else if (type == CellType.u16)
             {
                 if (!ushort.TryParse(value, out _))
                 {
@@ -272,7 +294,7 @@ namespace Yapped
                     ShowError("Invalid value for unsigned short.");
                 }
             }
-            else if (type == "x16")
+            else if (type == CellType.x16)
             {
                 try
                 {
@@ -284,7 +306,7 @@ namespace Yapped
                     ShowError("Invalid value for hex short.");
                 }
             }
-            else if (type == "s32")
+            else if (type == CellType.s32)
             {
                 if (!int.TryParse(value, out _))
                 {
@@ -292,7 +314,7 @@ namespace Yapped
                     ShowError("Invalid value for signed int.");
                 }
             }
-            else if (type == "u32")
+            else if (type == CellType.u32)
             {
                 if (!uint.TryParse(value, out _))
                 {
@@ -300,7 +322,7 @@ namespace Yapped
                     ShowError("Invalid value for unsigned int.");
                 }
             }
-            else if (type == "x32")
+            else if (type == CellType.x32)
             {
                 try
                 {
@@ -312,7 +334,7 @@ namespace Yapped
                     ShowError("Invalid value for hex int.");
                 }
             }
-            else if (type == "f32")
+            else if (type == CellType.f32)
             {
                 if (!float.TryParse(value, out _))
                 {
@@ -320,7 +342,7 @@ namespace Yapped
                     ShowError("Invalid value for float.");
                 }
             }
-            else if (type == "b8" || type == "b32")
+            else if (type == CellType.b8 || type == CellType.b32)
             {
                 if (!bool.TryParse(value, out _))
                 {
@@ -328,7 +350,7 @@ namespace Yapped
                     ShowError("Invalid value for bool.");
                 }
             }
-            else if (type.StartsWith("fixstr"))
+            else if (type == CellType.fixstr || type == CellType.fixstrW)
             {
                 // Don't see how you could mess this up
             }
@@ -341,11 +363,11 @@ namespace Yapped
             PARAM64.Cell cell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             if (e.ColumnIndex == 2)
             {
-                if (cell.Type == "x8")
+                if (cell.Type == CellType.x8)
                     e.Value = $"0x{e.Value:X2}";
-                else if (cell.Type == "x16")
+                else if (cell.Type == CellType.x16)
                     e.Value = $"0x{e.Value:X4}";
-                else if (cell.Type == "x32")
+                else if (cell.Type == CellType.x32)
                     e.Value = $"0x{e.Value:X8}";
             }
         }
@@ -370,7 +392,7 @@ namespace Yapped
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BND4 bnd = Core.ReadRegulation(regulationPath, out bool encrypted);
+            BND4 bnd = SFUtil.DecryptDS3Regulation(regulationPath);
             foreach (BND4.File file in bnd.Files)
             {
                 foreach (DataGridViewRow paramRow in dgvParams.Rows)
@@ -380,7 +402,7 @@ namespace Yapped
                         file.Bytes = paramFile.Param.Write();
                 }
             }
-            Core.WriteRegulation(regulationPath, encrypted, bnd);
+            SFUtil.EncryptDS3Regulation(regulationPath, bnd);
         }
 
         private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
@@ -424,47 +446,39 @@ namespace Yapped
 
         private void updateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Process.Start(UPDATE_URL);
         }
 
         private void addRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ParamFile paramFile = (ParamFile)dgvRows.DataSource;
-            PARAM64.Row row = new PARAM64.Row(0, "", paramFile.Layout);
-            paramFile.Param.Rows.Add(row);
-
-            // Force refresh
-            dgvRows.DataSource = null;
-            dgvRows.DataSource = paramFile;
-            dgvRows.DataMember = "Rows";
-            dgvRows.ClearSelection();
-            dgvRows.Rows[dgvRows.Rows.Count - 1].Selected = true;
-            dgvRows.CurrentCell = dgvRows.SelectedCells[0];
+            ParamFile paramFile = (ParamFile)rowSource.DataSource;
+            PARAM64.Row row = new PARAM64.Row(paramFile.Rows.Max(r => r.ID) + 1, "", paramFile.Layout);
+            rowSource.Add(row);
         }
 
         private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult choice = MessageBox.Show("Are you sure you want to delete this row?",
-                "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (choice == DialogResult.Yes)
+            if (dgvRows.SelectedCells.Count > 0)
             {
-                ParamFile paramFile = (ParamFile)dgvRows.DataSource;
-                int rowIndex = dgvRows.SelectedCells[0].RowIndex;
-                if (rowIndex == 0)
-                    rowIndex = 1;
-                PARAM64.Row row = (PARAM64.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
-                paramFile.Param.Rows.Remove(row);
+                DialogResult choice = DialogResult.Yes;
+                if (verifyDeletionsToolStripMenuItem.Checked)
+                    choice = MessageBox.Show("Are you sure you want to delete this row?",
+                        "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                // Force refresh7
-                dgvRows.DataSource = null;
-                dgvRows.DataSource = paramFile;
-                dgvRows.DataMember = "Rows";
-
-                if (dgvRows.Rows.Count > 0)
+                if (choice == DialogResult.Yes)
                 {
-                    dgvRows.ClearSelection();
-                    dgvRows.Rows[rowIndex - 1].Selected = true;
-                    dgvRows.CurrentCell = dgvRows.SelectedCells[0];
+                    int rowIndex = dgvRows.SelectedCells[0].RowIndex;
+                    rowSource.RemoveAt(rowIndex);
+
+                    // If you remove a row it automatically selects the next one, but if you remove the last row
+                    // it doesn't automatically select the previous one
+                    if (rowIndex == dgvRows.RowCount)
+                    {
+                        if (dgvRows.RowCount > 0)
+                            dgvRows.Rows[dgvRows.RowCount - 1].Selected = true;
+                        else
+                            dgvCells.DataSource = null;
+                    }
                 }
             }
         }
@@ -497,14 +511,7 @@ namespace Yapped
                 }
             }
 
-            // Force refresh rows
-            if (dgvRows.DataSource != null)
-            {
-                ParamFile paramFile = (ParamFile)dgvRows.DataSource;
-                dgvRows.DataSource = null;
-                dgvRows.DataSource = paramFile;
-                dgvRows.DataMember = "Rows";
-            }
+            dgvRows.Refresh();
         }
 
         private void dgvRows_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -544,6 +551,20 @@ namespace Yapped
                 {
                     ShowError($"Failed to write name file: {paramFile.Name}.txt\r\n\r\n{ex}");
                     break;
+                }
+            }
+        }
+
+        private void dgvCells_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            for (int i = 0; i < e.RowCount; i++)
+            {
+                DataGridViewRow row = dgvCells.Rows[e.RowIndex + i];
+                PARAM64.Cell paramCell = (PARAM64.Cell)row.DataBoundItem;
+                if (paramCell.Type == CellType.b8 || paramCell.Type == CellType.b32)
+                {
+                    // Value
+                    row.Cells[2] = new DataGridViewCheckBoxCell();
                 }
             }
         }

@@ -39,13 +39,11 @@
     <Reference Include="EPPlus, Version=4.5.2.1, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.5.2.1\lib\net40\EPPlus.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -98,10 +96,6 @@
     <ProjectReference Include="..\..\..\GitHub\JKAnderson\SoulsFormats\SoulsFormats\SoulsFormats.csproj">
       <Project>{22c664bd-877b-44df-8ecf-2808522469a8}</Project>
       <Name>SoulsFormats</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Yapped.Core\Yapped.Core.csproj">
-      <Project>{6f9dae8a-7414-472b-a194-86cf0c6eba5d}</Project>
-      <Name>Yapped.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

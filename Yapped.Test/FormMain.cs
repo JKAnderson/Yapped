@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using CellType = SoulsFormats.PARAM64.CellType;
 
 namespace Yapped.Test
 {
@@ -66,7 +67,7 @@ namespace Yapped.Test
             BND4 bnd;
             try
             {
-                bnd = Core.ReadRegulation(path);
+                bnd = SFUtil.DecryptDS3Regulation(path);
             }
             catch (Exception ex)
             {
@@ -169,11 +170,11 @@ namespace Yapped.Test
             PARAM64.Cell cell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             if (e.ColumnIndex == 1)
             {
-                if (cell.Type == "x8")
+                if (cell.Type == CellType.x8)
                     e.Value = $"0x{e.Value:X2}";
-                if (cell.Type == "x16")
+                if (cell.Type == CellType.x16)
                     e.Value = $"0x{e.Value:X4}";
-                if (cell.Type == "x32")
+                if (cell.Type == CellType.x32)
                     e.Value = $"0x{e.Value:X8}";
             }
         }
@@ -192,7 +193,7 @@ namespace Yapped.Test
             {
                 try
                 {
-                    if (entry.Type != "dummy8")
+                    if (entry.Type != CellType.dummy8)
                         PARAM64.Layout.ParseParamValue(entry.Type, e.FormattedValue.ToString());
                 }
                 catch
@@ -219,7 +220,7 @@ namespace Yapped.Test
             // Default
             else if (e.ColumnIndex == 3)
             {
-                cell.ReadOnly = entry.Type == "dummy8";
+                cell.ReadOnly = entry.Type == CellType.dummy8;
             }
         }
 
@@ -267,7 +268,7 @@ namespace Yapped.Test
         private void addEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var layout = (PARAM64.Layout)dgvLayout.DataSource;
-            var entry = new PARAM64.Layout.Entry("u8", "name", 0);
+            var entry = new PARAM64.Layout.Entry(CellType.u8, "name", 0);
             if (dgvLayout.SelectedCells.Count == 0)
                 layout.Add(entry);
             else

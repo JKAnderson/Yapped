@@ -1,0 +1,578 @@
+0 Test_param0 -- test_param0
+1 Knight Test _ Recovery Medicine × 1 [definite] weapon material -- 騎士テスト_回復薬×1【確定】武器素材
+2 Simulator test -- シミュレータテスト
+10 100% appearance test item -- 100％出現テストアイテム
+2000 Ojo 1 Full Armor beast drop -- 王城1　フルアーマー獣ドロップ
+2010 Ojo 1 Tracker Drop -- 王城1　追跡者ドロップ
+2020 Ojo 1 Dragon Drop -- 王城1　竜の御使いドロップ
+2030 Ojo 2 Dragon Guardian Knight Drop -- 王城2　竜の守護騎士ドロップ
+2040 Ojo Three princes of Darkness drop -- 王城3　闇の双皇子ドロップ
+2050 Ojo 3-Prince of Darkness (full body) drop -- 王城3　闇の双皇子（完全体）ドロップ
+2060 City Colossus drop -- 街　巨像ドロップ
+2070 Forest 1 Crystal Elders drop -- 森１　結晶の古老ドロップ
+2080 Forest 2 Observer + Wolf drop -- 森2　監視者+狼ドロップ
+2090 Cathedral church Cardinal Drop -- 聖堂教会　枢機卿団ドロップ
+2100 Basilica Church Rosaliza -- 聖堂教会　ロザリアドロップ
+2110 The old king drop of Anole caries -- アノール　蝕の老王ドロップ
+2120 Anole Saliva-Ndrop -- アノール　サリヴァ―ンドロップ
+2130 Dungeon Ash Daemon Drop -- ダンジョン　灰のデーモンドロップ
+2140 Dungeon of the Evil king drop -- ダンジョン　死霊の王ドロップ
+2150 Dungeon Halleck Drop -- 地下牢　ハレックドロップ
+2160 Base Segunda Drop -- 拠点　グンダドロップ
+2170 Drop Stronghold Evil Spirits -- 拠点　邪霊ドロップ
+2180 Base Las boss Drop -- 拠点　ラスボスドロップ
+2500 [FDP] Hero Segunda Sword 1 -- 【FDP】英雄グンダ　刺さっている剣1
+2520 The key to Bridge bridge building -- 橋　橋の建物への鍵
+4000 Game Progression Relief Treasure Chest -- ゲーム進行 救済宝箱
+4010 Game Progression Relief Treasure Chest -- ゲーム進行 救済宝箱
+4020 Game Progression Relief Treasure Chest -- ゲーム進行 救済宝箱
+5000 Reward of thieves -- 盗賊団の報酬
+5010 Eyes of the Grave king -- 墓王の瞳
+5020 Pledge Berserker Reward -- 誓約バーサーカー報酬
+5030 Testimony of the Sun's friendship -- 太陽の友情の証
+5040 Dragon Scales -- 竜のうろこ
+5200 2pt Humanity 100% -- 人間性 2pt 100％
+5210 3pt Humanity 100% -- 人間性 3pt 100％
+5220 6PT Humanity 100% -- 人間性 6pt 100％
+5230 10pt Humanity 100% -- 人間性 10pt 100％
+5240 20pt Humanity 100% -- 人間性 20pt 100％
+5250 30PT Humanity 100% -- 人間性 30pt 100％
+5260 40PT Humanity 100% -- 人間性 40pt 100％
+5270 50PT Humanity 100% -- 人間性 50pt 100％
+5280 100PT Humanity 100% -- 人間性 100pt 100％
+5500 Black Soul kills reward -- 闇霊撃破報酬
+9000 Humanity -- 人間性
+9010 Human Nature X4 -- 人間性x4
+9020 Twins of Humanity -- 人間性の双子
+9030 Returning bone fragments -- 帰還の骨片
+59200 α _ Blacksmith -- α_鍛冶屋
+59300 α _ Pledge: Rosalia -- α_誓約：ロザリア
+59400 α _ Pledge: the Sun -- α_誓約：太陽
+59500 α _ Pledge: Barsaka- -- α_誓約：バーサーカ-
+59600 α _ Indulgences -- α_免罪
+59700 Alpha _ Ghost Shop -- α_亡霊ショップ
+59800 α _ est bottle sorting -- α_エスト瓶振り分け
+3000060 Wall End -- 城壁の端
+3000250 Back of the saloon -- 大広間奥
+3100000 Tower Town _00 -- 塔の町_00
+3100010 Tower Town _01 -- 塔の町_01
+3100020 Tower Town _02 -- 塔の町_02
+3100030 Tower Town _03 -- 塔の町_03
+3100040 Tower Town _04 -- 塔の町_04
+3100050 Tower Town _05 -- 塔の町_05
+3100060 Tower Town _06 -- 塔の町_06
+3100070 Tower Town _07 -- 塔の町_07
+3100080 Tower Town _08 -- 塔の町_08
+3100090 Tower Town _09 -- 塔の町_09
+3100100 Tower Town _10 -- 塔の町_10
+3100110 Tower Town _11 -- 塔の町_11
+3100120 Tower Town _12 -- 塔の町_12
+3100130 Tower Town _13 -- 塔の町_13
+3100140 Tower Town _14 -- 塔の町_14
+3100150 Tower Town _15 -- 塔の町_15
+3100160 Tower Town _16 -- 塔の町_16
+3100170 Tower Town _17 -- 塔の町_17
+3100180 Tower Town _18 -- 塔の町_18
+3100190 Tower Town _19 -- 塔の町_19
+3100200 Tower Town _20 -- 塔の町_20
+3100210 Tower Town _21 -- 塔の町_21
+3100220 Tower Town _22 -- 塔の町_22
+3100230 Tower Town _23 -- 塔の町_23
+3100240 Tower Town _24 -- 塔の町_24
+3100250 Tower Town _25 -- 塔の町_25
+3100260 Tower Town _26 -- 塔の町_26
+3100270 Tower Town _27 -- 塔の町_27
+3100280 Tower Town _28 -- 塔の町_28
+3100300 Tower Town _30 -- 塔の町_30
+3100310 Tower Town _31 -- 塔の町_31
+3100320 Tower Town _32 -- 塔の町_32
+3100330 Tower Town _33 -- 塔の町_33
+3100340 Tower Town _34 -- 塔の町_34
+3100350 Tower Town _35 -- 塔の町_35
+3100360 Tower Town _36 -- 塔の町_36
+3100370 Tower Town _37 -- 塔の町_37
+3100380 Tower Town _38 -- 塔の町_38
+3100390 Tower Town _39 -- 塔の町_39
+3100400 Tower Town _40 -- 塔の町_40
+3100410 Tower Town _41 -- 塔の町_41
+3100420 Tower Town _42 -- 塔の町_42
+3100430 Tower Town _43 -- 塔の町_43
+3100440 Tower Town _44 -- 塔の町_44
+3100450 Tower Town _45 -- 塔の町_45
+3100490 Tower Town _49 -- 塔の町_49
+3100500 Tower Town _50 -- 塔の町_50
+3100610 Tower Town _ a hanging treasure corpse _01 -- 塔の町_吊り宝死体_01
+3100620 Tower Town _ a hanging treasure corpse _02 -- 塔の町_吊り宝死体_02
+3100630 Tower Town _ a hanging treasure corpse _03 -- 塔の町_吊り宝死体_03
+3100640 Tower Town _ a hanging treasure corpse _04 -- 塔の町_吊り宝死体_04
+3100650 Tower Town _ a hanging treasure corpse _05 -- 塔の町_吊り宝死体_05
+3100660 Tower Town _ a hanging treasure corpse _06 -- 塔の町_吊り宝死体_06
+3100670 Tower Town _ a hanging treasure corpse _07 -- 塔の町_吊り宝死体_07
+3100680 Tower Town _ a hanging treasure corpse _08 -- 塔の町_吊り宝死体_08
+3100700 Tower Town _ a hanging treasure corpse _10 -- 塔の町_吊り宝死体_10
+3100710 Tower Town _ a hanging treasure corpse _11 -- 塔の町_吊り宝死体_11
+3100800 Tower Town _ Treasure Chest 01 -- 塔の町_宝箱01
+3200000 The Bridge of Flying Dragon _01 -- 飛竜の橋_01
+3200010 The Bridge of Flying Dragon _02 -- 飛竜の橋_02
+3200020 The Bridge of Flying Dragon _03 -- 飛竜の橋_03
+3200030 The Bridge of Flying Dragon _04 -- 飛竜の橋_04
+3200040 The Bridge of Flying Dragon _05 -- 飛竜の橋_05
+3200050 The Bridge of Flying Dragon _06 -- 飛竜の橋_06
+3200060 The Bridge of Flying Dragon _07 -- 飛竜の橋_07
+3200070 The Bridge of Flying Dragon _08 -- 飛竜の橋_08
+3200080 The Bridge of Flying Dragon _09 -- 飛竜の橋_09
+3200090 The Bridge of Flying Dragon _10 -- 飛竜の橋_10
+3200100 The Bridge of Flying Dragon _11 -- 飛竜の橋_11
+3200110 The Bridge of Flying Dragon _12 -- 飛竜の橋_12
+3200120 The Bridge of Flying Dragon _13 -- 飛竜の橋_13
+3200130 The Bridge of Flying Dragon _14 -- 飛竜の橋_14
+3200140 The Bridge of Flying Dragon _15 -- 飛竜の橋_15
+3200150 The Bridge of Flying Dragon _16 -- 飛竜の橋_16
+3200160 The Bridge of Flying Dragon _17 -- 飛竜の橋_17
+3200170 The Bridge of Flying Dragon _18 -- 飛竜の橋_18
+3200180 The Bridge of Flying Dragon _19 -- 飛竜の橋_19
+3200190 The Bridge of Flying Dragon _20 -- 飛竜の橋_20
+3200200 The Bridge of Flying Dragon _21 -- 飛竜の橋_21
+3200210 The Bridge of Flying Dragon _22 -- 飛竜の橋_22
+3200220 The Bridge of Flying Dragon _23 -- 飛竜の橋_23
+3200230 The Bridge of Flying Dragon _24 -- 飛竜の橋_24
+3200240 The Bridge of Flying Dragon _25 -- 飛竜の橋_25
+3200260 The Bridge of Flying Dragon _27 -- 飛竜の橋_27
+3200270 The Bridge of Flying Dragon _28 -- 飛竜の橋_28
+3200280 The Bridge of Flying Dragon _29 -- 飛竜の橋_29
+3200290 The Bridge of Flying Dragon _30 -- 飛竜の橋_30
+3200300 The Bridge of Flying Dragon _31 -- 飛竜の橋_31
+3200310 The Bridge of Flying Dragon _32 -- 飛竜の橋_32
+3200330 The Bridge of Flying Dragon _34 -- 飛竜の橋_34
+3200340 The Bridge of Flying Dragon _35 -- 飛竜の橋_35
+3200350 The Bridge of Flying Dragon _36 -- 飛竜の橋_36
+3200360 The Bridge of Flying Dragon _37 -- 飛竜の橋_37
+3200370 The Bridge of Flying Dragon _38 -- 飛竜の橋_38
+3200380 The Bridge of Flying Dragon _39 -- 飛竜の橋_39
+3300000 Poison Forest first half 00 -- 毒森 前半 00
+3300010 Poison Forest first half 01 -- 毒森 前半 01
+3300020 Poison Forest first half 02 -- 毒森 前半 02
+3300030 Poison Forest-First part 03 -- 毒森 前半 03
+3300040 Poison Forest First Part 04 -- 毒森 前半 04
+3300050 Poison Forest first half 05 -- 毒森 前半 05
+3300060 Poison Forest first half 06 -- 毒森 前半 06
+3300070 Poison Forest first half 07 -- 毒森 前半 07
+3300080 Poison Forest first half 08 -- 毒森 前半 08
+3300090 Poison Forest first half 09 -- 毒森 前半 09
+3300100 Poison Forest First 10 -- 毒森 前半 10
+3300110 Poison Forest first half Eleven -- 毒森 前半 11
+3300120 Poison Forest First 12 -- 毒森 前半 12
+3300130 Poison Forest First 13 -- 毒森 前半 13
+3300140 Poison Forest first half 14 -- 毒森 前半 14
+3300150 Poison Forest first half 15 -- 毒森 前半 15
+3300160 Poison Forest First 16 -- 毒森 前半 16
+3300170 Poison Forest first half 17 -- 毒森 前半 17
+3300180 Poison Forest first half 18 -- 毒森 前半 18
+3300190 Poison Forest First Nineteen -- 毒森 前半 19
+3300210 Poison Forest First 21 -- 毒森 前半 21
+3300220 Poison Forest First 22 -- 毒森 前半 22
+3300230 Poison Forest First 23 -- 毒森 前半 23
+3300240 Poison Forest first half 24 -- 毒森 前半 24
+3300270 Poison Forest first half 27 -- 毒森 前半 27
+3300280 Poison Forest first half 28 -- 毒森 前半 28
+3300290 Poison Forest first half 29 -- 毒森 前半 29
+3300300 Poison Forest first half 30 -- 毒森 前半 30
+3300310 Poison Forest first half 31 -- 毒森 前半 31
+3300320 Poison Forest first half 32 -- 毒森 前半 32
+3300340 Poison Forest first half 34 -- 毒森 前半 34
+3300350 Poison Forest first half 35 -- 毒森 前半 35
+3300360 Poison Forest first half 36 -- 毒森 前半 36
+3300370 Poison Forest first half 37 -- 毒森 前半 37
+3300380 Poison Forest first half 38 -- 毒森 前半 38
+3300390 Poison Forest first half 39 -- 毒森 前半 39
+3300400 Poison Forest First 40 -- 毒森 前半 40
+3300410 Poison Forest first half 41 -- 毒森 前半 41
+3300420 Poison Forest first half 42 -- 毒森 前半 42
+3300430 Poison Forest first half 43 -- 毒森 前半 43
+3300440 Poison Forest First 44 -- 毒森 前半 44
+3300450 Poison Forest First 45 -- 毒森 前半 45
+3300460 Poison Forest first half 46 -- 毒森 前半 46
+3300470 Poison Forest first half 47 -- 毒森 前半 47
+3300480 Poison Forest first half 48 -- 毒森 前半 48
+3300490 Poison Forest first half 49 -- 毒森 前半 49
+3300500 Poison Forest first half 50 -- 毒森 前半 50
+3300510 Poison Forest first half 51 -- 毒森 前半 51
+3300520 Poison Forest first half 52 -- 毒森 前半 52
+3300530 Poison Forest first half 53 -- 毒森 前半 53
+3300540 Poison Forest first half 54 -- 毒森 前半 54
+3300550 Poison Forest first half 55 -- 毒森 前半 55
+3300560 Poison Forest first half 56 -- 毒森 前半 56
+3300570 Poison Forest first half 57 -- 毒森 前半 57
+3300580 Poison Forest first half 58 -- 毒森 前半 58
+3300590 Poison Forest first half 59 -- 毒森 前半 59
+3300600 Poison Forest first half 60 -- 毒森 前半 60
+3300610 Poison Forest First 61 -- 毒森 前半 61
+3300620 Poison Forest first half 62 -- 毒森 前半 62
+3300630 Poison Forest First 63 -- 毒森 前半 63
+3300640 Poison Forest first half 64 -- 毒森 前半 64
+3300650 Poison Forest First 65 -- 毒森 前半 65
+3300700 Poison Forest _ Treasure Chest 01 -- 毒森_宝箱01
+3300710 Poison Forest _ Treasure Chest 02 -- 毒森_宝箱02
+3300720 Poison Forest _ Treasure Chest 03 -- 毒森_宝箱03
+3300730 Poison Forest _ Treasure Chest 04 -- 毒森_宝箱04
+3300740 Poison Forest _ Treasure Chest 05 -- 毒森_宝箱05
+3300750 Poison Forest _ Treasure Chest 06 -- 毒森_宝箱06
+3410000 Ojo 3_00 -- 王城3_00
+3410010 Ojo 3_01 -- 王城3_01
+3410020 Ojo 3_02 -- 王城3_02
+3410030 Ojo 3_03 -- 王城3_03
+3410040 Ojo 3_04 -- 王城3_04
+3410060 Ojo 3_06 -- 王城3_06
+3410070 Ojo 3_07 -- 王城3_07
+3410080 Ojo 3_08 -- 王城3_08
+3410090 Ojo 3_09 -- 王城3_09
+3410100 Ojo 3_10 -- 王城3_10
+3410110 Ojo 3_11 -- 王城3_11
+3410120 Ojo 3_12 -- 王城3_12
+3410130 Ojo 3_13 -- 王城3_13
+3410140 Ojo 3_14 -- 王城3_14
+3410150 Ojo 3_15 -- 王城3_15
+3410160 Ojo 3_16 -- 王城3_16
+3410180 Ojo 3_18 -- 王城3_18
+3410200 Ojo 3_20 -- 王城3_20
+3410210 Ojo 3_21 -- 王城3_21
+3410220 Ojo 3_22 -- 王城3_22
+3410240 Ojo 3_24 -- 王城3_24
+3410250 Ojo 3_25 -- 王城3_25
+3410260 Ojo 3_26 -- 王城3_26
+3410280 Ojo 3_28 -- 王城3_28
+3410290 Ojo 3_29 -- 王城3_29
+3410300 Ojo 3_30 -- 王城3_30
+3410320 Ojo 3_32 -- 王城3_32
+3410330 Ojo 3_33 -- 王城3_33
+3410350 Ojo 3_35 -- 王城3_35
+3410360 Ojo 3_36 -- 王城3_36
+3410370 Ojo 3_37 -- 王城3_37
+3410380 Ojo 3_38 -- 王城3_38
+3410410 Ojo 3_41 -- 王城3_41
+3410420 Ojo 3_42 -- 王城3_42
+3410450 Ojo 3_45 -- 王城3_45
+3410470 Ojo 3_47 -- 王城3_47
+3410500 Ojo 3_ Chest 01 -- 王城3_宝箱01
+3410510 Ojo 3_ Chest 02 -- 王城3_宝箱02
+3410520 Ojo 3_ Treasure Box 03 -- 王城3_宝箱03
+3410530 Ojo 3_ Treasure Box 04 -- 王城3_宝箱04
+3410540 Ojo 3_ Treasure Chest 05 -- 王城3_宝箱05
+3500000 Basilica _00 -- 聖堂_00
+3500010 Basilica _01 -- 聖堂_01
+3500020 Basilica _02 -- 聖堂_02
+3500030 Basilica _03 -- 聖堂_03
+3500040 Basilica _04 -- 聖堂_04
+3500050 Basilica _05 -- 聖堂_05
+3500060 Basilica _06 -- 聖堂_06
+3500070 Basilica _07 -- 聖堂_07
+3500080 Basilica _08 -- 聖堂_08
+3500090 Basilica _09 -- 聖堂_09
+3500110 Basilica _11 -- 聖堂_11
+3500130 Basilica _13 -- 聖堂_13
+3500140 Basilica _14 -- 聖堂_14
+3500150 Basilica _15 -- 聖堂_15
+3500160 Basilica _16 -- 聖堂_16
+3500170 Basilica _17 -- 聖堂_17
+3500180 Basilica _18 -- 聖堂_18
+3500200 Basilica _20 -- 聖堂_20
+3500210 Basilica _21 -- 聖堂_21
+3500220 Basilica _22 -- 聖堂_22
+3500230 Basilica _23 -- 聖堂_23
+3500240 Basilica _24 -- 聖堂_24
+3500260 Basilica _26 -- 聖堂_26
+3500270 Basilica _27 -- 聖堂_27
+3500280 Basilica _28 -- 聖堂_28
+3500300 Basilica _30 -- 聖堂_30
+3500310 Basilica _31 -- 聖堂_31
+3500320 Basilica _32 -- 聖堂_32
+3500330 Basilica _33 -- 聖堂_33
+3500340 Basilica _34 -- 聖堂_34
+3500370 Basilica _37 -- 聖堂_37
+3500380 Basilica _38 -- 聖堂_38
+3500390 Basilica _39 -- 聖堂_39
+3500400 Basilica _40 -- 聖堂_40
+3500420 Basilica _42 -- 聖堂_42
+3500430 Basilica _43 -- 聖堂_43
+3500450 Basilica _45 -- 聖堂_45
+3500460 Basilica _46 -- 聖堂_46
+3500470 Basilica _47 -- 聖堂_47
+3500480 Basilica _48 -- 聖堂_48
+3500490 Basilica _49 -- 聖堂_49
+3500500 Basilica _50 -- 聖堂_50
+3500540 Basilica _54 -- 聖堂_54
+3500550 Basilica _55 -- 聖堂_55
+3500560 Basilica _56 -- 聖堂_56
+3500620 Basilica _62 -- 聖堂_62
+3500630 Basilica _63 -- 聖堂_63
+3600000 God Grave _01 -- 神墓_01
+3600010 God Grave _02 -- 神墓_02
+3600020 God Grave _03 -- 神墓_03
+3600030 God Grave _04 -- 神墓_04
+3600040 God Grave _05 -- 神墓_05
+3600050 God Grave _06 -- 神墓_06
+3600060 God Grave _07 -- 神墓_07
+3600070 God Grave _08 -- 神墓_08
+3600080 God Grave _09 -- 神墓_09
+3600090 God Grave _10 -- 神墓_10
+3700000 Anole _01 -- アノール_01
+3700010 Anole _02 -- アノール_02
+3700020 Anole _03 -- アノール_03
+3700030 Anole _04 -- アノール_04
+3700040 Anole _05 -- アノール_05
+3700050 Anole _06 -- アノール_06
+3700060 Anole _07 -- アノール_07
+3700070 Anole _08 -- アノール_08
+3700080 Anole _09 -- アノール_09
+3700090 Anole _10 -- アノール_10
+3700100 Anole _11 -- アノール_11
+3700110 Anole _12 -- アノール_12
+3700120 Anole _13 -- アノール_13
+3700130 Anole _14 -- アノール_14
+3700140 Anole _15 -- アノール_15
+3700150 Anole _16 -- アノール_16
+3700160 Anole _17 -- アノール_17
+3700170 Anole _18 -- アノール_18
+3700180 Anole _19 -- アノール_19
+3700190 Anole _20 -- アノール_20
+3700200 Anole _21 -- アノール_21
+3700210 Anole _22 -- アノール_22
+3700220 Anole _23 -- アノール_23
+3700230 Anole _24 -- アノール_24
+3700240 Anole _25 -- アノール_25
+3700250 Anole _26 -- アノール_26
+3700260 Anole _27 -- アノール_27
+3700270 Anole _28 -- アノール_28
+3700280 Anole _29 -- アノール_29
+3700290 Anole _30 -- アノール_30
+3700300 Anole _31 -- アノール_31
+3700310 Anole _32 -- アノール_32
+3700320 Anole _33 -- アノール_33
+3700330 Anole _34 -- アノール_34
+3700340 Anole _35 -- アノール_35
+3700350 Anole _36 -- アノール_36
+3700360 Anole _37 -- アノール_37
+3700370 Anole _38 -- アノール_38
+3700380 Anole _39 -- アノール_39
+3700390 Anole _40 -- アノール_40
+3700400 Anole _41 -- アノール_41
+3700410 Anole _42 -- アノール_42
+3700420 Anole _43 -- アノール_43
+3700430 Anole _44 -- アノール_44
+3700440 Anole _45 -- アノール_45
+3700450 Anole _46 -- アノール_46
+3700460 Anole _47 -- アノール_47
+3700470 Anole _48 -- アノール_48
+3700480 Anole _49 -- アノール_49
+3700490 Anole _50 -- アノール_50
+3700500 Anole _51 -- アノール_51
+3700510 Anole _52 -- アノール_52
+3700520 Anole _53 -- アノール_53
+3700530 Anole _54 -- アノール_54
+3700540 Anole _55 -- アノール_55
+3700550 Anole _56 -- アノール_56
+3700560 Anole _57 -- アノール_57
+3700600 Anole _61 -- アノール_61
+3700610 Anole _62 -- アノール_62
+3700620 Anole _63 -- アノール_63
+3700630 Anole _64 -- アノール_64
+3700640 Anole _65 -- アノール_65
+3700800 Anole (top) _01 -- アノール（上）_01
+3700810 Anole (top) _02 -- アノール（上）_02
+3700820 Anole (top) _03 -- アノール（上）_03
+3700830 Anole (top) _04 -- アノール（上）_04
+3700840 Anole (top) _05 -- アノール（上）_05
+3800000 _01, disused city -- 廃都_01
+3800010 _02, disused city -- 廃都_02
+3800020 _03, disused city -- 廃都_03
+3800030 _04, disused city -- 廃都_04
+3800040 _05, disused city -- 廃都_05
+3800050 _06, disused city -- 廃都_06
+3800060 _07, disused city -- 廃都_07
+3800070 _08, disused city -- 廃都_08
+3800080 _09, disused city -- 廃都_09
+3800090 _10, disused city -- 廃都_10
+3800100 _11, disused city -- 廃都_11
+3800110 _12, disused city -- 廃都_12
+3800120 _13, disused city -- 廃都_13
+3800130 _14, disused city -- 廃都_14
+3800140 _15, disused city -- 廃都_15
+3800150 _16, disused city -- 廃都_16
+3800160 _17, disused city -- 廃都_17
+3800170 _18, disused city -- 廃都_18
+3800180 _19, disused city -- 廃都_19
+3800190 _20, disused city -- 廃都_20
+3800200 _21, disused city -- 廃都_21
+3800210 _22, disused city -- 廃都_22
+3800220 _23, disused city -- 廃都_23
+3800230 _24, disused city -- 廃都_24
+3800240 _25, disused city -- 廃都_25
+3800250 _26, disused city -- 廃都_26
+3800260 _27, disused city -- 廃都_27
+3800270 _28, disused city -- 廃都_28
+3800280 _29, disused city -- 廃都_29
+3800290 _30, disused city -- 廃都_30
+3800300 _31, disused city -- 廃都_31
+3800310 _32, disused city -- 廃都_32
+3800330 _34, disused city -- 廃都_34
+3800340 _35, disused city -- 廃都_35
+3800350 _36, disused city -- 廃都_36
+3800360 _37, disused city -- 廃都_37
+3800370 _38, disused city -- 廃都_38
+3800380 _39, disused city -- 廃都_39
+3800390 _40, disused city -- 廃都_40
+3800400 _41, disused city -- 廃都_41
+3800410 _42, disused city -- 廃都_42
+3800420 _43, disused city -- 廃都_43
+3800430 _44, disused city -- 廃都_44
+3800440 _45, disused city -- 廃都_45
+3800450 _46, disused city -- 廃都_46
+3800460 _47, disused city -- 廃都_47
+3800470 _48, disused city -- 廃都_48
+3800500 _51, disused city -- 廃都_51
+3800510 _52, disused city -- 廃都_52
+3800520 _53, disused city -- 廃都_53
+3800530 _54, disused city -- 廃都_54
+3800540 _55, disused city -- 廃都_55
+3800560 _57, disused city -- 廃都_57
+3800570 _58, disused city -- 廃都_58
+3800580 _59, disused city -- 廃都_59
+3800590 _60, disused city -- 廃都_60
+3800600 _61, disused city -- 廃都_61
+3900000 Dungeon _01 -- 地下牢_01
+3900010 Dungeon _02 -- 地下牢_02
+3900030 Dungeon _04 -- 地下牢_04
+3900040 Dungeon _05 -- 地下牢_05
+3900050 Dungeon _06 -- 地下牢_06
+3900060 Dungeon _07 -- 地下牢_07
+3900070 Dungeon _08 -- 地下牢_08
+3900080 Dungeon _09 -- 地下牢_09
+3900090 Dungeon _10 -- 地下牢_10
+3900100 Dungeon _11 -- 地下牢_11
+3900110 Dungeon _12 -- 地下牢_12
+3900120 Dungeon _13 -- 地下牢_13
+3900130 Dungeon _14 -- 地下牢_14
+3900140 Dungeon _15 -- 地下牢_15
+3900150 Dungeon _16 -- 地下牢_16
+3900160 Dungeon _17 -- 地下牢_17
+3900180 Dungeon _19 -- 地下牢_19
+3900190 Dungeon _20 -- 地下牢_20
+3900200 Dungeon _21 -- 地下牢_21
+3900210 Dungeon _22 -- 地下牢_22
+3900220 Dungeon _23 -- 地下牢_23
+3900230 Dungeon _24 -- 地下牢_24
+3900240 Dungeon _25 -- 地下牢_25
+3900250 Dungeon _26 -- 地下牢_26
+3900260 Dungeon _27 -- 地下牢_27
+3900270 Dungeon _28 -- 地下牢_28
+3900280 Dungeon _29 -- 地下牢_29
+3900290 Dungeon _30 -- 地下牢_30
+3900300 Dungeon _31 -- 地下牢_31
+3900310 Dungeon _32 -- 地下牢_32
+3900320 Dungeon _33 -- 地下牢_33
+3900330 Dungeon _34 -- 地下牢_34
+3900340 Dungeon _35 -- 地下牢_35
+3900350 Dungeon _36 -- 地下牢_36
+3900360 Dungeon _37 -- 地下牢_37
+3900370 Dungeon _38 -- 地下牢_38
+3900380 Dungeon _39 -- 地下牢_39
+3900390 Dungeon _40 -- 地下牢_40
+3900400 Dungeon _41 -- 地下牢_41
+3900500 Dungeon _ Treasure Chest 01 -- 地下牢_宝箱01
+3900510 Dungeon _ Treasure Chest 02 -- 地下牢_宝箱02
+3900520 Dungeon _ Treasure Chest 03 -- 地下牢_宝箱03
+3900590 Dungeon _ Treasure Chest 10 -- 地下牢_宝箱10
+9930000 Treasure Corpse 01 -- 宝死体01
+9930001 Treasure Corpse 01 -- 宝死体01
+9930002 Treasure Corpse 01 -- 宝死体01
+9930003 Treasure Corpse 01 -- 宝死体01
+9930004 Treasure Corpse 01 -- 宝死体01
+9930010 Treasure Corpse 02 -- 宝死体02
+9931000 Treasure Chest 01 -- 宝箱01
+9990000 Treasure Test 1 -- 宝テスト1
+9990010 Treasure Test 2 -- 宝テスト2
+9991000 The Lonely old woman 01 -- 孤独な老婆01
+9991010 The Lonely old woman 02 -- 孤独な老婆02
+9991020 The Lonely old woman 03 -- 孤独な老婆03
+9991030 The Lonely old woman 04 -- 孤独な老婆04
+10900000 Ojo 1 Segunda dead -- 王城1　グンダ亡者
+10901000 Ojo 2 Segunda dead -- 王城2　グンダ亡者
+10902000 Ojo 3 Segunda dead -- 王城3　グンダ亡者
+11000000 Ojo 1 dead Soldier (sword only) -- 王城1　亡者兵士（剣のみ）
+11000100 Ojo 1 dead Soldier (folding sword) -- 王城1　亡者兵士（折剣）
+11000200 Ojo 1 dead Soldier (Sword Shield) -- 王城1　亡者兵士（剣盾）
+11000300 Ojo 1 dead Soldier (Sword lantern) -- 王城1　亡者兵士（剣ランタン）
+11000400 Ojo 1 dead Soldier (Crossbow) -- 王城1　亡者兵士（クロスボウ）
+11000500 Ojo 1 dead soldier (Spear shield) -- 王城1　亡者兵士（槍盾）
+11000600 Ojo 1 dead Soldier (dagger) -- 王城1　亡者兵士（短剣）
+11001000 Ojo 2 dead Soldier (sword only) -- 王城2　亡者兵士（剣のみ）
+11001100 Ojo 2 dead Soldier (folding sword) -- 王城2　亡者兵士（折剣）
+11001200 Ojo 2 dead Soldier (Sword Shield) -- 王城2　亡者兵士（剣盾）
+11001300 Ojo 2 dead Soldier (Sword lantern) -- 王城2　亡者兵士（剣ランタン）
+11001400 Ojo 2 dead Soldier (Crossbow) -- 王城2　亡者兵士（クロスボウ）
+11001500 Ojo 2 dead Soldier (Spear shield) -- 王城2　亡者兵士（槍盾）
+11001600 Ojo 2 dead Soldier (dagger) -- 王城2　亡者兵士（短剣）
+11002000 Ojo 3 dead Soldier (sword only) -- 王城3　亡者兵士（剣のみ）
+11002100 Ojo 3 dead Soldier (folding sword) -- 王城3　亡者兵士（折剣）
+11002200 Ojo 3 dead Soldier (Sword Shield) -- 王城3　亡者兵士（剣盾）
+11002400 Ojo 3 dead Soldier (Crossbow) -- 王城3　亡者兵士（クロスボウ）
+11002500 Ojo 3 dead Soldier (Spear shield) -- 王城3　亡者兵士（槍盾）
+11050000 Ojo 1 dead Soldier (Large) axe -- 王城1　亡者兵士（大）斧
+11050100 Ojo 1 dead soldier (large) Halle Bird -- 王城1　亡者兵士（大）ハルバード
+11051000 Ojo 2 dead Soldier (Large) axe -- 王城2　亡者兵士（大）斧
+11051100 Ojo 2 dead Soldier (large) Halle Bird -- 王城2　亡者兵士（大）ハルバード
+11300000 Ojo 2 slugs of caries (small) -- 王城2　蝕のナメクジ（小）
+12000000 Town Dwarf people Hatchet -- 街　矮小人　ハチェット
+12000100 Street Dwarf man Ice-ax -- 街　矮小人　ピッケル
+12000200 The Town Dwarf man large sword -- 街　矮小人　大剣
+12001000 Ojo 3 Dwarf man hatchet -- 王城3　矮小人　ハチェット
+12001100 Ojo 3 Dwarf man ice-ax -- 王城3　矮小人　ピッケル
+12001200 Ojo 3 Dwarf man Large Sword -- 王城3　矮小人　大剣
+12300000 City missionaries -- 街　宣教師
+12400000 City poor dead Hatchet -- 街　貧民亡者　鉈
+12400100 City poor dead hatchet + lantern -- 街　貧民亡者　鉈+ランタン
+12400200 City poor dead sickle + dagger -- 街　貧民亡者　鎌+短剣
+12400300 Street poor dead wooden mallet -- 街　貧民亡者　木槌
+12400400 City Poor Dead Hoe -- 街　貧民亡者　鍬
+12600000 Street poor servant saw -- 街　貧民下男　のこぎり
+12600100 City poor servant Mortar -- 街　貧民下男　臼
+12800000 Ojo 1 Dead Knight Sword Shield -- 王城1　亡者騎士　剣盾
+12800100 Ojo 1 dead Spear Shield -- 王城1　亡者騎士　槍盾
+12801000 Ojo 2 Dead Knight Sword Shield -- 王城2　亡者騎士　剣盾
+12801100 Ojo 2 dead Knight Spear Shield -- 王城2　亡者騎士　槍盾
+12801200 Ojo 2 dead Knight Great Sword -- 王城2　亡者騎士　大剣
+12801300 Ojo 2 Dead Knight Crossbow -- 王城2　亡者騎士　クロスボウ
+12802100 Ojo 3 dead Knight Spear Shield -- 王城3　亡者騎士　槍盾
+12802300 Ojo 3 Dead Knight Crossbow -- 王城3　亡者騎士　クロスボウ
+12900000 Ojo 1 Ojo Deb (Long Axe) -- 王城1　王城デブ（長斧）
+12901000 Ojo 2 Ojo Deb (Long Axe) -- 王城2　王城デブ（長斧）
+12901100 Ojo 2 Ojo Deb (short axe Nitori) -- 王城2　王城デブ（短斧二刀流）
+12902000 Ojo 3 Ojo Deb (Long Axe) -- 王城3　王城デブ（長斧）
+12902100 Ojo 3 Ojo Deb (short axe Nitori) -- 王城3　王城デブ（短斧二刀流）
+13000000 City Black Knight Sword -- 街　黒騎士　剣
+13100000 Ojo 1 Dark Knight Beast -- 王城1　ダークナイトビースト
+13101000 Ojo 3 Dark Knight Beast -- 王城3　ダークナイトビースト
+13400000 Ojo 3 dead of Wax -- 王城3　蝋の死人
+20200000 Ojo 1 Dead Dog (Large) -- 王城1　亡者犬（大）
+20201000 City dead Dog (Large) -- 街　亡者犬（大）
+20210000 Ojo 1 Dead Dog (small) -- 王城1　亡者犬（小）
+20211000 City dead Dog (small) -- 街　亡者犬（小）
+21100000 City Dog Rats -- 街　犬ネズミ
+21300000 City Wriggles Carrion -- 街　蠢く腐肉
+21500000 City Crystal Lizard -- 街　結晶トカゲ
+21501000 Ojo 2 Crystal Lizard -- 王城2　結晶トカゲ
+21502000 Ojo 3 Crystal Lizard -- 王城3　結晶トカゲ
+21900000 Ojo 3 Gargoyle Lights -- 王城3　ガーゴイル　灯火
+21900100 Ojo 3 Gargoyle Spear -- 王城3　ガーゴイル　槍
+30600000 City Firewood Daemon -- 街　薪のデーモン
+30900000 The City Dungeon Spider -- 街　牢蜘蛛
+70010000 [FDP] Princess of caries -- 【FDP】蝕の皇女
+95040000 [FDP] Test _ Painting Defense -- 【FDP】テスト_絵画守り
+95040001 [FDP] Test _ Painting Defense -- 【FDP】テスト_絵画守り
+95040002 [FDP] Test _ Painting Defense -- 【FDP】テスト_絵画守り
+95040003 [FDP] Test _ Painting Defense -- 【FDP】テスト_絵画守り
+95040004 [FDP] Test _ Painting Defense -- 【FDP】テスト_絵画守り
+210900000 Ojo 1 Segunda dead -- 王城1　グンダ亡者
+503400040 Ojo 2_04 -- 王城2_04
+603400040 Ojo 2_04 -- 王城2_04
+703400040 Ojo 2_04 -- 王城2_04
