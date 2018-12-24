@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.ofdRegulation = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -75,7 +75,7 @@
             // ofdRegulation
             // 
             this.ofdRegulation.FileName = "Data0.bdt";
-            this.ofdRegulation.Filter = "DS3 Regulation|Data0.bdt";
+            this.ofdRegulation.Filter = "DS3 Regulation|*";
             // 
             // menuStrip1
             // 
@@ -293,8 +293,8 @@
             // 
             this.dgvRowsIDCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dgvRowsIDCol.DataPropertyName = "ID";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dgvRowsIDCol.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dgvRowsIDCol.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvRowsIDCol.HeaderText = "Row";
             this.dgvRowsIDCol.Name = "dgvRowsIDCol";
             this.dgvRowsIDCol.Width = 54;

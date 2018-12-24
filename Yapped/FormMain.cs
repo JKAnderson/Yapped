@@ -140,6 +140,12 @@ namespace Yapped
 
         private void LoadRegulation()
         {
+            if (!File.Exists(regulationPath))
+            {
+                ShowError($"Regulation file not found:\r\n{regulationPath}\r\n\r\nPlease browse to Data0.bdt in your game directory from the File->Open menu.");
+                return;
+            }
+
             BND4 bnd;
             try
             {
@@ -147,7 +153,7 @@ namespace Yapped
             }
             catch (Exception ex)
             {
-                ShowError($"Failed to load regulation file:\r\n\r\n{regulationPath}\r\n\r\n{ex}");
+                ShowError($"Failed to load regulation file:\r\n{regulationPath}\r\n\r\n{ex}");
                 return;
             }
 
@@ -179,7 +185,7 @@ namespace Yapped
             dgvParams.DataSource = paramFiles;
         }
 
-        public static void ShowError(string message)
+        private static void ShowError(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
