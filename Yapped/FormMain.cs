@@ -408,6 +408,9 @@ namespace Yapped
                         file.Bytes = paramFile.Param.Write();
                 }
             }
+
+            if (!File.Exists(regulationPath + ".bak"))
+                File.Copy(regulationPath, regulationPath + ".bak");
             SFUtil.EncryptDS3Regulation(regulationPath, bnd);
         }
 

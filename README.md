@@ -7,6 +7,10 @@ Requires [.NET 4.7.2](https://www.microsoft.com/net/download/thank-you/net472) -
 As far as we know, *any* edits to the regulation file (where params are stored) will trigger anticheat, including simply opening it and resaving it.  
 Only use modified params in offline mode. Back up your save file and restore it before going online again if you're doing anything that could affect it.  
 
+# Changelog
+### 1.0.1
+* Backup actually works now. If you've already modified something, verify your game files through Steam. Sorry!
+
 # Credits
 **Pav** - Layouts  
 **TKGP** - Application

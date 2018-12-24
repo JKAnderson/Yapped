@@ -1,5 +1,5 @@
 
---| Yapped 1.0
+--| Yapped 1.0.1
 --| https://www.nexusmods.com/darksouls3/mods/298
 --| https://github.com/JKAnderson/Yapped
 
@@ -38,6 +38,12 @@ s32 - signed integer, -2,147,483,648 - 2,147,483,647
 
 After editing rows or values, save the regulation with File->Save. The original file will be backed up automatically and can be restored with File->Restore.
 Because the regulation is only loaded once when the game boots, changes will only take effect after shutting down the game completely and restarting it.
+
+
+--| Changelog
+
+1.0.1
+	Backup actually works now. If you've already modified something, verify your game files through Steam. Sorry!
 
 
 --| Credits
