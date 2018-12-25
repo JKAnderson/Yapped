@@ -42,6 +42,10 @@ namespace Yapped.Test
                 WindowState = FormWindowState.Maximized;
 
             regulationPath = settings.RegulationPath;
+            splitContainer1.SplitterDistance = settings.SplitterDistance1;
+            splitContainer2.SplitterDistance = settings.SplitterDistance2;
+            splitContainer3.SplitterDistance = settings.SplitterDistance3;
+
             LoadRegulation(regulationPath);
         }
 
@@ -60,6 +64,9 @@ namespace Yapped.Test
             }
 
             settings.RegulationPath = regulationPath;
+            settings.SplitterDistance1 = splitContainer1.SplitterDistance;
+            settings.SplitterDistance2 = splitContainer2.SplitterDistance;
+            settings.SplitterDistance3 = splitContainer3.SplitterDistance;
         }
 
         private void LoadRegulation(string path)
@@ -146,11 +153,11 @@ namespace Yapped.Test
                 dgvLayout.DataSource = layouts[paramFile.Param.ID];
 
                 if (paramFile.Rows.Count == 0 || paramFile.Param.DetectedSize == paramFile.Layout.Size)
-                    lblSizeWarning.Visible = false;
+                    warningToolStripMenuItem.Visible = false;
                 else
                 {
-                    lblSizeWarning.Text = $"Warning: layout size (0x{paramFile.Layout.Size:X}) does not equal detected param size (0x{paramFile.Param.DetectedSize:X}).";
-                    lblSizeWarning.Visible = true;
+                    warningToolStripMenuItem.Text = $"Layout size (0x{paramFile.Layout.Size:X}) does not equal param size (0x{paramFile.Param.DetectedSize:X})";
+                    warningToolStripMenuItem.Visible = true;
                 }
             }
         }

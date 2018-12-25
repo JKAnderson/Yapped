@@ -17,5 +17,14 @@
     <Setting Name="RegulationPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game\Data0.bdt</Value>
     </Setting>
+    <Setting Name="SplitterDistance1" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">279</Value>
+    </Setting>
+    <Setting Name="SplitterDistance2" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">279</Value>
+    </Setting>
+    <Setting Name="SplitterDistance3" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">279</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
