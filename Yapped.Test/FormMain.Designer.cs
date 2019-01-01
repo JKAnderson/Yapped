@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.ofdRegulation = new System.Windows.Forms.OpenFileDialog();
@@ -48,15 +49,16 @@
             this.dgvParams = new System.Windows.Forms.DataGridView();
             this.dgvParamsCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvLayout = new System.Windows.Forms.DataGridView();
-            this.dgvLayoutDefaultCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvLayoutSizeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvLayoutNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvLayoutTypeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.dgvRowsIDCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvRowsNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.dgvLayoutTypeCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvLayoutNameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvLayoutSizeCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvLayoutDefaultCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCells)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRows)).BeginInit();
@@ -107,7 +109,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -115,7 +117,7 @@
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
             this.refreshToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.refreshToolStripMenuItem.Text = "&Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
@@ -123,7 +125,7 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -140,14 +142,14 @@
             // 
             this.addEntryToolStripMenuItem.Name = "addEntryToolStripMenuItem";
             this.addEntryToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.addEntryToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.addEntryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addEntryToolStripMenuItem.Text = "Add Entry";
             this.addEntryToolStripMenuItem.Click += new System.EventHandler(this.addEntryToolStripMenuItem_Click);
             // 
             // deleteEntriesToolStripMenuItem
             // 
             this.deleteEntriesToolStripMenuItem.Name = "deleteEntriesToolStripMenuItem";
-            this.deleteEntriesToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.deleteEntriesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteEntriesToolStripMenuItem.Text = "Delete Entries";
             this.deleteEntriesToolStripMenuItem.Click += new System.EventHandler(this.deleteEntriesToolStripMenuItem_Click);
             // 
@@ -260,6 +262,7 @@
             this.dgvLayoutSizeCol,
             this.dgvLayoutDefaultCol});
             this.dgvLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvLayout.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvLayout.Location = new System.Drawing.Point(0, 0);
             this.dgvLayout.Name = "dgvLayout";
             this.dgvLayout.RowHeadersVisible = false;
@@ -267,37 +270,6 @@
             this.dgvLayout.TabIndex = 9;
             this.dgvLayout.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvLayout_CellPainting);
             this.dgvLayout.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvLayout_CellValidating);
-            // 
-            // dgvLayoutDefaultCol
-            // 
-            this.dgvLayoutDefaultCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dgvLayoutDefaultCol.DataPropertyName = "Default";
-            this.dgvLayoutDefaultCol.HeaderText = "Default";
-            this.dgvLayoutDefaultCol.Name = "dgvLayoutDefaultCol";
-            // 
-            // dgvLayoutSizeCol
-            // 
-            this.dgvLayoutSizeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dgvLayoutSizeCol.DataPropertyName = "Size";
-            this.dgvLayoutSizeCol.HeaderText = "Size";
-            this.dgvLayoutSizeCol.Name = "dgvLayoutSizeCol";
-            this.dgvLayoutSizeCol.Width = 52;
-            // 
-            // dgvLayoutNameCol
-            // 
-            this.dgvLayoutNameCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dgvLayoutNameCol.DataPropertyName = "Name";
-            this.dgvLayoutNameCol.HeaderText = "Name";
-            this.dgvLayoutNameCol.Name = "dgvLayoutNameCol";
-            this.dgvLayoutNameCol.Width = 60;
-            // 
-            // dgvLayoutTypeCol
-            // 
-            this.dgvLayoutTypeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dgvLayoutTypeCol.DataPropertyName = "Type";
-            this.dgvLayoutTypeCol.HeaderText = "Type";
-            this.dgvLayoutTypeCol.Name = "dgvLayoutTypeCol";
-            this.dgvLayoutTypeCol.Width = 56;
             // 
             // splitContainer1
             // 
@@ -372,6 +344,39 @@
             this.dgvRowsNameCol.Name = "dgvRowsNameCol";
             this.dgvRowsNameCol.ReadOnly = true;
             // 
+            // dgvLayoutTypeCol
+            // 
+            this.dgvLayoutTypeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgvLayoutTypeCol.DataPropertyName = "Type";
+            this.dgvLayoutTypeCol.HeaderText = "Type";
+            this.dgvLayoutTypeCol.Name = "dgvLayoutTypeCol";
+            this.dgvLayoutTypeCol.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvLayoutTypeCol.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dgvLayoutTypeCol.Width = 56;
+            // 
+            // dgvLayoutNameCol
+            // 
+            this.dgvLayoutNameCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgvLayoutNameCol.DataPropertyName = "Name";
+            this.dgvLayoutNameCol.HeaderText = "Name";
+            this.dgvLayoutNameCol.Name = "dgvLayoutNameCol";
+            this.dgvLayoutNameCol.Width = 60;
+            // 
+            // dgvLayoutSizeCol
+            // 
+            this.dgvLayoutSizeCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dgvLayoutSizeCol.DataPropertyName = "Size";
+            this.dgvLayoutSizeCol.HeaderText = "Size";
+            this.dgvLayoutSizeCol.Name = "dgvLayoutSizeCol";
+            this.dgvLayoutSizeCol.Width = 52;
+            // 
+            // dgvLayoutDefaultCol
+            // 
+            this.dgvLayoutDefaultCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgvLayoutDefaultCol.DataPropertyName = "Default";
+            this.dgvLayoutDefaultCol.HeaderText = "Default";
+            this.dgvLayoutDefaultCol.Name = "dgvLayoutDefaultCol";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,15 +432,16 @@
         private System.Windows.Forms.DataGridView dgvParams;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvParamsCol;
         private System.Windows.Forms.DataGridView dgvLayout;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvLayoutTypeCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvLayoutNameCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvLayoutSizeCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvLayoutDefaultCol;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvRowsIDCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvRowsNameCol;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgvLayoutTypeCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvLayoutNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvLayoutSizeCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvLayoutDefaultCol;
     }
 }
 

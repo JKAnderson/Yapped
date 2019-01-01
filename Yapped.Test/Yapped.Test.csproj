@@ -77,8 +77,6 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FormMain.ParamFile.datasource" />
-    <None Include="Properties\DataSources\SoulsFormats.PARAM+Cell.datasource" />
-    <None Include="Properties\DataSources\SoulsFormats.PARAM+Row.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

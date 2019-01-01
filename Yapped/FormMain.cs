@@ -3,6 +3,7 @@ using SoulsFormats;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -243,7 +244,7 @@ namespace Yapped
         {
             PARAM64.Cell paramCell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             DataGridViewCell dgvCell = dgvCells.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            paramCell.Value = PARAM64.Layout.ParseParamValue(paramCell.Type, dgvCell.Value.ToString());
+            paramCell.Value = PARAM64.Layout.ParseParamValue(paramCell.Type, dgvCell.Value.ToString(), CultureInfo.CurrentCulture);
         }
 
         private void dgvCells_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)

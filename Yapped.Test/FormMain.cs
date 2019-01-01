@@ -23,6 +23,7 @@ namespace Yapped.Test
             dgvRows.AutoGenerateColumns = false;
             dgvCells.AutoGenerateColumns = false;
             dgvLayout.AutoGenerateColumns = false;
+            dgvLayoutTypeCol.DataSource = Enum.GetValues(typeof(CellType));
 
             layouts = new Dictionary<string, PARAM64.Layout>();
             foreach (string path in Directory.GetFiles("Layouts", "*.xml"))
