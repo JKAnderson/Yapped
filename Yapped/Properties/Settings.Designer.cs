@@ -109,18 +109,6 @@ namespace Yapped.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int SelectedRow {
-            get {
-                return ((int)(this["SelectedRow"]));
-            }
-            set {
-                this["SelectedRow"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool VerifyRowDeletion {
             get {
@@ -140,6 +128,18 @@ namespace Yapped.Properties {
             }
             set {
                 this["SplitterDistance2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DGVIndices {
+            get {
+                return ((string)(this["DGVIndices"]));
+            }
+            set {
+                this["DGVIndices"] = value;
             }
         }
     }

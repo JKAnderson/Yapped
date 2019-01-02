@@ -23,14 +23,14 @@
     <Setting Name="SelectedParam" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="SelectedRow" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="VerifyRowDeletion" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SplitterDistance2" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">249</Value>
+    </Setting>
+    <Setting Name="DGVIndices" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

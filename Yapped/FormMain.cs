@@ -22,13 +22,14 @@ namespace Yapped
         private string regulationPath;
         private Dictionary<string, PARAM64.Layout> layouts;
         private BindingSource rowSource;
+        private Dictionary<string, (int Row, int Cell)> dgvIndices;
 
         public FormMain()
         {
             InitializeComponent();
             layouts = new Dictionary<string, PARAM64.Layout>();
             rowSource = new BindingSource();
-            rowSource.DataMember = "Rows";
+            dgvIndices = new Dictionary<string, (int Row, int Cell)>();
             dgvRows.DataSource = rowSource;
             dgvParams.AutoGenerateColumns = false;
             dgvRows.AutoGenerateColumns = false;
@@ -53,6 +54,12 @@ namespace Yapped
             {
                 LoadRegulation();
 
+                foreach (Match match in Regex.Matches(settings.DGVIndices, @"[^,]+"))
+                {
+                    string[] components = match.Value.Split(':');
+                    dgvIndices[components[0]] = (int.Parse(components[1]), int.Parse(components[2]));
+                }
+
                 if (settings.SelectedParam >= dgvParams.Rows.Count)
                     settings.SelectedParam = 0;
 
@@ -61,16 +68,6 @@ namespace Yapped
                     dgvParams.ClearSelection();
                     dgvParams.Rows[settings.SelectedParam].Selected = true;
                     dgvParams.CurrentCell = dgvParams.SelectedCells[0];
-                }
-
-                if (settings.SelectedRow >= dgvRows.Rows.Count)
-                    settings.SelectedRow = 0;
-
-                if (dgvRows.Rows.Count > 0)
-                {
-                    dgvRows.ClearSelection();
-                    dgvRows.Rows[settings.SelectedRow].Selected = true;
-                    dgvRows.CurrentCell = dgvRows.SelectedCells[0];
                 }
             }
 
@@ -108,8 +105,14 @@ namespace Yapped
 
             if (dgvParams.SelectedCells.Count > 0)
                 settings.SelectedParam = dgvParams.SelectedCells[0].RowIndex;
-            if (dgvRows.SelectedCells.Count > 0)
-                settings.SelectedRow = dgvRows.SelectedCells[0].RowIndex;
+
+            // Force saving the dgv indices
+            dgvParams.ClearSelection();
+
+            var components = new List<string>();
+            foreach (string key in dgvIndices.Keys)
+                components.Add($"{key}:{dgvIndices[key].Row}:{dgvIndices[key].Cell}");
+            settings.DGVIndices = string.Join(",", components);
         }
 
         private bool LoadLayouts()
@@ -167,12 +170,16 @@ namespace Yapped
                     try
                     {
                         PARAM64 param = PARAM64.Read(file.Bytes);
-
                         if (layouts.ContainsKey(param.ID))
                         {
                             PARAM64.Layout layout = layouts[param.ID];
                             if (layout.Size == param.DetectedSize)
-                                paramFiles.Add(new ParamFile(name, param, layout));
+                            {
+                                var paramFile = new ParamFile(name, param, layout);
+                                paramFiles.Add(paramFile);
+                                if (!dgvIndices.ContainsKey(paramFile.Name))
+                                    dgvIndices[paramFile.Name] = (0, 0);
+                            }
                         }
                     }
                     catch (Exception ex)
@@ -210,33 +217,69 @@ namespace Yapped
 
         private void dgvParams_SelectionChanged(object sender, EventArgs e)
         {
+            if (rowSource.DataSource != null)
+            {
+                ParamFile paramFile = (ParamFile)rowSource.DataSource;
+                (int Row, int Cell) indices = (0, 0);
+
+                if (dgvRows.SelectedCells.Count > 0)
+                    indices.Row = dgvRows.SelectedCells[0].RowIndex;
+                else if (dgvRows.FirstDisplayedScrollingRowIndex >= 0)
+                    indices.Row = dgvRows.FirstDisplayedScrollingRowIndex;
+
+                if (dgvCells.FirstDisplayedScrollingRowIndex >= 0)
+                    indices.Cell = dgvCells.FirstDisplayedScrollingRowIndex;
+
+                dgvIndices[paramFile.Name] = indices;
+            }
+
+            rowSource.DataSource = null;
+            dgvCells.DataSource = null;
             if (dgvParams.SelectedCells.Count > 0)
             {
                 ParamFile paramFile = (ParamFile)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
-                if (dgvCells.FirstDisplayedCell != null && dgvCells.Rows.Count > 0)
-                    dgvCells.FirstDisplayedScrollingRowIndex = 0;
-
+                // Yes, I need to set this again every time because it gets cleared out when you null the DataSource for some stupid reason
+                rowSource.DataMember = "Rows";
                 rowSource.DataSource = paramFile;
+                (int Row, int Cell) indices = dgvIndices[paramFile.Name];
+
+                if (indices.Row >= dgvRows.RowCount)
+                    indices.Row = dgvRows.RowCount - 1;
+
+                if (indices.Row < 0)
+                    indices.Row = 0;
+
+                dgvIndices[paramFile.Name] = indices;
+                dgvRows.ClearSelection();
+                if (dgvRows.RowCount > 0)
+                {
+                    dgvRows.FirstDisplayedScrollingRowIndex = indices.Row;
+                    dgvRows.Rows[indices.Row].Selected = true;
+                }
             }
         }
 
         private void dgvRows_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvRows.SelectedCells.Count == 0)
+            if (dgvRows.SelectedCells.Count > 0)
             {
-                dgvCells.DataSource = null;
-            }
-            else
-            {
-                int cellDisplayIndex = 0;
-                if (dgvCells.FirstDisplayedCell != null)
-                    cellDisplayIndex = dgvCells.FirstDisplayedScrollingRowIndex;
+                ParamFile paramFile = (ParamFile)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
+                (int Row, int Cell) indices = dgvIndices[paramFile.Name];
+                if (dgvCells.FirstDisplayedScrollingRowIndex >= 0)
+                    indices.Cell = dgvCells.FirstDisplayedScrollingRowIndex;
 
                 PARAM64.Row row = (PARAM64.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
                 dgvCells.DataSource = row.Cells.Where(cell => cell.Type != CellType.dummy8).ToArray();
 
-                if (dgvCells.Rows.Count > 0)
-                    dgvCells.FirstDisplayedScrollingRowIndex = cellDisplayIndex;
+                if (indices.Cell >= dgvCells.RowCount)
+                    indices.Cell = dgvCells.RowCount - 1;
+
+                if (indices.Cell < 0)
+                    indices.Cell = 0;
+
+                dgvIndices[paramFile.Name] = indices;
+                if (dgvCells.RowCount > 0)
+                    dgvCells.FirstDisplayedScrollingRowIndex = indices.Cell;
             }
         }
 

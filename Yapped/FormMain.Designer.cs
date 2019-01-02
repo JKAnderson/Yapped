@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.ofdRegulation = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -293,8 +293,8 @@
             // 
             this.dgvRowsIDCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dgvRowsIDCol.DataPropertyName = "ID";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dgvRowsIDCol.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dgvRowsIDCol.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRowsIDCol.HeaderText = "Row";
             this.dgvRowsIDCol.Name = "dgvRowsIDCol";
             this.dgvRowsIDCol.Width = 54;
@@ -389,9 +389,6 @@
         private System.Windows.Forms.DataGridView dgvRows;
         private System.Windows.Forms.DataGridView dgvCells;
         private System.Windows.Forms.OpenFileDialog ofdRegulation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCellsTypeCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCellsNameCol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCellsValueCol;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -412,6 +409,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem verifyDeletionsToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCellsTypeCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCellsNameCol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCellsValueCol;
     }
 }
 
