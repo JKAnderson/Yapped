@@ -1,5 +1,5 @@
 
---| Yapped 1.0.1
+--| Yapped 1.0.2
 --| https://www.nexusmods.com/darksouls3/mods/298
 --| https://github.com/JKAnderson/Yapped
 
@@ -41,6 +41,10 @@ Because the regulation is only loaded once when the game boots, changes will onl
 
 
 --| Changelog
+
+1.0.2
+	Locales that use a comma for the decimal point are now supported
+	Selected row and visible cells are now remembered for each param separately
 
 1.0.1
 	Backup actually works now. If you've already modified something, verify your game files through Steam. Sorry!

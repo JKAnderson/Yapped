@@ -8,6 +8,10 @@ As far as we know, *any* edits to the regulation file (where params are stored) 
 Only use modified params in offline mode. Back up your save file and restore it before going online again if you're doing anything that could affect it.  
 
 # Changelog
+### 1.0.2
+* Locales that use a comma for the decimal point are now supported
+* Selected row and visible cells are now remembered for each param separately
+
 ### 1.0.1
 * Backup actually works now. If you've already modified something, verify your game files through Steam. Sorry!
 
