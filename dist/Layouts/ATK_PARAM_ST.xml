@@ -426,7 +426,7 @@
     <default>100</default>
   </entry>
   <entry>
-    <name>appearAiSoundId</name>
+    <name>spawnAiSoundId</name>
     <type>s32</type>
     <default>2030</default>
   </entry>
@@ -436,322 +436,322 @@
     <default>2130</default>
   </entry>
   <entry>
-    <name>DirCameraId0</name>
+    <name>RumbleId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>DirCameraId1</name>
+    <name>RumbleId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>DirCameraId2</name>
+    <name>RumbleId2</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>DirCameraId3</name>
+    <name>RumbleId3</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xA8</name>
+    <name>Hit0_VfxId</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xAC</name>
+    <name>Hit0_DummyPolyId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xB0</name>
+    <name>Hit0_DummyPolyId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xB4</name>
+    <name>Hit1_VfxId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xB8</name>
+    <name>Hit1_DummyPolyId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xBC</name>
+    <name>Hit1_DummyPolyId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xC0</name>
+    <name>Hit2_VfxId</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xC4</name>
+    <name>Hit2_DummyPolyId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xC8</name>
+    <name>Hit2_DummyPolyId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xCC</name>
+    <name>Hit3_VfxId</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xD0</name>
+    <name>Hit3_DummyPolyId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xD4</name>
+    <name>Hit3_DummyPolyId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xD8</name>
+    <name>Hit4_VfxId</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xDC</name>
+    <name>Hit4_DummyPolyId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xE0</name>
+    <name>Hit4_DummyPolyId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xE4</name>
+    <name>Hit5_VfxId</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xE8</name>
+    <name>Hit5_DummyPolyId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xEC</name>
+    <name>Hit5_DummyPolyId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xF0</name>
+    <name>Hit6_VfxId</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xF4</name>
+    <name>Hit6_DummyPolyId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xF8</name>
+    <name>Hit6_DummyPolyId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0xFC</name>
+    <name>Hit7_VfxId</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x100</name>
+    <name>Hit7_DummyPolyId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x104</name>
+    <name>Hit7_DummyPolyId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x108</name>
+    <name>Hit4_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x10C</name>
+    <name>Hit5_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x110</name>
+    <name>Hit6_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x114</name>
+    <name>Hit7_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x118</name>
+    <name>Hit8_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x11C</name>
+    <name>Hit9_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x120</name>
+    <name>Hit10_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x124</name>
+    <name>Hit11_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x128</name>
+    <name>Hit12_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x12C</name>
+    <name>Hit13_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x130</name>
+    <name>Hit14_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x134</name>
+    <name>Hit15_Radius</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>0x138</name>
+    <name>Hit4_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x13A</name>
+    <name>Hit5_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x13C</name>
+    <name>Hit6_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x13E</name>
+    <name>Hit7_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x140</name>
+    <name>Hit8_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x142</name>
+    <name>Hit9_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x144</name>
+    <name>Hit10_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x146</name>
+    <name>Hit11_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x148</name>
+    <name>Hit12_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x14A</name>
+    <name>Hit13_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x14C</name>
+    <name>Hit14_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x14E</name>
+    <name>Hit15_DmyPoly1</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x150</name>
+    <name>Hit4_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x152</name>
+    <name>Hit5_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x154</name>
+    <name>Hit6_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x156</name>
+    <name>Hit7_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x158</name>
+    <name>Hit8_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x15A</name>
+    <name>Hit9_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x15C</name>
+    <name>Hit10_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x15E</name>
+    <name>Hit11_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x160</name>
+    <name>Hit12_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x162</name>
+    <name>Hit13_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x164</name>
+    <name>Hit14_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>0x166</name>
+    <name>Hit15_DmyPoly2</name>
     <type>s16</type>
     <default>-1</default>
   </entry>

@@ -1,162 +1,162 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layout>
   <entry>
-    <name>HitSfx0</name>
+    <name>MtrlVfxId0</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx1</name>
+    <name>MtrlVfxId1</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx2</name>
+    <name>MtrlVfxId2</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx3</name>
+    <name>MtrlVfxId3</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx4</name>
+    <name>MtrlVfxId4</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx5</name>
+    <name>MtrlVfxId5</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx6</name>
+    <name>MtrlVfxId6</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx7</name>
+    <name>MtrlVfxId7</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx8</name>
+    <name>MtrlVfxId8</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx9</name>
+    <name>MtrlVfxId9</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx10</name>
+    <name>MtrlVfxId10</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx11</name>
+    <name>MtrlVfxId11</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx12</name>
+    <name>MtrlVfxId12</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx13</name>
+    <name>MtrlVfxId13</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx14</name>
+    <name>MtrlVfxId14</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx15</name>
+    <name>MtrlVfxId15</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx16</name>
+    <name>MtrlVfxId16</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx17</name>
+    <name>MtrlVfxId17</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx18</name>
+    <name>MtrlVfxId18</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx19</name>
+    <name>MtrlVfxId19</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx20</name>
+    <name>MtrlVfxId20</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx21</name>
+    <name>MtrlVfxId21</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx22</name>
+    <name>MtrlVfxId22</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx23</name>
+    <name>MtrlVfxId23</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx24</name>
+    <name>MtrlVfxId24</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx25</name>
+    <name>MtrlVfxId25</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx26</name>
+    <name>MtrlVfxId26</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx27</name>
+    <name>MtrlVfxId27</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx28</name>
+    <name>MtrlVfxId28</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx29</name>
+    <name>MtrlVfxId29</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx30</name>
+    <name>MtrlVfxId30</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>HitSfx31</name>
+    <name>MtrlVfxId31</name>
     <type>s32</type>
     <default>0</default>
   </entry>

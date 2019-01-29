@@ -1,107 +1,107 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layout>
   <entry>
-    <name>DrawDistScaleVal0</name>
+    <name>LodDistDrawScale0</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal1</name>
+    <name>LodDistDrawScale1</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal2</name>
+    <name>LodDistDrawScale2</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal3</name>
+    <name>LodDistDrawScale3</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal4</name>
+    <name>LodDistDrawScale4</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal5</name>
+    <name>LodDistDrawScale5</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal6</name>
+    <name>LodDistDrawScale6</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal7</name>
+    <name>LodDistDrawScale7</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal8</name>
+    <name>LodDistDrawScale8</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal9</name>
+    <name>LodDistDrawScale9</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal10</name>
+    <name>LodDistDrawScale10</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal11</name>
+    <name>LodDistDrawScale11</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal12</name>
+    <name>LodDistDrawScale12</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal13</name>
+    <name>LodDistDrawScale13</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal14</name>
+    <name>LodDistDrawScale14</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal15</name>
+    <name>LodDistDrawScale15</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal16</name>
+    <name>LodDistDrawScale16</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal17</name>
+    <name>LodDistDrawScale17</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal18</name>
+    <name>LodDistDrawScale18</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal19</name>
+    <name>LodDistDrawScale19</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>DrawDistScaleVal20</name>
+    <name>LodDistDrawScale20</name>
     <type>f32</type>
     <default>1</default>
   </entry>

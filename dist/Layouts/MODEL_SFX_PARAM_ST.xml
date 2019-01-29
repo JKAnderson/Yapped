@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layout>
   <entry>
-    <name>SfxId1</name>
+    <name>VfxId1</name>
     <type>s32</type>
     <default>800022</default>
   </entry>
   <entry>
-    <name>DummyPointId1</name>
+    <name>DummyPolyId1</name>
     <type>s32</type>
     <default>200</default>
   </entry>
@@ -16,12 +16,12 @@
     <size>8</size>
   </entry>
   <entry>
-    <name>SfxId2</name>
+    <name>VfxId2</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>DummyPointId2</name>
+    <name>DummyPolyId2</name>
     <type>s32</type>
     <default>0</default>
   </entry>
@@ -31,12 +31,12 @@
     <size>8</size>
   </entry>
   <entry>
-    <name>SfxId3</name>
+    <name>VfxId3</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>DummyPointId3</name>
+    <name>DummyPolyId3</name>
     <type>s32</type>
     <default>0</default>
   </entry>
@@ -46,12 +46,12 @@
     <size>0</size>
   </entry>
   <entry>
-    <name>SfxId4</name>
+    <name>VfxId4</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>DummyPointId4</name>
+    <name>DummyPolyId4</name>
     <type>s32</type>
     <default>0</default>
   </entry>
@@ -61,12 +61,12 @@
     <size>0</size>
   </entry>
   <entry>
-    <name>SfxId5</name>
+    <name>VfxId5</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>DummyPointId5</name>
+    <name>DummyPolyId5</name>
     <type>s32</type>
     <default>0</default>
   </entry>
@@ -76,12 +76,12 @@
     <size>0</size>
   </entry>
   <entry>
-    <name>SfxId6</name>
+    <name>VfxId6</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>DummyPointId6</name>
+    <name>DummyPolyId6</name>
     <type>s32</type>
     <default>0</default>
   </entry>
@@ -91,12 +91,12 @@
     <size>0</size>
   </entry>
   <entry>
-    <name>SfxId7</name>
+    <name>VfxId7</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>DummyPointId7</name>
+    <name>DummyPolyId7</name>
     <type>s32</type>
     <default>0</default>
   </entry>
@@ -106,12 +106,12 @@
     <size>8</size>
   </entry>
   <entry>
-    <name>SfxId8</name>
+    <name>VfxId8</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>DummyPointId8</name>
+    <name>DummyPolyId8</name>
     <type>s32</type>
     <default>0</default>
   </entry>
@@ -121,12 +121,12 @@
     <size>8</size>
   </entry>
   <entry>
-    <name>SfxId9</name>
+    <name>VfxId9</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>DummyPointId9</name>
+    <name>DummyPolyId9</name>
     <type>s32</type>
     <default>0</default>
   </entry>
@@ -136,12 +136,12 @@
     <size>8</size>
   </entry>
   <entry>
-    <name>SfxId10</name>
+    <name>VfxId10</name>
     <type>s32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>DummyPointId10</name>
+    <name>DummyPolyId10</name>
     <type>s32</type>
     <default>0</default>
   </entry>

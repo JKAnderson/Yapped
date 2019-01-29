@@ -1,132 +1,132 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layout>
   <entry>
-    <name>BudgetMonitorVal0</name>
+    <name>MemoryBudget0</name>
     <type>f32</type>
     <default>3000</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal1</name>
+    <name>MemoryBudget1</name>
     <type>f32</type>
     <default>340</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal2</name>
+    <name>MemoryBudget2</name>
     <type>f32</type>
     <default>500</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal3</name>
+    <name>MemoryBudget3</name>
     <type>f32</type>
     <default>980</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal4</name>
+    <name>MemoryBudget4</name>
     <type>f32</type>
     <default>220</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal5</name>
+    <name>MemoryBudget5</name>
     <type>f32</type>
     <default>150</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal6</name>
+    <name>MemoryBudget6</name>
     <type>f32</type>
     <default>150</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal7</name>
+    <name>MemoryBudget7</name>
     <type>f32</type>
     <default>160</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal8</name>
+    <name>MemoryBudget8</name>
     <type>f32</type>
     <default>60</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal9</name>
+    <name>MemoryBudget9</name>
     <type>f32</type>
     <default>100</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal10</name>
+    <name>MemoryBudget10</name>
     <type>f32</type>
     <default>50</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal11</name>
+    <name>MemoryBudget11</name>
     <type>f32</type>
     <default>145</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal12</name>
+    <name>MemoryBudget12</name>
     <type>f32</type>
     <default>5</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal13</name>
+    <name>MemoryBudget13</name>
     <type>f32</type>
     <default>140</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal14</name>
+    <name>MemoryBudget14</name>
     <type>f32</type>
     <default>110</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal15</name>
+    <name>MemoryBudget15</name>
     <type>f32</type>
     <default>100</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal16</name>
+    <name>MemoryBudget16</name>
     <type>f32</type>
     <default>20</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal17</name>
+    <name>MemoryBudget17</name>
     <type>f32</type>
     <default>256</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal18</name>
+    <name>MemoryBudget18</name>
     <type>f32</type>
     <default>45</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal19</name>
+    <name>MemoryBudget19</name>
     <type>f32</type>
     <default>5</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal20</name>
+    <name>MemoryBudget20</name>
     <type>f32</type>
     <default>200</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal21</name>
+    <name>MemoryBudget21</name>
     <type>f32</type>
     <default>50</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal22</name>
+    <name>MemoryBudget22</name>
     <type>f32</type>
     <default>50</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal23</name>
+    <name>MemoryBudget23</name>
     <type>f32</type>
     <default>50</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal24</name>
+    <name>MemoryBudget24</name>
     <type>f32</type>
     <default>3000</default>
   </entry>
   <entry>
-    <name>BudgetMonitorVal25</name>
+    <name>MemoryBudget25</name>
     <type>f32</type>
     <default>370</default>
   </entry>

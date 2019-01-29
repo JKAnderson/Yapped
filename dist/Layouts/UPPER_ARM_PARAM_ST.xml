@@ -1,102 +1,102 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layout>
   <entry>
-    <name>ArmYCorrection0</name>
+    <name>ArmZ0</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection0</name>
+    <name>ArmXY0</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmYCorrection1</name>
+    <name>ArmZ1</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection1</name>
+    <name>ArmXY1</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmYCorrection2</name>
+    <name>ArmZ2</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection2</name>
+    <name>ArmXY2</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmYCorrection3</name>
+    <name>ArmZ3</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection3</name>
+    <name>ArmXY3</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmYCorrection4</name>
+    <name>ArmZ4</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection4</name>
+    <name>ArmXY4</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmYCorrection5</name>
+    <name>ArmZ5</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection5</name>
+    <name>ArmXY5</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmYCorrection6</name>
+    <name>ArmZ6</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection6</name>
+    <name>ArmXY6</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmYCorrection7</name>
+    <name>ArmZ7</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection7</name>
+    <name>ArmXY7</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmYCorrection8</name>
+    <name>ArmZ8</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection8</name>
+    <name>ArmXY8</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmYCorrection9</name>
+    <name>ArmZ9</name>
     <type>f32</type>
     <default>0</default>
   </entry>
   <entry>
-    <name>ArmXZCorrection9</name>
+    <name>ArmXY9</name>
     <type>f32</type>
     <default>0</default>
   </entry>

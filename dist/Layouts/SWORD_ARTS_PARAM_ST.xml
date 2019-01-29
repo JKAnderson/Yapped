@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layout>
   <entry>
-    <name>ActType0</name>
+    <name>ActionId [0-36]</name>
     <type>u8</type>
     <default>22</default>
   </entry>
   <entry>
-    <name>ActType1</name>
+    <name>ActionCorrection</name>
     <type>u8</type>
     <default>2</default>
   </entry>
   <entry>
-    <name>AttackType0</name>
+    <name>ReserveArtPointType [0-3]</name>
     <type>u8</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>Unk2</name>
+    <name>UnusedField</name>
     <type>u8</type>
     <default>2</default>
   </entry>
@@ -41,7 +41,7 @@
     <default>-1</default>
   </entry>
   <entry>
-    <name>TextID</name>
+    <name>DebugTextId</name>
     <type>s32</type>
     <default>70005</default>
   </entry>
@@ -66,7 +66,7 @@
     <default>-1</default>
   </entry>
   <entry>
-    <name>AttackType1</name>
+    <name>ShieldCategory [0-4]</name>
     <type>u8</type>
     <default>0</default>
   </entry>

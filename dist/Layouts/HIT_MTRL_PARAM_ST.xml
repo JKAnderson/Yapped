@@ -6,12 +6,12 @@
     <default>1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit0</name>
+    <name>spEffectId0</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit1</name>
+    <name>spEffectId1</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
@@ -71,77 +71,77 @@
     <default>0</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit2</name>
+    <name>spEffectId2</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit3</name>
+    <name>spEffectId3</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit4</name>
+    <name>spEffectId4</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit5</name>
+    <name>spEffectId5</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit6</name>
+    <name>spEffectId6</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit7</name>
+    <name>spEffectId7</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit8</name>
+    <name>spEffectId8</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit9</name>
+    <name>spEffectId9</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit10</name>
+    <name>spEffectId10</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit11</name>
+    <name>spEffectId11</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit12</name>
+    <name>spEffectId12</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit13</name>
+    <name>spEffectId13</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit14</name>
+    <name>spEffectId14</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit15</name>
+    <name>spEffectId15</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
   <entry>
-    <name>spEffectIdOnHit16</name>
+    <name>spEffectId16</name>
     <type>s32</type>
     <default>-1</default>
   </entry>

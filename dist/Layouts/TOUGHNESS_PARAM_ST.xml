@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layout>
   <entry>
-    <name>CurrentToughness</name>
+    <name>Toughness</name>
     <type>f32</type>
     <default>1</default>
   </entry>
@@ -21,7 +21,7 @@
     <size>1</size>
   </entry>
   <entry>
-    <name>damageSubstitutionSpEffectId</name>
+    <name>SpEffectId</name>
     <type>s32</type>
     <default>6352</default>
   </entry>

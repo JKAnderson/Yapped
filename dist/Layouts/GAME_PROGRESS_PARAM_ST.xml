@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layout>
   <entry>
-    <name>EventId</name>
+    <name>EventFlagId</name>
     <type>s32</type>
     <default>6100</default>
   </entry>
   <entry>
-    <name>FlagId</name>
+    <name>ProgressId</name>
     <type>u8</type>
     <default>10</default>
   </entry>

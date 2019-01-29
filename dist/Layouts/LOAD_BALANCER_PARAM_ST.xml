@@ -1,32 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <layout>
   <entry>
-    <name>LowerFps</name>
+    <name>Unk1</name>
     <type>f32</type>
     <default>23</default>
   </entry>
   <entry>
-    <name>UpperFps</name>
+    <name>Unk2</name>
     <type>f32</type>
     <default>27</default>
   </entry>
   <entry>
-    <name>LowerFpsContinousCount</name>
+    <name>Unk3</name>
     <type>s32</type>
     <default>5</default>
   </entry>
   <entry>
-    <name>UpperFpsContinousCount</name>
+    <name>Unk4</name>
     <type>s32</type>
     <default>20</default>
   </entry>
   <entry>
-    <name>upAfterChangeSleep</name>
+    <name>Unk5</name>
     <type>s32</type>
     <default>30</default>
   </entry>
   <entry>
-    <name>downAfterChangeSleep</name>
+    <name>Unk6</name>
     <type>s32</type>
     <default>10</default>
   </entry>

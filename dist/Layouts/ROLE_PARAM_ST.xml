@@ -146,7 +146,7 @@
     <default>-1</default>
   </entry>
   <entry>
-    <name>Unk1</name>
+    <name>PhantomParamIdForDebug</name>
     <type>s32</type>
     <default>-1</default>
   </entry>
