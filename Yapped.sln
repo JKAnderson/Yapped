@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yapped.Test", "Yapped.Test\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yapped.Dump", "Yapped.Dump\Yapped.Dump.csproj", "{E89CC074-5DBE-4BB2-B15E-C711F46243D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulsFormats", "..\..\GitHub\JKAnderson\SoulsFormats\SoulsFormats\SoulsFormats.csproj", "{22C664BD-877B-44DF-8ECF-2808522469A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoulsFormats", "..\SoulsFormats\SoulsFormats\SoulsFormats.csproj", "{22C664BD-877B-44DF-8ECF-2808522469A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
