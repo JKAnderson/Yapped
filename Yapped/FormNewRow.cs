@@ -19,7 +19,7 @@ namespace Yapped
         private void btnCreate_Click(object sender, EventArgs e)
         {
             ResultID = (long)nudID.Value;
-            Name = txtName.Text.Length > 0 ? txtName.Text : null;
+            ResultName = txtName.Text.Length > 0 ? txtName.Text : null;
             DialogResult = DialogResult.OK;
             Close();
         }

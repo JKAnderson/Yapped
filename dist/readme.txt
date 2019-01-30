@@ -1,5 +1,5 @@
 
---| Yapped 1.1
+--| Yapped 1.1.1
 --| https://www.nexusmods.com/darksouls3/mods/298
 --| https://github.com/JKAnderson/Yapped
 
@@ -41,6 +41,10 @@ Because the regulation is only loaded once when the game boots, changes will onl
 
 
 --| Changelog
+
+1.1.1
+	Fix name in create row dialog not doing anything
+	Fix duplicated rows being unsaveable sometimes
 
 1.1
 	Ctrl+Shift+N: Duplicate selected row

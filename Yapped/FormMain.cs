@@ -503,19 +503,21 @@ namespace Yapped
 
         private void duplicateRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgvCells.DataSource == null)
+            if (dgvRows.SelectedCells.Count == 0)
             {
-                ShowError("You can't duplicate a row without one loaded!");
+                ShowError("You can't duplicate a row without one selected!");
                 return;
             }
 
-            var oldRow = (PARAM64.Cell[])dgvCells.DataSource;
+            int index = dgvRows.SelectedCells[0].RowIndex;
+            ParamWrapper wrapper = (ParamWrapper)rowSource.DataSource;
+            PARAM64.Row oldRow = wrapper.Rows[index];
             PARAM64.Row newRow;
             if ((newRow = CreateRow("Duplicate a row...")) != null)
             {
-                for (int i = 0; i < oldRow.Length; i++)
+                for (int i = 0; i < oldRow.Cells.Count; i++)
                 {
-                    newRow.Cells[i].Value = oldRow[i].Value;
+                    newRow.Cells[i].Value = oldRow.Cells[i].Value;
                 }
             }
         }
@@ -550,6 +552,7 @@ namespace Yapped
                     dgvRows.FirstDisplayedScrollingRowIndex = Math.Max(0, index - displayedRows / 2);
                     dgvRows.ClearSelection();
                     dgvRows.Rows[index].Selected = true;
+                    dgvRows.Refresh();
                 }
             }
             return result;

@@ -8,6 +8,10 @@ As far as we know, *any* edits to the regulation file (where params are stored) 
 Only use modified params in offline mode. Back up your save file and restore it before going online again if you're doing anything that could affect it.  
 
 # Changelog
+### 1.1.1
+* Fix name in create row dialog not doing anything
+* Fix duplicated rows being unsaveable sometimes
+
 ### 1.1
 * Ctrl+Shift+N: Duplicate selected row
 * Ctrl+F: Search for row by name
