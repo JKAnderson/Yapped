@@ -61,16 +61,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormFind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFind.Designer.cs">
+      <DependentUpon>FormFind.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGoto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGoto.Designer.cs">
+      <DependentUpon>FormGoto.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormNewRow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNewRow.Designer.cs">
+      <DependentUpon>FormNewRow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ParamInfo.cs" />
+    <Compile Include="ParamWrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormFind.resx">
+      <DependentUpon>FormFind.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGoto.resx">
+      <DependentUpon>FormGoto.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNewRow.resx">
+      <DependentUpon>FormNewRow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

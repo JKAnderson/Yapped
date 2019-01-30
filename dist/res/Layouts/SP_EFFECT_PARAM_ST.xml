@@ -1326,27 +1326,27 @@
     <default>1</default>
   </entry>
   <entry>
-    <name>Unk31</name>
+    <name>PhysDefCutRateMP</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>Unk32</name>
+    <name>MagicDefCutRateMP</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>Unk33</name>
+    <name>FireDefCutRateMP</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>Unk34</name>
+    <name>ThunderDefCutRateMP</name>
     <type>f32</type>
     <default>1</default>
   </entry>
   <entry>
-    <name>Unk35</name>
+    <name>DarkDefCutRateMP</name>
     <type>f32</type>
     <default>1</default>
   </entry>

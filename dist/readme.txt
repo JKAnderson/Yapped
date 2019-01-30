@@ -1,5 +1,5 @@
 
---| Yapped 1.0.2
+--| Yapped 1.1
 --| https://www.nexusmods.com/darksouls3/mods/298
 --| https://github.com/JKAnderson/Yapped
 
@@ -19,7 +19,7 @@ Only use modified params in offline mode. Back up your save file and restore it 
 Yapped will try to load the regulation from the default Steam location when it starts. If you have the game installed somewhere else, use File->Open to find Data0.bdt in your game directory.
 The different params will be displayed in the left pane. Clicking one will display the rows within it in the center pane. Clicking a row will display its values in the right pane.
 Rows can be created or deleted from the Edit menu, or with the hotkeys indicated there. By default you will be prompted when deleting a row; uncheck the option in the Edit menu if you don't want that.
-Row ID and name can be edited at will; the name has no functional significance. Vanilla DS3 has its row names stripped out; use Edit->Import Names to populate them with names from the network test (which aren't necessarily accurate) and names inferred from item text (which are).
+Row ID and name can be edited at will; the name has no functional significance. Vanilla DS3 has its row names stripped out; use Edit->Import Names to populate them with names from the network test (which aren't necessarily accurate) and names inferred from text files (which are).
 Be aware of the type when editing values. If you enter an invalid value you will receive an error; either correct it, or press Escape to cancel. Types are described below.
 
 b8, b32 - true or false
@@ -42,6 +42,18 @@ Because the regulation is only loaded once when the game boots, changes will onl
 
 --| Changelog
 
+1.1
+	Ctrl+Shift+N: Duplicate selected row
+	Ctrl+F: Search for row by name
+	Ctrl+G: Go to row by ID
+	Ctrl+Shift+F: Search for field by name
+	Unused params are hidden by default
+	Creating a new row has a nice dialog now
+	Updated layouts for several params (thanks Pav)
+	Updated names for several params (thanks GiveMeThePowa)
+	Added brief descriptions for params on mouse-over (thanks Pav)
+	Added support for field descriptions, but didn't actually write any yet
+
 1.0.2
 	Locales that use a comma for the decimal point are now supported
 	Selected row and visible cells are now remembered for each param separately
@@ -54,6 +66,7 @@ Because the regulation is only loaded once when the game boots, changes will onl
 
 Pav - Layouts
 TKGP - Application
+GiveMeThePowa - Contributing row names
 
 
 --| Libraries

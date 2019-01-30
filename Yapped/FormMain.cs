@@ -17,12 +17,16 @@ namespace Yapped
     public partial class FormMain : Form
     {
         private const string UPDATE_URL = "https://www.nexusmods.com/darksouls3/mods/306?tab=files";
+        private const string LAYOUTS_DIR = @"res\Layouts";
+        private const string NAMES_DIR = @"res\Names";
+        private const string PARAM_INFO_PATH = @"res\ParamInfo.xml";
         private static Properties.Settings settings = Properties.Settings.Default;
 
         private string regulationPath;
         private Dictionary<string, PARAM64.Layout> layouts;
         private BindingSource rowSource;
         private Dictionary<string, (int Row, int Cell)> dgvIndices;
+        private string lastFindRowPattern, lastFindFieldPattern;
 
         public FormMain()
         {
@@ -34,6 +38,7 @@ namespace Yapped
             dgvParams.AutoGenerateColumns = false;
             dgvRows.AutoGenerateColumns = false;
             dgvCells.AutoGenerateColumns = false;
+            lastFindRowPattern = "";
         }
 
         private async void FormMain_Load(object sender, EventArgs e)
@@ -46,6 +51,7 @@ namespace Yapped
                 WindowState = FormWindowState.Maximized;
 
             regulationPath = settings.RegulationPath;
+            hideUnusedParamsToolStripMenuItem.Checked = settings.HideUnusedParams;
             verifyDeletionsToolStripMenuItem.Checked = settings.VerifyRowDeletion;
             splitContainer2.SplitterDistance = settings.SplitterDistance2;
             splitContainer1.SplitterDistance = settings.SplitterDistance1;
@@ -69,19 +75,23 @@ namespace Yapped
                     dgvParams.Rows[settings.SelectedParam].Selected = true;
                     dgvParams.CurrentCell = dgvParams.SelectedCells[0];
                 }
-            }
 
-            Octokit.GitHubClient gitHubClient = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("Yapped"));
-            try
-            {
-                Octokit.Release release = await gitHubClient.Repository.Release.GetLatest("JKAnderson", "Yapped");
-                if (SemVersion.Parse(release.TagName) > Application.ProductVersion)
+                Octokit.GitHubClient gitHubClient = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("Yapped"));
+                try
                 {
-                    updateToolStripMenuItem.Visible = true;
+                    Octokit.Release release = await gitHubClient.Repository.Release.GetLatest("JKAnderson", "Yapped");
+                    if (SemVersion.Parse(release.TagName) > Application.ProductVersion)
+                    {
+                        updateToolStripMenuItem.Visible = true;
+                    }
                 }
+                // Oh well.
+                catch { }
             }
-            // Oh well.
-            catch { }
+            else
+            {
+                Close();
+            }
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -99,6 +109,7 @@ namespace Yapped
             }
 
             settings.RegulationPath = regulationPath;
+            settings.HideUnusedParams = hideUnusedParamsToolStripMenuItem.Checked;
             settings.VerifyRowDeletion = verifyDeletionsToolStripMenuItem.Checked;
             settings.SplitterDistance2 = splitContainer2.SplitterDistance;
             settings.SplitterDistance1 = splitContainer1.SplitterDistance;
@@ -117,15 +128,14 @@ namespace Yapped
 
         private bool LoadLayouts()
         {
-            if (!Directory.Exists("Layouts"))
+            if (!Directory.Exists(LAYOUTS_DIR))
             {
-                ShowError("No Layouts directory found with application; params cannot be edited.");
-                Close();
+                ShowError("No res\\Layouts directory found with application; params cannot be edited.");
                 return false;
             }
             else
             {
-                foreach (string path in Directory.GetFiles("Layouts", "*.xml"))
+                foreach (string path in Directory.GetFiles(LAYOUTS_DIR, "*.xml"))
                 {
                     string paramID = Path.GetFileNameWithoutExtension(path);
                     try
@@ -161,65 +171,49 @@ namespace Yapped
                 return;
             }
 
-            List<ParamFile> paramFiles = new List<ParamFile>();
-            foreach (BND4.File file in bnd.Files)
+            Dictionary<string, ParamInfo> paramInfo = ParamInfo.ReadParamInfo(PARAM_INFO_PATH);
+            var paramWrappers = new List<ParamWrapper>();
+            foreach (BND4.File file in bnd.Files.Where(f => f.Name.EndsWith(".param")))
             {
-                if (Path.GetExtension(file.Name) == ".param")
+                string name = Path.GetFileNameWithoutExtension(file.Name);
+                if (hideUnusedParamsToolStripMenuItem.Checked && paramInfo.ContainsKey(name) && paramInfo[name].Hidden)
+                    continue;
+
+                try
                 {
-                    string name = Path.GetFileNameWithoutExtension(file.Name);
-                    try
+                    PARAM64 param = PARAM64.Read(file.Bytes);
+                    if (layouts.ContainsKey(param.ID))
                     {
-                        PARAM64 param = PARAM64.Read(file.Bytes);
-                        if (layouts.ContainsKey(param.ID))
+                        PARAM64.Layout layout = layouts[param.ID];
+                        if (layout.Size == param.DetectedSize)
                         {
-                            PARAM64.Layout layout = layouts[param.ID];
-                            if (layout.Size == param.DetectedSize)
-                            {
-                                var paramFile = new ParamFile(name, param, layout);
-                                paramFiles.Add(paramFile);
-                                if (!dgvIndices.ContainsKey(paramFile.Name))
-                                    dgvIndices[paramFile.Name] = (0, 0);
-                            }
+                            string description = null;
+                            if (paramInfo.ContainsKey(name))
+                                description = paramInfo[name].Description;
+
+                            var wrapper = new ParamWrapper(name, param, layout, description);
+                            paramWrappers.Add(wrapper);
+                            if (!dgvIndices.ContainsKey(wrapper.Name))
+                                dgvIndices[wrapper.Name] = (0, 0);
                         }
                     }
-                    catch (Exception ex)
-                    {
-                        ShowError($"Failed to load param file: {name}.param\r\n\r\n{ex}");
-                    }
+                }
+                catch (Exception ex)
+                {
+                    ShowError($"Failed to load param file: {name}.param\r\n\r\n{ex}");
                 }
             }
 
-            paramFiles.Sort((p1, p2) => p1.Name.CompareTo(p2.Name));
-            dgvParams.DataSource = paramFiles;
-        }
-
-        private static void ShowError(string message)
-        {
-            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        public class ParamFile
-        {
-            public string Name { get; set; }
-            public PARAM64 Param;
-            public PARAM64.Layout Layout;
-            public List<PARAM64.Row> Rows { get; set; }
-
-            public ParamFile(string name, PARAM64 param, PARAM64.Layout layout)
-            {
-                Name = name;
-                Param = param;
-                Layout = layout;
-                Param.SetLayout(layout);
-                Rows = Param.Rows;
-            }
+            paramWrappers.Sort();
+            dgvParams.DataSource = paramWrappers;
+            toolStripStatusLabel1.Text = regulationPath;
         }
 
         private void dgvParams_SelectionChanged(object sender, EventArgs e)
         {
             if (rowSource.DataSource != null)
             {
-                ParamFile paramFile = (ParamFile)rowSource.DataSource;
+                ParamWrapper paramFile = (ParamWrapper)rowSource.DataSource;
                 (int Row, int Cell) indices = (0, 0);
 
                 if (dgvRows.SelectedCells.Count > 0)
@@ -237,7 +231,7 @@ namespace Yapped
             dgvCells.DataSource = null;
             if (dgvParams.SelectedCells.Count > 0)
             {
-                ParamFile paramFile = (ParamFile)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
+                ParamWrapper paramFile = (ParamWrapper)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
                 // Yes, I need to set this again every time because it gets cleared out when you null the DataSource for some stupid reason
                 rowSource.DataMember = "Rows";
                 rowSource.DataSource = paramFile;
@@ -263,7 +257,7 @@ namespace Yapped
         {
             if (dgvRows.SelectedCells.Count > 0)
             {
-                ParamFile paramFile = (ParamFile)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
+                ParamWrapper paramFile = (ParamWrapper)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
                 (int Row, int Cell) indices = dgvIndices[paramFile.Name];
                 if (dgvCells.FirstDisplayedScrollingRowIndex >= 0)
                     indices.Cell = dgvCells.FirstDisplayedScrollingRowIndex;
@@ -447,7 +441,7 @@ namespace Yapped
             {
                 foreach (DataGridViewRow paramRow in dgvParams.Rows)
                 {
-                    ParamFile paramFile = (ParamFile)paramRow.DataBoundItem;
+                    ParamWrapper paramFile = (ParamWrapper)paramRow.DataBoundItem;
                     if (Path.GetFileNameWithoutExtension(file.Name) == paramFile.Name)
                         file.Bytes = paramFile.Param.Write();
                 }
@@ -468,8 +462,7 @@ namespace Yapped
                 {
                     try
                     {
-                        File.Delete(regulationPath);
-                        File.Move(regulationPath + ".bak", regulationPath);
+                        File.Copy(regulationPath + ".bak", regulationPath, true);
                         LoadRegulation();
                         SystemSounds.Asterisk.Play();
                     }
@@ -504,9 +497,61 @@ namespace Yapped
 
         private void addRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ParamFile paramFile = (ParamFile)rowSource.DataSource;
-            PARAM64.Row row = new PARAM64.Row(paramFile.Rows.Max(r => r.ID) + 1, "", paramFile.Layout);
-            rowSource.Add(row);
+            CreateRow("Add a new row...");
+        }
+
+        private void duplicateRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvCells.DataSource == null)
+            {
+                ShowError("You can't duplicate a row without one loaded!");
+                return;
+            }
+
+            var oldRow = (PARAM64.Cell[])dgvCells.DataSource;
+            PARAM64.Row newRow;
+            if ((newRow = CreateRow("Duplicate a row...")) != null)
+            {
+                for (int i = 0; i < oldRow.Length; i++)
+                {
+                    newRow.Cells[i].Value = oldRow[i].Value;
+                }
+            }
+        }
+
+        private PARAM64.Row CreateRow(string prompt)
+        {
+            if (rowSource.DataSource == null)
+            {
+                ShowError("You can't create a row with no param selected!");
+                return null;
+            }
+
+            PARAM64.Row result = null;
+            var newRowForm = new FormNewRow(prompt);
+            if (newRowForm.ShowDialog() == DialogResult.OK)
+            {
+                long id = newRowForm.ResultID;
+                string name = newRowForm.ResultName;
+                ParamWrapper paramWrapper = (ParamWrapper)rowSource.DataSource;
+                if (paramWrapper.Rows.Any(row => row.ID == id))
+                {
+                    ShowError($"A row with this ID already exists: {id}");
+                }
+                else
+                {
+                    result = new PARAM64.Row(id, name, paramWrapper.Layout);
+                    rowSource.Add(result);
+                    paramWrapper.Rows.Sort((r1, r2) => r1.ID.CompareTo(r2.ID));
+
+                    int index = paramWrapper.Rows.FindIndex(row => ReferenceEquals(row, result));
+                    int displayedRows = dgvRows.DisplayedRowCount(false);
+                    dgvRows.FirstDisplayedScrollingRowIndex = Math.Max(0, index - displayedRows / 2);
+                    dgvRows.ClearSelection();
+                    dgvRows.Rows[index].Selected = true;
+                }
+            }
+            return result;
         }
 
         private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
@@ -538,13 +583,17 @@ namespace Yapped
 
         private void importNamesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<ParamFile> paramFiles = (List<ParamFile>)dgvParams.DataSource;
-            foreach (ParamFile paramFile in paramFiles)
+            bool replace = MessageBox.Show("If a row already has a name, would you like to skip it?\r\n" +
+                "Click Yes to skip existing names.\r\nClick No to replace existing names.",
+                "Importing Names", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+
+            List<ParamWrapper> paramFiles = (List<ParamWrapper>)dgvParams.DataSource;
+            foreach (ParamWrapper paramFile in paramFiles)
             {
-                if (File.Exists($"Names\\{paramFile.Name}.txt"))
+                if (File.Exists($@"{NAMES_DIR}\{paramFile.Name}.txt"))
                 {
                     var names = new Dictionary<long, string>();
-                    string nameStr = File.ReadAllText($"Names\\{paramFile.Name}.txt");
+                    string nameStr = File.ReadAllText($@"{NAMES_DIR}\{paramFile.Name}.txt");
                     foreach (string line in Regex.Split(nameStr, @"\s*[\r\n]+\s*"))
                     {
                         if (line.Length > 0)
@@ -559,7 +608,10 @@ namespace Yapped
                     foreach (PARAM64.Row row in paramFile.Param.Rows)
                     {
                         if (names.ContainsKey(row.ID))
-                            row.Name = names[row.ID];
+                        {
+                            if (replace || row.Name == null || row.Name == "")
+                                row.Name = names[row.ID];
+                        }
                     }
                 }
             }
@@ -583,8 +635,8 @@ namespace Yapped
 
         private void exportNamesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            List<ParamFile> paramFiles = (List<ParamFile>)dgvParams.DataSource;
-            foreach (ParamFile paramFile in paramFiles)
+            List<ParamWrapper> paramFiles = (List<ParamWrapper>)dgvParams.DataSource;
+            foreach (ParamWrapper paramFile in paramFiles)
             {
                 StringBuilder sb = new StringBuilder();
                 foreach (PARAM64.Row row in paramFile.Param.Rows)
@@ -598,7 +650,7 @@ namespace Yapped
 
                 try
                 {
-                    File.WriteAllText($"Names\\{paramFile.Name}.txt", sb.ToString());
+                    File.WriteAllText($@"{NAMES_DIR}\{paramFile.Name}.txt", sb.ToString());
                 }
                 catch (Exception ex)
                 {
@@ -620,6 +672,156 @@ namespace Yapped
                     row.Cells[2] = new DataGridViewCheckBoxCell();
                 }
             }
+        }
+
+        private void findRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var findForm = new FormFind("Find row with name...");
+            if (findForm.ShowDialog() == DialogResult.OK)
+            {
+                FindRow(findForm.ResultPattern);
+            }
+        }
+
+        private void findNextRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FindRow(lastFindRowPattern);
+        }
+
+        private void FindRow(string pattern)
+        {
+            if (rowSource.DataSource == null)
+            {
+                ShowError("You can't search for a row when there are no rows!");
+                return;
+            }
+
+            int startIndex = dgvRows.SelectedCells.Count > 0 ? dgvRows.SelectedCells[0].RowIndex + 1 : 0;
+            List<PARAM64.Row> rows = ((ParamWrapper)rowSource.DataSource).Rows;
+            int index = -1;
+
+            for (int i = 0; i < rows.Count; i++)
+            {
+                if ((rows[(startIndex + i) % rows.Count].Name ?? "").ToLower().Contains(pattern.ToLower()))
+                {
+                    index = (startIndex + i) % rows.Count;
+                    break;
+                }
+            }
+
+            if (index != -1)
+            {
+                int displayedRows = dgvRows.DisplayedRowCount(false);
+                dgvRows.FirstDisplayedScrollingRowIndex = Math.Max(0, index - displayedRows / 2);
+                dgvRows.ClearSelection();
+                dgvRows.Rows[index].Selected = true;
+                lastFindRowPattern = pattern;
+            }
+            else
+            {
+                ShowError($"No row found matching: {pattern}");
+            }
+        }
+
+        private void gotoRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var gotoForm = new FormGoto();
+            if (gotoForm.ShowDialog() == DialogResult.OK)
+            {
+                if (rowSource.DataSource == null)
+                {
+                    ShowError("You can't goto a row when there are no rows!");
+                    return;
+                }
+
+                long id = gotoForm.ResultID;
+                List<PARAM64.Row> rows = ((ParamWrapper)rowSource.DataSource).Rows;
+                int index = rows.FindIndex(row => row.ID == id);
+
+                if (index != -1)
+                {
+                    int displayedRows = dgvRows.DisplayedRowCount(false);
+                    dgvRows.FirstDisplayedScrollingRowIndex = Math.Max(0, index - displayedRows / 2);
+                    dgvRows.ClearSelection();
+                    dgvRows.Rows[index].Selected = true;
+                }
+                else
+                {
+                    ShowError($"Row ID not found: {id}");
+                }
+            }
+        }
+
+        private void findFieldToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var findForm = new FormFind("Find field with name...");
+            if (findForm.ShowDialog() == DialogResult.OK)
+            {
+                FindField(findForm.ResultPattern);
+            }
+        }
+
+        private void findNextFieldToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FindField(lastFindFieldPattern);
+        }
+
+        private void dgvParams_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var paramWrapper = (ParamWrapper)dgvParams.Rows[e.RowIndex].DataBoundItem;
+                e.ToolTipText = paramWrapper.Description;
+            }
+        }
+
+        private void dgvCells_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+            {
+                var cell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+                e.ToolTipText = cell.Description;
+            }
+        }
+
+        private void FindField(string pattern)
+        {
+            if (dgvCells.DataSource == null)
+            {
+                ShowError("You can't search for a field when there are no fields!");
+                return;
+            }
+
+            int startIndex = dgvCells.SelectedCells.Count > 0 ? dgvCells.SelectedCells[0].RowIndex + 1 : 0;
+            var cells = (PARAM64.Cell[])dgvCells.DataSource;
+            int index = -1;
+
+            for (int i = 0; i < cells.Length; i++)
+            {
+                if ((cells[(startIndex + i) % cells.Length].Name ?? "").ToLower().Contains(pattern.ToLower()))
+                {
+                    index = (startIndex + i) % cells.Length;
+                    break;
+                }
+            }
+
+            if (index != -1)
+            {
+                int displayedRows = dgvCells.DisplayedRowCount(false);
+                dgvCells.FirstDisplayedScrollingRowIndex = Math.Max(0, index - displayedRows / 2);
+                dgvCells.ClearSelection();
+                dgvCells.Rows[index].Selected = true;
+                lastFindFieldPattern = pattern;
+            }
+            else
+            {
+                ShowError($"No field found matching: {pattern}");
+            }
+        }
+
+        private static void ShowError(string message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

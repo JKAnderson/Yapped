@@ -8,6 +8,18 @@ As far as we know, *any* edits to the regulation file (where params are stored) 
 Only use modified params in offline mode. Back up your save file and restore it before going online again if you're doing anything that could affect it.  
 
 # Changelog
+### 1.1
+* Ctrl+Shift+N: Duplicate selected row
+* Ctrl+F: Search for row by name
+* Ctrl+G: Go to row by ID
+* Ctrl+Shift+F: Search for field by name
+* Unused params are hidden by default
+* Creating a new row has a nice dialog now
+* Updated layouts for several params (thanks Pav)
+* Updated names for several params (thanks GiveMeThePowa)
+* Added brief descriptions for params on mouse-over (thanks Pav)
+* Added support for field descriptions, but didn't actually write any yet
+
 ### 1.0.2
 * Locales that use a comma for the decimal point are now supported
 * Selected row and visible cells are now remembered for each param separately
@@ -17,7 +29,8 @@ Only use modified params in offline mode. Back up your save file and restore it 
 
 # Credits
 **Pav** - Layouts  
-**TKGP** - Application
+**TKGP** - Application  
+**GiveMeThePowa** - Contributing row names
 
 # Libraries
 [Costura.Fody](https://github.com/Fody/Costura) by Simon Cropp, Cameron MacFarland

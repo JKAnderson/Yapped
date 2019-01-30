@@ -142,5 +142,17 @@ namespace Yapped.Properties {
                 this["DGVIndices"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HideUnusedParams {
+            get {
+                return ((bool)(this["HideUnusedParams"]));
+            }
+            set {
+                this["HideUnusedParams"] = value;
+            }
+        }
     }
 }

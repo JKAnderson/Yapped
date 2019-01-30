@@ -2,18 +2,18 @@
 1 Pledge effect test -- 誓約効果テスト
 2 Test_enchantweapon -- test_enchantweapon
 3 Test_cure -- test_cure
-4 System Sossign -- 【システム】SOSsign
+4 Item: White Sign Soapstone
 5 Test_cureitem -- test_cureitem
 6 【 system 】 Kickout -- 【システム】kickout
-7 【 system 】 Leavesession -- 【システム】leaveSession
+7 Item: Black Separation Crystal
 8 System: Parameter changes during ghosting -- 【システム】ゴースト時のパラメータ変化
 9 【 system 】 Black parameter change -- 【システム】ブラック時のパラメータ変化
-10 System Black_soulsign -- 【システム】Black_Soulsign
-11 System Black_forcejoinsoulsign -- 【システム】Black_ForceJoinSoulsign
+10 Item: Red Sign Soapstone
+11 Item: Cracked Red Eye Orb
 12 【 system 】 Bloodsign -- 【システム】bloodSign
 13 [System] Soul steel [multi] -- 【システム】ソウルスティール【マルチ】
 14 [System] Blue sign Visualization -- 【システム】青サイン可視化
-15 System Entry into NPC -- 【システム】NPCへの侵入
+15 Item: Black Eye Orb
 16 【 system 】 NITs intrusion sign barreling -- 【システム】ニト侵入サインばらまき
 17 【 system 】 L Arena exit -- 【システム】l闘技場 退出
 20 【 System 】 Evaluation effect -- 【システム】評価効果
@@ -24,7 +24,7 @@
 25 [System] effect for revival production -- 【システム】復活演出用効果
 26 【 system 】 Invasion of the prize neck -- 【システム】賞金首に侵入
 27 [System] to scatter the scales of dragons -- 【システム】竜のうろこをばらまく
-28 【 system 】 Multi intrusion Limit time to level 0 -- 【システム】マルチ侵入制限時間をレベル0にする
+28 Item: Dried Finger
 30 Paris State (throwing conditions) -- パリィ崩され状態（投げ条件）
 31 Counter damage [puncture] -- カウンターダメージ【刺突】
 32 Player is falling (throwing condition) -- プレイヤが落下中（投げ条件）
@@ -198,20 +198,37 @@
 1905 [FDP] Holding guard compensation for continuous firing -- 【FDP】構え連撃用ガード補正
 1906 [FDP] Double chanting -- 【FDP】二重詠唱
 1907 FDP SA chanting -- 【FDP】SA詠唱
-2000 Equipment weight Up -- 装備重量アップ
-2010 Pinch attack power up -- ピンチ攻撃力アップ
-2020 Flame Resistant -- 炎耐性
-2021 Lightning resistant up -- 雷耐性アップ
-2022 Magic resistant up -- 魔法耐性アップ
-2023 Physical immunity -- 物理耐性
-2024 All Resistance up 1 -- 全耐性アップ1
-2030 Bleeding resistance -- 出血耐性
-2100 Item Drop-up -- アイテムドロップアップ
-2110 Sound elimination -- 音消去
-2120 Rigid legs -- 剛脚
-2130 Resurrection -- 復活
+2000 Item: Estus Flask
+2001 Item: Estus Flask+1
+2002 Item: Estus Flask+2
+2003 Item: Estus Flask+3
+2004 Item: Estus Flask+4
+2005 Item: Estus Flask+5
+2006 Item: Estus Flask+6
+2007 Item: Estus Flask+7
+2008 Item: Estus Flask+8
+2009 Item: Estus Flask+9
+2010 Item: Estus Flask+10
+2020 Item: Ashen Estus Flask
+2021 Item: Ashen Estus Flask+1
+2022 Item: Ashen Estus Flask+2
+2023 Item: Ashen Estus Flask+3
+2024 Item: Ashen Estus Flask+4
+2025 Item: Ashen Estus Flask+5
+2026 Item: Ashen Estus Flask+6
+2027 Item: Ashen Estus Flask+7
+2028 Item: Ashen Estus Flask+8
+2029 Item: Ashen Estus Flask+9
+2030 Item: Ashen Estus Flask+10
+2100 Item: Charcoal Pine Resin
+2110 Item: Charcoal Pine Bundle
+2120 Item: Gold Pine Resin
+2130 Item: Gold Pine Bundle
 2140 Resonance -- 共鳴
-2190 Words of Chaos -- 混沌の言葉
+2150 Item: Rotten Pine Resin
+2170 Item: Human Pine Resin
+2180 Item: Carthus Rouge
+2190 Item: Pale Pine Resin
 2300 Power Up Miracles -- 奇跡威力アップ
 2310 Magic Slot-up B -- 魔法スロットアップB
 2320 Dark Moon God's ring -- 暗月神の指輪
@@ -219,8 +236,9 @@
 2340 HP Slight increase -- HP微増
 2350 Black Dragon Ring -- 黒竜の指輪
 3000 HP Recovery Grass -- HP回復草
-3040 Stamina Grass -- スタミナ草
+3040 Item: Green Blossom
 3041 [DLC] Fragment of mushroom -- 【DLC】エリンギの欠片
+3042 Item: Budding Green Blossom
 3050 bleeding treatment [State recovery] -- 出血治療【状態回復】
 3051 bleeding treatment [resistance recovery] -- 出血治療【耐性回復】
 3060 Poison treatment [State recovery] -- 毒治療【状態回復】
@@ -231,7 +249,8 @@
 3090 Curse treatment -- 呪治療
 3091 Egg treatment -- 卵治療
 3092 Caries treatment -- 蝕治療
-3100 Weapon Repair -- 武器修理
+3093 Item: Purging Stone
+3100 Item: Repair Powder
 3110 Poison-throwing knife [poison effect] -- 毒投げナイフ【毒効果】
 3120 To make the opponent a poisonous poison -- 糞団子【相手を猛毒にする】
 3121 I take damage -- 糞団子【自分もダメージを受ける】
@@ -246,28 +265,39 @@
 3171 Weapon Lightning Enhancement (quick) -- 武器雷強化（クイック）
 3180 Weapon versus Spirit reinforcement -- 武器対霊強化
 3210 Excitement Incense -- 興奮香
-3220 Return Stone -- 帰還石
+3220 Item: Coiled Sword Fragment
 3221 Return Stone A -- 帰還石A
 3222 return Stone B -- 帰還石B
 3223 return Stone C -- 帰還石C
 3224 return Stone D -- 帰還石D
 3225 Return Stone E -- 帰還石E
-3226 Dark Ring -- ダークリング
+3226 Item: Darksign
 3230 Resurrection Stone [Resurrection effect] -- 復活石【復活効果】
 3231 Human Nature Recovery -- 人間性回復
-3240 Tongen -- 遠眼鏡
+3240 Item: Binoculars
 3250 Pledge discarded -- 誓約破棄
-3270 Seoul 1 -- ソウル1
-3271 Seoul 2 -- ソウル2
-3272 Seoul 3 -- ソウル3
-3273 Seoul 4 -- ソウル4
-3274 Seoul 5 -- ソウル5
-3275 Seoul 6 -- ソウル6
-3276 Seoul 7 -- ソウル7
-3277 Seoul 8 -- ソウル8
-3278 Seoul 9 -- ソウル9
-3279 Seoul 10 -- ソウル10
-3290 [FDP] Embers (Wang Hua items of firewood) -- 【FDP】残り火（薪の王化アイテム）
+3269 Item: Fading Soul
+3270 Item: Soul of a Deserted Corpse
+3271 Item: Large Soul of a Deserted Corpse
+3272 Item: Soul of an Unknown Traveler
+3273 Item: Large Soul of an Unknown Traveler
+3274 Item: Soul of a Nameless Soldier
+3275 Item: Large Soul of a Nameless Soldier
+3276 Item: Soul of a Weary Warrior
+3277 Item: Large Soul of a Weary Warrior
+3278 Item: Soul of a Crestfallen Knight
+3279 Item: Large Soul of a Crestfallen Knight
+3280 Item: Soul of a Proud Paladin
+3281 Item: Large Soul of a Proud Paladin
+3282 Item: Soul of an Intrepid Hero
+3283 Item: Large Soul of an Intrepid Hero
+3284 Item: Soul of a Seasoned Warrior
+3285 Item: Large Soul of a Seasoned Warrior
+3286 Item: Soul of an Old Hand
+3287 Item: Soul of a Venerable Old Hand
+3288 Item: Soul of a Champion
+3289 Item: Soul of a Great Champion
+3290 Item: Ember
 3291 Wang Hua of firewood when SFX: right elbow -- 薪の王化時SFX：右肘
 3292 Wang Hua of firewood when SFX: right shoulder -- 薪の王化時SFX：右肩
 3293 Wang Hua of firewood when SFX: upper body -- 薪の王化時SFX：上半身
@@ -277,29 +307,49 @@
 3297 Wang Hua of firewood when SFX: -- 薪の王化時SFX：
 3298 Wang Hua of firewood when SFX: -- 薪の王化時SFX：
 3330 Human Nature Recovery -- 人間性回復
-3340 Caries status _ pulled out since April -- 蝕状態_引き寄せ　4月以降削除
-3400 [Boss Soul] soul of Crystal Elders -- 【ボスソウル】結晶の古老のソウル
+3340 Item: Hidden Blessing
+3400 Item: Soul of a Crystal Sage
 3401 Soul of the Wolf of the eclipse of the boss soul -- 【ボスソウル】蝕のオオカミのソウル
-3402 Boss Soul: Soul of the Warden of the Abyss -- 【ボスソウル】深淵の監視者のソウル
-3403 Boss Soul: Dragon's Soul -- 【ボスソウル】竜の御使いのソウル
-3404 Soul of Full Armor beast [Boss Soul] -- 【ボスソウル】フルアーマー獣のソウル
-3405 [Boss Soul] Ash demon Soul -- 【ボスソウル】灰のデーモンのソウル
-3406 [Boss Soul] Soul of the Guardian Knight of the Dragon -- 【ボスソウル】竜の守護騎士のソウル
-3407 Boss Soul: King of the Storm -- 【ボスソウル】嵐の王のソウル
+3402 Item: Soul of the Blood of the Wolf
+3403 Item: Soul of Consumed Oceiros
+3404 Item: Soul of Boreal Valley Vordt
+3405 Item: Soul of the Old Demon King
+3406 Item: Soul of Dragonslayer Armour
+3407 Item: Soul of the Nameless King
 3408 [Boss Soul] Crimson bat Soul -- 【ボスソウル】クリムゾンバットのソウル
-3409 [Boss Soul] hero Segunda's soul -- 【ボスソウル】英雄グンダのソウル
+3409 Item: Soul of Champion Gundyr
 3410 [Boss Soul] soul of evil spirits -- 【ボスソウル】邪霊のソウル
-3411 Boss Soul: The old king of caries -- 【ボスソウル】蝕の老王のソウル
-3412 [Boss Soul] Salivan Seoul -- 【ボスソウル】サリヴァーンのソウル
-3413 Boss Soul: Soul of the King of Evil -- 【ボスソウル】死霊の王のソウル
-3414 Soul of Colossus, Boss soul -- 【ボスソウル】巨像のソウル
-3415 [Boss Soul] Rosalia Seoul -- 【ボスソウル】ロザリアのソウル
-3416 [Boss Soul] Cardinal Soul -- 【ボスソウル】枢機卿団のソウル
+3411 Item: Soul of Pontiff Sulyvahn
+3412 Item: Soul of Aldrich
+3413 Item: Soul of High Lord Wolnir
+3414 Item: Soul of the Rotted Greatwood
+3415 Item: Soul of Rosaria
+3416 Item: Soul of the Deacons of the Deep
 3417 Boss Soul: Prince of Darkness, soul of Brother -- 【ボスソウル】闇の双皇子兄のソウル
-3418 Boss Soul: Soul of the Dark Twins -- 【ボスソウル】闇の双皇子弟のソウル
-3419 [Boss Soul] Hallec Seoul -- 【ボスソウル】ハレックのソウル
-3420 Boss Soul: Soul of the Cold Valley Dancer -- 【ボスソウル】冷たい谷の踊り子のソウル
-3421 Boss Soul: The soul of the Las Boss -- 【ボスソウル】ラスボスのソウル
+3418 Item: Soul of the Twin Princes
+3419 Item: Soul of Yhorm the Giant
+3420 Item: Soul of the Dancer
+3421 Item: Soul of the Lords
+3427 Item: Soul of a Demon
+3431 Item: Soul of a Stray Demon
+3432 Item: Soul of Sister Friede
+3433 Item: Soul of Slave Knight Gael
+3434 Item: Soul of the Demon Prince
+3435 Item: Soul of Darkeater Midir
+3700 Item: Seed of a Giant Tree
+3730 Item: Way of White Circlet
+3740 Item: Forked Pale Tongue
+3750 Item: Proof of a Concord Well Kept
+3820 Item: Mossfruit
+3870 Item: Young White Branch
+3880 Item: Rusted Coin
+3890 Item: Rusted Gold Coin
+3900 Item: Siegbräu Heal
+3901 Item: Siegbräu Frost Resistence
+3910 Item: Blue Bug Pellet
+3920 Item: Red Bug Pellet
+3930 Item: Yellow Bug Pellet
+3940 Item: Black Bug Pellet
 4000 Sustained damage floor [slow for poison] -- 持続ダメージ床【毒用鈍足】
 4001 Sustained damage floor [Poison _ Interval Adjustment _ Poison swamp Forest (deep)] -- 持続ダメージ床【毒_間隔調整_毒沼の森（深）】
 4002 Sustained damage floor [poison _ Effect Body _ Poison swamp Forest (deep)] -- 持続ダメージ床【毒_効果本体_毒沼の森（深）】
@@ -795,4 +845,342 @@
 140201 Multi-Doping: Boss: 1 Client -- マルチドーピング：ボス：クライアント1名
 140202 Multi-Doping: Boss: 2 Clients -- マルチドーピング：ボス：クライアント2名
 140203 Multi-Doping: Boss: 3 clients -- マルチドーピング：ボス：クライアント3名
+224690 Item:
+224691 Item:
+224692 Item:
+224693 Item:
 900100 SFX Confirmation: EST recovery -- SFX確認用：エスト使用回数回復
+900200 Ring:
+900201 Ring:
+900202 Ring:
+900203 Ring:
+900210 Ring:
+900211 Ring:
+900212 Ring:
+111000000 Ring: Blade of the Darkmoon
+111001000 Ring: Spears of the Church
+111002000 Ring: Watchdogs of Farron
+111003000 Ring: Aldrich Faithful
+111004000 Ring: Blue Sentinels
+112000000 Ring: Life Ring
+112000100 Ring: Life Ring+1
+112000200 Ring: Life Ring+2
+112000300 Ring: Life Ring+3
+112001000 Ring: Chloranthy Ring
+112001100 Ring: Chloranthy Ring+1
+112001200 Ring: Chloranthy Ring+2
+112001300 Ring: Chloranthy Ring+3
+112002000 Ring: Havel's Ring
+112002100 Ring: Havel's Ring+1
+112002200 Ring: Havel's Ring+2
+112002300 Ring: Havel's Ring+3
+112003000 Ring: Ring of Favor
+112003100 Ring: Ring of Favor+1
+112003200 Ring: Ring of Favor+2
+112003300 Ring: Ring of Favor+3
+112004000 Ring: Ring of Steel Protection
+112004100 Ring: Ring of Steel Protection+1
+112004200 Ring: Ring of Steel Protection+2
+112004300 Ring: Ring of Steel Protection+3
+112005000 Ring: Flame Stoneplate Ring
+112005100 Ring: Flame Stoneplate Ring+1
+112005200 Ring: Flame Stoneplate Ring+2
+112006000 Ring: Thunder Stoneplate Ring
+112006100 Ring: Thunder Stoneplate Ring+1
+112006200 Ring: Thunder Stoneplate Ring+2
+112007000 Ring: Magic Stoneplate Ring
+112007100 Ring: Magic Stoneplate Ring+1
+112007200 Ring: Magic Stoneplate Ring+2
+112008000 Ring: Dark Stoneplate Ring
+112008100 Ring: Dark Stoneplate Ring+1
+112008200 Ring: Dark Stoneplate Ring+2
+112009000 Ring: Speckled Stoneplate Ring
+112009100 Ring: Speckled Stoneplate Ring+1
+112010000 Ring: Bloodbite Ring
+112010100 Ring: Bloodbite Ring+1
+112011000 Ring: Poisonbite Ring
+112011100 Ring: Poisonbite Ring+1
+112012000 Ring: Cursebite Ring
+112013000 Ring: Fleshbite Ring
+112013100 Ring: Fleshbite Ring+1
+112014000 Ring: Wood Grain Ring
+112014100 Ring: Wood Grain Ring+1
+112014200 Ring: Wood Grain Ring+2
+112015000 Ring: Scholar Ring
+112016000 Ring: Priestess Ring
+112017000 Ring: Red Tearstone Ring
+112018000 Ring: Blue Tearstone Ring
+112019000 Ring: Wolf Ring
+112019100 Ring: Wolf Ring+1
+112019200 Ring: Wolf Ring+2
+112019300 Ring: Wolf Ring+3
+112020000 Ring: Leo Ring
+112021000 Ring: Ring of Sacrifice
+112022000 Ring: Ring of Sacrifice (Complementary)
+112023000 Ring: Young Dragon Ring
+112023100 Ring: Bellowing Dragoncrest Ring
+112024000 Ring: Great Swamp Ring
+112024100 Ring: Witch's Ring
+112025000 Ring: Morne's Ring
+112025100 Ring: Ring of the Sun's First Born
+112027000 Ring: Lingering Dragoncrest Ring
+112027100 Ring: Lingering Dragoncrest Ring+1
+112027200 Ring: Lingering Dragoncrest Ring+2
+112028000 Ring: Sage Ring
+112028100 Ring: Sage Ring+1
+112028200 Ring: Sage Ring+2
+112029000 Ring: Slumbering Dragoncrest Ring
+112030000 Ring: Dusk Crown Ring
+112031000 Ring: Saint's Ring
+112032000 Ring: Deep Ring
+112033000 Ring: Darkmoon Ring
+112037000 Ring: Hawk Ring
+112038000 Ring: Hornet Ring
+112039000 Ring: Covetous Gold Serpent Ring
+112039100 Ring: Covetous Gold Serpent Ring+1
+112039200 Ring: Covetous Gold Serpent Ring+2
+112039300 Ring: Covetous Gold Serpent Ring+3
+112040000 Ring: Covetous Silver Serpent Ring
+112040100 Ring: Covetous Silver Serpent Ring+1
+112040200 Ring: Covetous Silver Serpent Ring+2
+112040300 Ring: Covetous Silver Serpent Ring+3
+112041000 Ring: Sun Princess Ring
+112042000 Ring: Silvercat Ring
+112043000 Ring: Skull Ring
+112044000 Ring: Untrue White Ring
+112045000 Ring: Carthus Milkring - Effect
+112045010 Ring: Carthus Milkring - Condition
+112046000 Ring: Knight's Ring
+112047000 Ring: Hunter's Ring
+112048000 Ring: Knight Slayer's Ring
+112049000 Ring: Magic Clutch Ring
+112050000 Ring: Lightning Clutch Ring
+112051000 Ring: Fire Clutch Ring
+112052000 Ring: Dark Clutch Ring
+112054000 Ring: Flynn's Ring
+112055000 Ring: Prisoner's Chain
+112056000 Ring: Untrue Dark Ring
+112058000 Ring: Obscuring Ring
+112059000 Ring: Ring of the Evil Eye
+112059010 Ring: Ring of the Evil Eye - Effect
+112059100 Ring: Ring of the Evil Eye+1
+112059110 Ring: Ring of the Evil Eye+1 - Effect
+112059200 Ring: Ring of the Evil Eye+2
+112059210 Ring: Ring of the Evil Eye+2 - Effect
+112059300 Ring: Ring of the Evil Eye+3
+112059310 Ring: Ring of the Evil Eye+3 - Effect
+112060000 Ring: Calamity Ring
+112061000 Ring: Farron Ring
+112062000 Ring: Aldrich's Ruby
+112062001 Ring: Aldrich's Ruby - Condition
+112062002 Ring: Aldrich's Ruby - Effect
+112063000 Ring: Aldrich's Sapphire
+112063001 Ring: Aldrich's Sapphire - Condition
+112063002 Ring: Aldrich's Sapphire - Effect
+112066000 Ring: Lloyd's Sword Ring
+112067000 Ring: Lloyd's Shield Ring
+112070000 Ring: Estus Ring
+112071000 Ring: Ashen Estus Ring
+112072000 Ring: Horsehoof Ring
+112073000 Ring: Carthus Bloodring
+112074000 Ring: Reversal Ring
+112075000 Ring: Pontiff's Right Eye - Condition
+112075010 Ring: Pontiff's Right Eye - Condition (Complementary)
+112075020 Ring: Pontiff's Right Eye - Condition (Complementary)
+112075030 Ring: Pontiff's Right Eye - Condition (Complementary)
+112075100 Ring: Pontiff's Right Eye - Effect (Complementary)
+112075110 Ring: Pontiff's Right Eye - Effect (Complementary)
+112075120 Ring: Pontiff's Right Eye - Effect (Complementary)
+112075130 Ring: Pontiff's Right Eye - Effect
+112079000 Ring: Pontiff's Left Eye
+112079100 Ring: Pontiff's Left Eye - Effect
+112083000 Ring: Dragonscale Ring
+112100000 Ring: Chillbite Ring
+129000500 Infusion: Simple
+129000501 Infusion: Simple +1
+129000502 Infusion: Simple +2
+129000503 Infusion: Simple +3
+129000504 Infusion: Simple +4
+129000505 Infusion: Simple +5
+129000506 Infusion: Simple +6
+129000507 Infusion: Simple +7
+129000508 Infusion: Simple +8
+129000509 Infusion: Simple +9
+129000510 Infusion: Simple +10
+129001100 Infusion: Poison
+129001101 Infusion: Poison +1
+129001102 Infusion: Poison +2
+129001103 Infusion: Poison +3
+129001104 Infusion: Poison +4
+129001105 Infusion: Poison +5
+129001106 Infusion: Poison +6
+129001107 Infusion: Poison +7
+129001108 Infusion: Poison +8
+129001109 Infusion: Poison +9
+129001110 Infusion: Poison +10
+129001200 Infusion: Bleed
+129001201 Infusion: Bleed +1
+129001202 Infusion: Bleed +2
+129001203 Infusion: Bleed +3
+129001204 Infusion: Bleed +4
+129001205 Infusion: Bleed +5
+129001206 Infusion: Bleed +6
+129001207 Infusion: Bleed +7
+129001208 Infusion: Bleed +8
+129001209 Infusion: Bleed +9
+129001210 Infusion: Bleed +10
+129001400 Infusion: Blessed
+129001401 Infusion: Blessed +1
+129001402 Infusion: Blessed +2
+129001403 Infusion: Blessed +3
+129001404 Infusion: Blessed +4
+129001405 Infusion: Blessed +5
+129001406 Infusion: Blessed +6
+129001407 Infusion: Blessed +7
+129001408 Infusion: Blessed +8
+129001409 Infusion: Blessed +9
+129001410 Infusion: Blessed +10
+129001500 Infusion: Hollow
+129001501 Infusion: Hollow +1
+129001502 Infusion: Hollow +2
+129001503 Infusion: Hollow +3
+129001504 Infusion: Hollow +4
+129001505 Infusion: Hollow +5
+129001506 Infusion: Hollow +6
+129001507 Infusion: Hollow +7
+129001508 Infusion: Hollow +8
+129001509 Infusion: Hollow +9
+129001510 Infusion: Hollow +10
+129010500 Infusion: Simple Level 2
+129010501 Infusion: Simple Level 2 +1
+129010502 Infusion: Simple Level 2 +2
+129010503 Infusion: Simple Level 2 +3
+129010504 Infusion: Simple Level 2 +4
+129010505 Infusion: Simple Level 2 +5
+129010506 Infusion: Simple Level 2 +6
+129010507 Infusion: Simple Level 2 +7
+129010508 Infusion: Simple Level 2 +8
+129010509 Infusion: Simple Level 2 +9
+129010510 Infusion: Simple Level 2 +10
+129011100 Infusion: Poison Level 2
+129011101 Infusion: Poison Level 2 +1
+129011102 Infusion: Poison Level 2 +2
+129011103 Infusion: Poison Level 2 +3
+129011104 Infusion: Poison Level 2 +4
+129011105 Infusion: Poison Level 2 +5
+129011106 Infusion: Poison Level 2 +6
+129011107 Infusion: Poison Level 2 +7
+129011108 Infusion: Poison Level 2 +8
+129011109 Infusion: Poison Level 2 +9
+129011110 Infusion: Poison Level 2 +10
+129011200 Infusion: Bleed Level 2
+129011201 Infusion: Bleed Level 2 +1
+129011202 Infusion: Bleed Level 2 +2
+129011203 Infusion: Bleed Level 2 +3
+129011204 Infusion: Bleed Level 2 +4
+129011205 Infusion: Bleed Level 2 +5
+129011206 Infusion: Bleed Level 2 +6
+129011207 Infusion: Bleed Level 2 +7
+129011208 Infusion: Bleed Level 2 +8
+129011209 Infusion: Bleed Level 2 +9
+129011210 Infusion: Bleed Level 2 +10
+129011400 Infusion: Blessed Level 2
+129011401 Infusion: Blessed Level 2 +1
+129011402 Infusion: Blessed Level 2 +2
+129011403 Infusion: Blessed Level 2 +3
+129011404 Infusion: Blessed Level 2 +4
+129011405 Infusion: Blessed Level 2 +5
+129011406 Infusion: Blessed Level 2 +6
+129011407 Infusion: Blessed Level 2 +7
+129011408 Infusion: Blessed Level 2 +8
+129011409 Infusion: Blessed Level 2 +9
+129011410 Infusion: Blessed Level 2 +10
+129021100 Infusion: Poison Level 3
+129021101 Infusion: Poison Level 3 +1
+129021102 Infusion: Poison Level 3 +2
+129021103 Infusion: Poison Level 3 +3
+129021104 Infusion: Poison Level 3 +4
+129021105 Infusion: Poison Level 3 +5
+129021106 Infusion: Poison Level 3 +6
+129021107 Infusion: Poison Level 3 +7
+129021108 Infusion: Poison Level 3 +8
+129021109 Infusion: Poison Level 3 +9
+129021110 Infusion: Poison Level 3 +10
+129021200 Infusion: Bleed Level 3
+129021201 Infusion: Bleed Level 3 +1
+129021202 Infusion: Bleed Level 3 +2
+129021203 Infusion: Bleed Level 3 +3
+129021204 Infusion: Bleed Level 3 +4
+129021205 Infusion: Bleed Level 3 +5
+129021206 Infusion: Bleed Level 3 +6
+129021207 Infusion: Bleed Level 3 +7
+129021208 Infusion: Bleed Level 3 +8
+129021209 Infusion: Bleed Level 3 +9
+129021210 Infusion: Bleed Level 3 +10
+129031100 Infusion: Poison Level 4
+129031101 Infusion: Poison Level 4 +1
+129031102 Infusion: Poison Level 4 +2
+129031103 Infusion: Poison Level 4 +3
+129031104 Infusion: Poison Level 4 +4
+129031105 Infusion: Poison Level 4 +5
+129031106 Infusion: Poison Level 4 +6
+129031107 Infusion: Poison Level 4 +7
+129031108 Infusion: Poison Level 4 +8
+129031109 Infusion: Poison Level 4 +9
+129031110 Infusion: Poison Level 4 +10
+129031200 Infusion: Bleed Level 4
+129031201 Infusion: Bleed Level 4 +1
+129031202 Infusion: Bleed Level 4 +2
+129031203 Infusion: Bleed Level 4 +3
+129031204 Infusion: Bleed Level 4 +4
+129031205 Infusion: Bleed Level 4 +5
+129031206 Infusion: Bleed Level 4 +6
+129031207 Infusion: Bleed Level 4 +7
+129031208 Infusion: Bleed Level 4 +8
+129031209 Infusion: Bleed Level 4 +9
+129031210 Infusion: Bleed Level 4 +10
+129041100 Infusion: Poison Level 5
+129041101 Infusion: Poison Level 5 +1
+129041102 Infusion: Poison Level 5 +2
+129041103 Infusion: Poison Level 5 +3
+129041104 Infusion: Poison Level 5 +4
+129041105 Infusion: Poison Level 5 +5
+129041106 Infusion: Poison Level 5 +6
+129041107 Infusion: Poison Level 5 +7
+129041108 Infusion: Poison Level 5 +8
+129041109 Infusion: Poison Level 5 +9
+129041110 Infusion: Poison Level 5 +10
+129041200 Infusion: Bleed Level 5
+129041201 Infusion: Bleed Level 5 +1
+129041202 Infusion: Bleed Level 5 +2
+129041203 Infusion: Bleed Level 5 +3
+129041204 Infusion: Bleed Level 5 +4
+129041205 Infusion: Bleed Level 5 +5
+129041206 Infusion: Bleed Level 5 +6
+129041207 Infusion: Bleed Level 5 +7
+129041208 Infusion: Bleed Level 5 +8
+129041209 Infusion: Bleed Level 5 +9
+129041210 Infusion: Bleed Level 5 +10
+129051100 Infusion: Poison Level 6
+129051101 Infusion: Poison Level 6 +1
+129051102 Infusion: Poison Level 6 +2
+129051103 Infusion: Poison Level 6 +3
+129051104 Infusion: Poison Level 6 +4
+129051105 Infusion: Poison Level 6 +5
+129051106 Infusion: Poison Level 6 +6
+129051107 Infusion: Poison Level 6 +7
+129051108 Infusion: Poison Level 6 +8
+129051109 Infusion: Poison Level 6 +9
+129051110 Infusion: Poison Level 6 +10
+129051200 Infusion: Bleed Level 6
+129051201 Infusion: Bleed Level 6 +1
+129051202 Infusion: Bleed Level 6 +2
+129051203 Infusion: Bleed Level 6 +3
+129051204 Infusion: Bleed Level 6 +4
+129051205 Infusion: Bleed Level 6 +5
+129051206 Infusion: Bleed Level 6 +6
+129051207 Infusion: Bleed Level 6 +7
+129051208 Infusion: Bleed Level 6 +8
+129051209 Infusion: Bleed Level 6 +9
+129051210 Infusion: Bleed Level 6 +10
+160000000 Ring:

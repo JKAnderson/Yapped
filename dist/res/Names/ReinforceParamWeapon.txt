@@ -1,47 +1,47 @@
-0 Usually -- 通常
-1 Normal + 1 -- 通常＋1
-2 Normal + 2 -- 通常＋2
-3 usually + 3 -- 通常＋3
-4 usually + 4 -- 通常＋4
-5 Normal + 5 -- 通常＋5
-6 usually + 6 -- 通常＋6
-7 usually + 7 -- 通常＋7
-8 usually + 8 -- 通常＋8
-9 usually + 9 -- 通常＋9
-10 Normal + 10 -- 通常＋10
-100 Strength correction -- 筋力補正
-101 Strength Correction + 1 -- 筋力補正＋1
-102 Strength Correction + 2 -- 筋力補正＋2
-103 Strength Correction + 3 -- 筋力補正＋3
-104 Strength Correction + 4 -- 筋力補正＋4
-105 Strength Correction + 5 -- 筋力補正＋5
-106 Strength Correction + 6 -- 筋力補正＋6
-107 Strength Correction + 7 -- 筋力補正＋7
-108 Strength Correction + 8 -- 筋力補正＋8
-109 Strength Correction + 9 -- 筋力補正＋9
-110 Strength Correction + 10 -- 筋力補正＋10
-200 Lightning -- 雷
-201 Thunder + 1 -- 雷＋1
-202 Thunder + 2 -- 雷＋2
-203 Thunder + 3 -- 雷＋3
-204 Thunder + 4 -- 雷＋4
-205 Thunder + 5 -- 雷＋5
-206 Thunder + 6 -- 雷＋6
-207 Thunder + 7 -- 雷＋7
-208 Thunder + 8 -- 雷＋8
-209 Thunder + 9 -- 雷＋9
-210 Thunder + 10 -- 雷＋10
-300 Quality -- 上質
-301 High quality + 1 -- 上質＋1
-302 High quality + 2 -- 上質＋2
-303 High quality + 3 -- 上質＋3
-304 High quality + 4 -- 上質＋4
-305 High quality + 5 -- 上質＋5
-306 High quality + 1 -- 上質＋1
-307 High quality + 2 -- 上質＋2
-308 High quality + 3 -- 上質＋3
-309 High quality + 4 -- 上質＋4
-310 High quality + 5 -- 上質＋5
+0 Standard
+1 Standard+1
+2 Standard+2
+3 Standard+3
+4 Standard+4
+5 Standard+5
+6 Standard+6
+7 Standard+7
+8 Standard+8
+9 Standard+9
+10 Standard+10
+100 Heavy
+101 Heavy+1
+102 Heavy+2
+103 Heavy+3
+104 Heavy+4
+105 Heavy+5
+106 Heavy+6
+107 Heavy+7
+108 Heavy+8
+109 Heavy+9
+110 Heavy+10
+200 Sharp
+201 Sharp+1
+202 Sharp+2
+203 Sharp+3
+204 Sharp+4
+205 Sharp+5
+206 Sharp+6
+207 Sharp+7
+208 Sharp+8
+209 Sharp+9
+210 Sharp+10
+300 Refined
+301 Refined+1
+302 Refined+2
+303 Refined+3
+304 Refined+4
+305 Refined+5
+306 Refined+6
+307 Refined+7
+308 Refined+8
+309 Refined+9
+310 Refined+10
 400 Magic A -- 魔法A
 401 Magic A + 1 -- 魔法A＋1
 402 Magic A + 2 -- 魔法A＋2
