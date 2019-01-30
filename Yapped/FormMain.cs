@@ -450,6 +450,7 @@ namespace Yapped
             if (!File.Exists(regulationPath + ".bak"))
                 File.Copy(regulationPath, regulationPath + ".bak");
             SFUtil.EncryptDS3Regulation(regulationPath, bnd);
+            SystemSounds.Asterisk.Play();
         }
 
         private void restoreToolStripMenuItem_Click(object sender, EventArgs e)

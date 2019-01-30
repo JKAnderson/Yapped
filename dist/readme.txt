@@ -50,7 +50,7 @@ Because the regulation is only loaded once when the game boots, changes will onl
 	Unused params are hidden by default
 	Creating a new row has a nice dialog now
 	Updated layouts for several params (thanks Pav)
-	Updated names for several params (thanks GiveMeThePowa)
+	Updated names for several params (thanks GiveMeThePowa and Xylozi)
 	Added brief descriptions for params on mouse-over (thanks Pav)
 	Added support for field descriptions, but didn't actually write any yet
 
@@ -66,7 +66,7 @@ Because the regulation is only loaded once when the game boots, changes will onl
 
 Pav - Layouts
 TKGP - Application
-GiveMeThePowa - Contributing row names
+GiveMeThePowa, Xylozi - Contributing row names
 
 
 --| Libraries
