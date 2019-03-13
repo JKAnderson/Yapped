@@ -173,7 +173,7 @@ namespace Yapped
 
             Dictionary<string, ParamInfo> paramInfo = ParamInfo.ReadParamInfo(PARAM_INFO_PATH);
             var paramWrappers = new List<ParamWrapper>();
-            foreach (BND4.File file in bnd.Files.Where(f => f.Name.EndsWith(".param")))
+            foreach (BinderFile file in bnd.Files.Where(f => f.Name.EndsWith(".param")))
             {
                 string name = Path.GetFileNameWithoutExtension(file.Name);
                 if (hideUnusedParamsToolStripMenuItem.Checked && paramInfo.ContainsKey(name) && paramInfo[name].Hidden)
@@ -437,7 +437,7 @@ namespace Yapped
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BND4 bnd = SFUtil.DecryptDS3Regulation(regulationPath);
-            foreach (BND4.File file in bnd.Files)
+            foreach (BinderFile file in bnd.Files)
             {
                 foreach (DataGridViewRow paramRow in dgvParams.Rows)
                 {

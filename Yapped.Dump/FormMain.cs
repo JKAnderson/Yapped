@@ -44,7 +44,7 @@ namespace Yapped.Dump
 
             var package = new ExcelPackage();
 
-            foreach (BND4.File file in bnd.Files)
+            foreach (BinderFile file in bnd.Files)
             {
                 if (Path.GetExtension(file.Name) == ".param")
                 {
