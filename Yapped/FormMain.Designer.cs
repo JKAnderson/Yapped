@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.ofdRegulation = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -68,6 +68,8 @@
             this.dgvCellsValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fbdExport = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -107,6 +109,7 @@
             this.saveToolStripMenuItem,
             this.restoreToolStripMenuItem,
             this.exploreToolStripMenuItem,
+            this.exportToolStripMenuItem,
             this.toolStripSeparator2,
             this.hideUnusedParamsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -384,8 +387,8 @@
             // 
             this.dgvRowsIDCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dgvRowsIDCol.DataPropertyName = "ID";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dgvRowsIDCol.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dgvRowsIDCol.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRowsIDCol.HeaderText = "Row";
             this.dgvRowsIDCol.Name = "dgvRowsIDCol";
             this.dgvRowsIDCol.Width = 54;
@@ -462,6 +465,19 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(81, 17);
             this.toolStripStatusLabel1.Text = "No file loaded";
             // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            this.exportToolStripMenuItem.ToolTipText = "Export an encrypted Data0.bdt to decrypted parambnds.";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // fbdExport
+            // 
+            this.fbdExport.Description = "Choose the folder to export parambnds to";
+            this.fbdExport.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,6 +550,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem duplicateRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog fbdExport;
     }
 }
 

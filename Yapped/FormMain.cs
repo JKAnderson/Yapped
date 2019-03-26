@@ -23,6 +23,8 @@ namespace Yapped
         private static Properties.Settings settings = Properties.Settings.Default;
 
         private string regulationPath;
+        private BND4 regulation;
+        private bool encrypted;
         private Dictionary<string, PARAM64.Layout> layouts;
         private BindingSource rowSource;
         private Dictionary<string, (int Row, int Cell)> dgvIndices;
@@ -31,6 +33,7 @@ namespace Yapped
         public FormMain()
         {
             InitializeComponent();
+            regulation = null;
             layouts = new Dictionary<string, PARAM64.Layout>();
             rowSource = new BindingSource();
             dgvIndices = new Dictionary<string, (int Row, int Cell)>();
@@ -160,10 +163,19 @@ namespace Yapped
                 return;
             }
 
-            BND4 bnd;
             try
             {
-                bnd = SFUtil.DecryptDS3Regulation(regulationPath);
+                if (BND4.Is(regulationPath))
+                {
+                    regulation = BND4.Read(regulationPath);
+                    encrypted = false;
+                }
+                else
+                {
+                    regulation = SFUtil.DecryptDS3Regulation(regulationPath);
+                    encrypted = true;
+                }
+                exportToolStripMenuItem.Enabled = encrypted;
             }
             catch (Exception ex)
             {
@@ -173,7 +185,7 @@ namespace Yapped
 
             Dictionary<string, ParamInfo> paramInfo = ParamInfo.ReadParamInfo(PARAM_INFO_PATH);
             var paramWrappers = new List<ParamWrapper>();
-            foreach (BinderFile file in bnd.Files.Where(f => f.Name.EndsWith(".param")))
+            foreach (BinderFile file in regulation.Files.Where(f => f.Name.EndsWith(".param")))
             {
                 string name = Path.GetFileNameWithoutExtension(file.Name);
                 if (hideUnusedParamsToolStripMenuItem.Checked && paramInfo.ContainsKey(name) && paramInfo[name].Hidden)
@@ -436,8 +448,7 @@ namespace Yapped
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BND4 bnd = SFUtil.DecryptDS3Regulation(regulationPath);
-            foreach (BinderFile file in bnd.Files)
+            foreach (BinderFile file in regulation.Files)
             {
                 foreach (DataGridViewRow paramRow in dgvParams.Rows)
                 {
@@ -449,7 +460,10 @@ namespace Yapped
 
             if (!File.Exists(regulationPath + ".bak"))
                 File.Copy(regulationPath, regulationPath + ".bak");
-            SFUtil.EncryptDS3Regulation(regulationPath, bnd);
+            if (encrypted)
+                SFUtil.EncryptDS3Regulation(regulationPath, regulation);
+            else
+                regulation.Write(regulationPath);
             SystemSounds.Asterisk.Play();
         }
 
@@ -820,6 +834,50 @@ namespace Yapped
             else
             {
                 ShowError($"No field found matching: {pattern}");
+            }
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fbdExport.SelectedPath = Path.GetDirectoryName(regulationPath);
+            if (fbdExport.ShowDialog() == DialogResult.OK)
+            {
+                BND4 paramBND = new BND4
+                {
+                    BigEndian = false,
+                    Compression = DCX.Type.DarkSouls3,
+                    Extended = 0x04,
+                    Flag1 = false,
+                    Flag2 = false,
+                    Format = Binder.Format.x74,
+                    Timestamp = regulation.Timestamp,
+                    Unicode = true,
+                    Files = regulation.Files.Where(f => f.Name.EndsWith(".param")).ToList()
+                };
+
+                BND4 stayBND = new BND4
+                {
+                    BigEndian = false,
+                    Compression = DCX.Type.DarkSouls3,
+                    Extended = 0x04,
+                    Flag1 = false,
+                    Flag2 = false,
+                    Format = Binder.Format.x74,
+                    Timestamp = regulation.Timestamp,
+                    Unicode = true,
+                    Files = regulation.Files.Where(f => f.Name.EndsWith(".stayparam")).ToList()
+                };
+
+                string dir = fbdExport.SelectedPath;
+                try
+                {
+                    paramBND.Write($@"{dir}\gameparam_dlc2.parambnd.dcx");
+                    stayBND.Write($@"{dir}\stayparam.parambnd.dcx");
+                }
+                catch (Exception ex)
+                {
+                    ShowError($"Failed to write exported parambnds.\r\n\r\n{ex}");
+                }
             }
         }
 
