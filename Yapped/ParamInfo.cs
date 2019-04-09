@@ -16,22 +16,24 @@ namespace Yapped
                 foreach (XmlNode node in xml.SelectNodes("params/param"))
                 {
                     string name = node.Attributes["name"].InnerText;
+                    bool blocked = bool.Parse(node.Attributes["blocked"]?.InnerText ?? "false");
                     bool hidden = bool.Parse(node.Attributes["hidden"]?.InnerText ?? "false");
                     string description = node.InnerText;
-
-                    if (!string.IsNullOrEmpty(description))
-                        result[name] = new ParamInfo(hidden, description);
+                    result[name] = new ParamInfo(blocked, hidden, description);
                 }
             }
             return result;
         }
 
-        public bool Hidden;
+        public bool Blocked { get; set; }
 
-        public string Description;
+        public bool Hidden { get; set; }
 
-        private ParamInfo(bool hidden, string description)
+        public string Description { get; set; }
+
+        private ParamInfo(bool blocked, bool hidden, string description)
         {
+            Blocked = blocked;
             Hidden = hidden;
             Description = description;
         }

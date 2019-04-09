@@ -16,10 +16,7 @@ namespace Yapped
 {
     public partial class FormMain : Form
     {
-        private const string UPDATE_URL = "https://www.nexusmods.com/darksouls3/mods/306?tab=files";
-        private const string LAYOUTS_DIR = @"res\Layouts";
-        private const string NAMES_DIR = @"res\Names";
-        private const string PARAM_INFO_PATH = @"res\ParamInfo.xml";
+        private const string UPDATE_URL = "https://www.nexusmods.com/sekiro/mods/121?tab=files";
         private static Properties.Settings settings = Properties.Settings.Default;
 
         private string regulationPath;
@@ -53,48 +50,42 @@ namespace Yapped
             if (settings.WindowMaximized)
                 WindowState = FormWindowState.Maximized;
 
+            toolStripComboBoxGame.SelectedIndex = settings.GameIndex;
             regulationPath = settings.RegulationPath;
             hideUnusedParamsToolStripMenuItem.Checked = settings.HideUnusedParams;
             verifyDeletionsToolStripMenuItem.Checked = settings.VerifyRowDeletion;
             splitContainer2.SplitterDistance = settings.SplitterDistance2;
             splitContainer1.SplitterDistance = settings.SplitterDistance1;
 
-            if (LoadLayouts())
+            LoadParams();
+
+            foreach (Match match in Regex.Matches(settings.DGVIndices, @"[^,]+"))
             {
-                LoadRegulation();
-
-                foreach (Match match in Regex.Matches(settings.DGVIndices, @"[^,]+"))
-                {
-                    string[] components = match.Value.Split(':');
-                    dgvIndices[components[0]] = (int.Parse(components[1]), int.Parse(components[2]));
-                }
-
-                if (settings.SelectedParam >= dgvParams.Rows.Count)
-                    settings.SelectedParam = 0;
-
-                if (dgvParams.Rows.Count > 0)
-                {
-                    dgvParams.ClearSelection();
-                    dgvParams.Rows[settings.SelectedParam].Selected = true;
-                    dgvParams.CurrentCell = dgvParams.SelectedCells[0];
-                }
-
-                Octokit.GitHubClient gitHubClient = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("Yapped"));
-                try
-                {
-                    Octokit.Release release = await gitHubClient.Repository.Release.GetLatest("JKAnderson", "Yapped");
-                    if (SemVersion.Parse(release.TagName) > Application.ProductVersion)
-                    {
-                        updateToolStripMenuItem.Visible = true;
-                    }
-                }
-                // Oh well.
-                catch { }
+                string[] components = match.Value.Split(':');
+                dgvIndices[components[0]] = (int.Parse(components[1]), int.Parse(components[2]));
             }
-            else
+
+            if (settings.SelectedParam >= dgvParams.Rows.Count)
+                settings.SelectedParam = 0;
+
+            if (dgvParams.Rows.Count > 0)
             {
-                Close();
+                dgvParams.ClearSelection();
+                dgvParams.Rows[settings.SelectedParam].Selected = true;
+                dgvParams.CurrentCell = dgvParams.SelectedCells[0];
             }
+
+            Octokit.GitHubClient gitHubClient = new Octokit.GitHubClient(new Octokit.ProductHeaderValue("Yapped"));
+            try
+            {
+                Octokit.Release release = await gitHubClient.Repository.Release.GetLatest("JKAnderson", "Yapped");
+                if (SemVersion.Parse(release.TagName) > Application.ProductVersion)
+                {
+                    updateToolStripMenuItem.Visible = true;
+                }
+            }
+            // Oh well.
+            catch { }
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -111,6 +102,7 @@ namespace Yapped
                 settings.WindowSize = RestoreBounds.Size;
             }
 
+            settings.GameIndex = toolStripComboBoxGame.SelectedIndex;
             settings.RegulationPath = regulationPath;
             settings.HideUnusedParams = hideUnusedParamsToolStripMenuItem.Checked;
             settings.VerifyRowDeletion = verifyDeletionsToolStripMenuItem.Checked;
@@ -129,96 +121,30 @@ namespace Yapped
             settings.DGVIndices = string.Join(",", components);
         }
 
-        private bool LoadLayouts()
+        private void LoadParams()
         {
-            if (!Directory.Exists(LAYOUTS_DIR))
+            string resDir = GetResRoot();
+            Dictionary<string, PARAM64.Layout> layouts = Util.LoadLayouts($@"{resDir}\Layouts");
+            Dictionary<string, ParamInfo> paramInfo = ParamInfo.ReadParamInfo($@"{resDir}\ParamInfo.xml");
+            LoadParamsResult result = Util.LoadParams(regulationPath, paramInfo, layouts, hideUnusedParamsToolStripMenuItem.Checked);
+
+            if (result == null)
             {
-                ShowError("No res\\Layouts directory found with application; params cannot be edited.");
-                return false;
+                exportToolStripMenuItem.Enabled = false;
             }
             else
             {
-                foreach (string path in Directory.GetFiles(LAYOUTS_DIR, "*.xml"))
-                {
-                    string paramID = Path.GetFileNameWithoutExtension(path);
-                    try
-                    {
-                        PARAM64.Layout layout = PARAM64.Layout.ReadXMLFile(path);
-                        layouts[paramID] = layout;
-                    }
-                    catch (Exception ex)
-                    {
-                        ShowError($"Failed to load layout {paramID}.txt\r\n\r\n{ex}");
-                    }
-                }
-                return true;
-            }
-        }
-
-        private void LoadRegulation()
-        {
-            if (!File.Exists(regulationPath))
-            {
-                ShowError($"Regulation file not found:\r\n{regulationPath}\r\n\r\nPlease browse to Data0.bdt in your game directory from the File->Open menu.");
-                return;
-            }
-
-            try
-            {
-                if (BND4.Is(regulationPath))
-                {
-                    regulation = BND4.Read(regulationPath);
-                    encrypted = false;
-                }
-                else
-                {
-                    regulation = SFUtil.DecryptDS3Regulation(regulationPath);
-                    encrypted = true;
-                }
+                encrypted = result.Encrypted;
+                regulation = result.ParamBND;
                 exportToolStripMenuItem.Enabled = encrypted;
-            }
-            catch (Exception ex)
-            {
-                ShowError($"Failed to load regulation file:\r\n{regulationPath}\r\n\r\n{ex}");
-                return;
-            }
-
-            Dictionary<string, ParamInfo> paramInfo = ParamInfo.ReadParamInfo(PARAM_INFO_PATH);
-            var paramWrappers = new List<ParamWrapper>();
-            foreach (BinderFile file in regulation.Files.Where(f => f.Name.EndsWith(".param")))
-            {
-                string name = Path.GetFileNameWithoutExtension(file.Name);
-                if (hideUnusedParamsToolStripMenuItem.Checked && paramInfo.ContainsKey(name) && paramInfo[name].Hidden)
-                    continue;
-
-                try
+                foreach (ParamWrapper wrapper in result.ParamWrappers)
                 {
-                    PARAM64 param = PARAM64.Read(file.Bytes);
-                    if (layouts.ContainsKey(param.ID))
-                    {
-                        PARAM64.Layout layout = layouts[param.ID];
-                        if (layout.Size == param.DetectedSize)
-                        {
-                            string description = null;
-                            if (paramInfo.ContainsKey(name))
-                                description = paramInfo[name].Description;
-
-                            var wrapper = new ParamWrapper(name, param, layout, description);
-                            paramWrappers.Add(wrapper);
-                            if (!dgvIndices.ContainsKey(wrapper.Name))
-                                dgvIndices[wrapper.Name] = (0, 0);
-                        }
-                    }
+                    if (!dgvIndices.ContainsKey(wrapper.Name))
+                        dgvIndices[wrapper.Name] = (0, 0);
                 }
-                catch (Exception ex)
-                {
-                    ShowError($"Failed to load param file: {name}.param\r\n\r\n{ex}");
-                }
+                dgvParams.DataSource = result.ParamWrappers;
+                toolStripStatusLabel1.Text = regulationPath;
             }
-
-            paramWrappers.Sort();
-            dgvParams.DataSource = paramWrappers;
-            toolStripStatusLabel1.Text = regulationPath;
         }
 
         private void dgvParams_SelectionChanged(object sender, EventArgs e)
@@ -302,116 +228,15 @@ namespace Yapped
                 return;
 
             PARAM64.Cell paramCell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
-            DataGridViewCell dgvCell = dgvCells.Rows[e.RowIndex].Cells[e.ColumnIndex];
             CellType type = paramCell.Type;
             string value = e.FormattedValue.ToString();
 
-            if (type == CellType.s8)
+            string error = Util.ValidateCell(type, value);
+            if (error != null)
             {
-                if (!sbyte.TryParse(value, out _))
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for signed byte.");
-                }
+                Util.ShowError(error);
+                e.Cancel = true;
             }
-            else if (type == CellType.u8)
-            {
-                if (!byte.TryParse(value, out _))
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for unsigned byte.");
-                }
-            }
-            else if (type == CellType.x8)
-            {
-                try
-                {
-                    Convert.ToByte(value, 16);
-                }
-                catch
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for hex byte.");
-                }
-            }
-            else if (type == CellType.s16)
-            {
-                if (!short.TryParse(value, out _))
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for signed short.");
-                }
-            }
-            else if (type == CellType.u16)
-            {
-                if (!ushort.TryParse(value, out _))
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for unsigned short.");
-                }
-            }
-            else if (type == CellType.x16)
-            {
-                try
-                {
-                    Convert.ToUInt16(value, 16);
-                }
-                catch
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for hex short.");
-                }
-            }
-            else if (type == CellType.s32)
-            {
-                if (!int.TryParse(value, out _))
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for signed int.");
-                }
-            }
-            else if (type == CellType.u32)
-            {
-                if (!uint.TryParse(value, out _))
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for unsigned int.");
-                }
-            }
-            else if (type == CellType.x32)
-            {
-                try
-                {
-                    Convert.ToUInt32(value, 16);
-                }
-                catch
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for hex int.");
-                }
-            }
-            else if (type == CellType.f32)
-            {
-                if (!float.TryParse(value, out _))
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for float.");
-                }
-            }
-            else if (type == CellType.b8 || type == CellType.b32)
-            {
-                if (!bool.TryParse(value, out _))
-                {
-                    e.Cancel = true;
-                    ShowError("Invalid value for bool.");
-                }
-            }
-            else if (type == CellType.fixstr || type == CellType.fixstrW)
-            {
-                // Don't see how you could mess this up
-            }
-            else
-                throw new NotImplementedException("Cannot validate cell type.");
         }
 
         private void dgvCells_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -436,13 +261,13 @@ namespace Yapped
             }
             catch
             {
-                ofdRegulation.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game";
+                ofdRegulation.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\Sekiro";
             }
 
             if (ofdRegulation.ShowDialog() == DialogResult.OK)
             {
                 regulationPath = ofdRegulation.FileName;
-                LoadRegulation();
+                LoadParams();
             }
         }
 
@@ -478,18 +303,18 @@ namespace Yapped
                     try
                     {
                         File.Copy(regulationPath + ".bak", regulationPath, true);
-                        LoadRegulation();
+                        LoadParams();
                         SystemSounds.Asterisk.Play();
                     }
                     catch (Exception ex)
                     {
-                        ShowError($"Failed to restore backup\r\n\r\n{regulationPath}.bak\r\n\r\n{ex}");
+                        Util.ShowError($"Failed to restore backup\r\n\r\n{regulationPath}.bak\r\n\r\n{ex}");
                     }
                 }
             }
             else
             {
-                ShowError($"There is no backup to restore at:\r\n\r\n{regulationPath}.bak");
+                Util.ShowError($"There is no backup to restore at:\r\n\r\n{regulationPath}.bak");
             }
         }
 
@@ -519,7 +344,7 @@ namespace Yapped
         {
             if (dgvRows.SelectedCells.Count == 0)
             {
-                ShowError("You can't duplicate a row without one selected!");
+                Util.ShowError("You can't duplicate a row without one selected!");
                 return;
             }
 
@@ -540,7 +365,7 @@ namespace Yapped
         {
             if (rowSource.DataSource == null)
             {
-                ShowError("You can't create a row with no param selected!");
+                Util.ShowError("You can't create a row with no param selected!");
                 return null;
             }
 
@@ -553,7 +378,7 @@ namespace Yapped
                 ParamWrapper paramWrapper = (ParamWrapper)rowSource.DataSource;
                 if (paramWrapper.Rows.Any(row => row.ID == id))
                 {
-                    ShowError($"A row with this ID already exists: {id}");
+                    Util.ShowError($"A row with this ID already exists: {id}");
                 }
                 else
                 {
@@ -605,13 +430,14 @@ namespace Yapped
                 "Click Yes to skip existing names.\r\nClick No to replace existing names.",
                 "Importing Names", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
 
+            string namesDir = $@"{GetResRoot()}\Names";
             List<ParamWrapper> paramFiles = (List<ParamWrapper>)dgvParams.DataSource;
             foreach (ParamWrapper paramFile in paramFiles)
             {
-                if (File.Exists($@"{NAMES_DIR}\{paramFile.Name}.txt"))
+                if (File.Exists($@"{namesDir}\{paramFile.Name}.txt"))
                 {
                     var names = new Dictionary<long, string>();
-                    string nameStr = File.ReadAllText($@"{NAMES_DIR}\{paramFile.Name}.txt");
+                    string nameStr = File.ReadAllText($@"{namesDir}\{paramFile.Name}.txt");
                     foreach (string line in Regex.Split(nameStr, @"\s*[\r\n]+\s*"))
                     {
                         if (line.Length > 0)
@@ -645,7 +471,7 @@ namespace Yapped
                 bool parsed = int.TryParse((string)e.FormattedValue, out int value);
                 if (!parsed || value < 0)
                 {
-                    ShowError("Row ID must be a positive integer.\r\nEnter a valid number or press Esc to cancel.");
+                    Util.ShowError("Row ID must be a positive integer.\r\nEnter a valid number or press Esc to cancel.");
                     e.Cancel = true;
                 }
             }
@@ -653,6 +479,7 @@ namespace Yapped
 
         private void exportNamesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string namesDir = $@"{GetResRoot()}\Names";
             List<ParamWrapper> paramFiles = (List<ParamWrapper>)dgvParams.DataSource;
             foreach (ParamWrapper paramFile in paramFiles)
             {
@@ -668,11 +495,11 @@ namespace Yapped
 
                 try
                 {
-                    File.WriteAllText($@"{NAMES_DIR}\{paramFile.Name}.txt", sb.ToString());
+                    File.WriteAllText($@"{namesDir}\{paramFile.Name}.txt", sb.ToString());
                 }
                 catch (Exception ex)
                 {
-                    ShowError($"Failed to write name file: {paramFile.Name}.txt\r\n\r\n{ex}");
+                    Util.ShowError($"Failed to write name file: {paramFile.Name}.txt\r\n\r\n{ex}");
                     break;
                 }
             }
@@ -710,7 +537,7 @@ namespace Yapped
         {
             if (rowSource.DataSource == null)
             {
-                ShowError("You can't search for a row when there are no rows!");
+                Util.ShowError("You can't search for a row when there are no rows!");
                 return;
             }
 
@@ -737,7 +564,7 @@ namespace Yapped
             }
             else
             {
-                ShowError($"No row found matching: {pattern}");
+                Util.ShowError($"No row found matching: {pattern}");
             }
         }
 
@@ -748,7 +575,7 @@ namespace Yapped
             {
                 if (rowSource.DataSource == null)
                 {
-                    ShowError("You can't goto a row when there are no rows!");
+                    Util.ShowError("You can't goto a row when there are no rows!");
                     return;
                 }
 
@@ -765,7 +592,7 @@ namespace Yapped
                 }
                 else
                 {
-                    ShowError($"Row ID not found: {id}");
+                    Util.ShowError($"Row ID not found: {id}");
                 }
             }
         }
@@ -806,7 +633,7 @@ namespace Yapped
         {
             if (dgvCells.DataSource == null)
             {
-                ShowError("You can't search for a field when there are no fields!");
+                Util.ShowError("You can't search for a field when there are no fields!");
                 return;
             }
 
@@ -833,7 +660,7 @@ namespace Yapped
             }
             else
             {
-                ShowError($"No field found matching: {pattern}");
+                Util.ShowError($"No field found matching: {pattern}");
             }
         }
 
@@ -876,14 +703,19 @@ namespace Yapped
                 }
                 catch (Exception ex)
                 {
-                    ShowError($"Failed to write exported parambnds.\r\n\r\n{ex}");
+                    Util.ShowError($"Failed to write exported parambnds.\r\n\r\n{ex}");
                 }
             }
         }
 
-        private static void ShowError(string message)
+        private string GetResRoot()
         {
-            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            int gameIndex = toolStripComboBoxGame.SelectedIndex;
+#if DEBUG
+            return gameIndex == 0 ? @"..\..\..\dist\res\DS3" : @"..\..\..\dist\res\SDT";
+#else
+            return gameIndex == 0 ? @"res\DS3" : @"res\SDT";
+#endif
         }
     }
 }

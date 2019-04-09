@@ -15,7 +15,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="RegulationPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files (x86)\Steam\steamapps\common\DARK SOULS III\Game\Data0.bdt</Value>
+      <Value Profile="(Default)">C:\Program Files (x86)\Steam\steamapps\common\Sekiro\param\gameparam\gameparam.parambnd.dcx</Value>
     </Setting>
     <Setting Name="SplitterDistance1" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">250</Value>
@@ -34,6 +34,9 @@
     </Setting>
     <Setting Name="HideUnusedParams" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GameIndex" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

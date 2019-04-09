@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.ofdRegulation = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -38,6 +38,7 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exploreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.hideUnusedParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,8 +69,8 @@
             this.dgvCellsValueCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fbdExport = new System.Windows.Forms.FolderBrowserDialog();
+            this.toolStripComboBoxGame = new System.Windows.Forms.ToolStripComboBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -111,6 +112,7 @@
             this.exploreToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.toolStripSeparator2,
+            this.toolStripComboBoxGame,
             this.hideUnusedParamsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -149,6 +151,14 @@
             this.exploreToolStripMenuItem.Text = "Explore";
             this.exploreToolStripMenuItem.ToolTipText = "Open the regulation file directory in Explorer.";
             this.exploreToolStripMenuItem.Click += new System.EventHandler(this.exploreToolStripMenuItem_Click);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exportToolStripMenuItem.Text = "Export";
+            this.exportToolStripMenuItem.ToolTipText = "Export an encrypted Data0.bdt to decrypted parambnds.";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -387,8 +397,8 @@
             // 
             this.dgvRowsIDCol.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.dgvRowsIDCol.DataPropertyName = "ID";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.dgvRowsIDCol.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dgvRowsIDCol.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRowsIDCol.HeaderText = "Row";
             this.dgvRowsIDCol.Name = "dgvRowsIDCol";
             this.dgvRowsIDCol.Width = 54;
@@ -465,18 +475,19 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(81, 17);
             this.toolStripStatusLabel1.Text = "No file loaded";
             // 
-            // exportToolStripMenuItem
-            // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.exportToolStripMenuItem.Text = "Export";
-            this.exportToolStripMenuItem.ToolTipText = "Export an encrypted Data0.bdt to decrypted parambnds.";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
-            // 
             // fbdExport
             // 
             this.fbdExport.Description = "Choose the folder to export parambnds to";
             this.fbdExport.RootFolder = System.Environment.SpecialFolder.MyComputer;
+            // 
+            // toolStripComboBoxGame
+            // 
+            this.toolStripComboBoxGame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxGame.Items.AddRange(new object[] {
+            "Dark Souls 3",
+            "Sekiro"});
+            this.toolStripComboBoxGame.Name = "toolStripComboBoxGame";
+            this.toolStripComboBoxGame.Size = new System.Drawing.Size(121, 23);
             // 
             // FormMain
             // 
@@ -552,6 +563,7 @@
         private System.Windows.Forms.ToolStripMenuItem duplicateRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.FolderBrowserDialog fbdExport;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxGame;
     }
 }
 
