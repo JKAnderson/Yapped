@@ -57,6 +57,11 @@ namespace Yapped
                     result.Encrypted = true;
                 }
             }
+            catch (DllNotFoundException ex) when (ex.Message.Contains("oo2core_6_win64.dll"))
+            {
+                ShowError("In order to load Sekiro params, you must copy oo2core_6_win64.dll from Sekiro into Yapped's lib folder.");
+                return null;
+            }
             catch (Exception ex)
             {
                 ShowError($"Failed to load parambnd:\r\n{paramPath}\r\n\r\n{ex}");

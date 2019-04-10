@@ -40,6 +40,7 @@
             this.exploreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripComboBoxGame = new System.Windows.Forms.ToolStripComboBox();
             this.hideUnusedParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.fbdExport = new System.Windows.Forms.FolderBrowserDialog();
-            this.toolStripComboBoxGame = new System.Windows.Forms.ToolStripComboBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -88,8 +88,8 @@
             // 
             // ofdRegulation
             // 
-            this.ofdRegulation.FileName = "Data0.bdt";
-            this.ofdRegulation.Filter = "DS3 Regulation|*";
+            this.ofdRegulation.FileName = "gameparam.parambnd.dcx";
+            this.ofdRegulation.Filter = "Regulation or parambnd|*";
             // 
             // menuStrip1
             // 
@@ -164,6 +164,15 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(181, 6);
+            // 
+            // toolStripComboBoxGame
+            // 
+            this.toolStripComboBoxGame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBoxGame.Items.AddRange(new object[] {
+            "Dark Souls 3",
+            "Sekiro"});
+            this.toolStripComboBoxGame.Name = "toolStripComboBoxGame";
+            this.toolStripComboBoxGame.Size = new System.Drawing.Size(121, 23);
             // 
             // hideUnusedParamsToolStripMenuItem
             // 
@@ -479,15 +488,6 @@
             // 
             this.fbdExport.Description = "Choose the folder to export parambnds to";
             this.fbdExport.RootFolder = System.Environment.SpecialFolder.MyComputer;
-            // 
-            // toolStripComboBoxGame
-            // 
-            this.toolStripComboBoxGame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBoxGame.Items.AddRange(new object[] {
-            "Dark Souls 3",
-            "Sekiro"});
-            this.toolStripComboBoxGame.Name = "toolStripComboBoxGame";
-            this.toolStripComboBoxGame.Size = new System.Drawing.Size(121, 23);
             // 
             // FormMain
             // 

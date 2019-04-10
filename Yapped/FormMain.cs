@@ -255,15 +255,7 @@ namespace Yapped
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ofdRegulation.InitialDirectory = Path.GetDirectoryName(regulationPath);
-            }
-            catch
-            {
-                ofdRegulation.InitialDirectory = @"C:\Program Files (x86)\Steam\steamapps\common\Sekiro";
-            }
-
+            ofdRegulation.FileName = regulationPath;
             if (ofdRegulation.ShowDialog() == DialogResult.OK)
             {
                 regulationPath = ofdRegulation.FileName;
