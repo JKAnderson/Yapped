@@ -704,7 +704,7 @@ namespace Yapped
         {
             int gameIndex = toolStripComboBoxGame.SelectedIndex;
 #if DEBUG
-            return gameIndex == 0 ? @"..\..\..\dist\res\DS3" : @"..\..\..\dist\res\SDT";
+            return gameIndex == 0 ? @"..\..\..\..\dist\res\DS3" : @"..\..\..\..\dist\res\SDT";
 #else
             return gameIndex == 0 ? @"res\DS3" : @"res\SDT";
 #endif
