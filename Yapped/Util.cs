@@ -35,7 +35,7 @@ namespace Yapped
         }
 
         public static LoadParamsResult LoadParams(string paramPath, Dictionary<string, ParamInfo> paramInfo,
-            Dictionary<string, PARAM64.Layout> layouts, bool hideUnusedParams)
+            Dictionary<string, PARAM64.Layout> layouts, GameMode gameMode, bool hideUnusedParams)
         {
             if (!File.Exists(paramPath))
             {
@@ -51,10 +51,19 @@ namespace Yapped
                     result.ParamBND = BND4.Read(paramPath);
                     result.Encrypted = false;
                 }
-                else
+                else if (gameMode.Game == GameMode.GameType.DarkSouls2)
+                {
+                    result.ParamBND = DecryptDS2Regulation(paramPath);
+                    result.Encrypted = true;
+                }
+                else if (gameMode.Game == GameMode.GameType.DarkSouls3)
                 {
                     result.ParamBND = SFUtil.DecryptDS3Regulation(paramPath);
                     result.Encrypted = true;
+                }
+                else
+                {
+                    throw new FormatException("Unrecognized file format.");
                 }
             }
             catch (DllNotFoundException ex) when (ex.Message.Contains("oo2core_6_win64.dll"))
@@ -208,6 +217,43 @@ namespace Yapped
                 throw new NotImplementedException("Cannot validate cell type.");
 
             return null;
+        }
+
+        private static byte[] ds2RegulationKey = {
+            0x40, 0x17, 0x81, 0x30, 0xDF, 0x0A, 0x94, 0x54, 0x33, 0x09, 0xE1, 0x71, 0xEC, 0xBF, 0x25, 0x4C };
+
+        public static BND4 DecryptDS2Regulation(string path)
+        {
+            byte[] bytes = File.ReadAllBytes(path);
+            byte[] iv = new byte[16];
+            iv[0] = 0x80;
+            Array.Copy(bytes, 0, iv, 1, 11);
+            iv[15] = 1;
+            byte[] input = new byte[bytes.Length - 32];
+            Array.Copy(bytes, 32, input, 0, bytes.Length - 32);
+            using (var ms = new MemoryStream(input))
+            {
+                byte[] decrypted = CryptographyUtility.DecryptAesCtr(ms, ds2RegulationKey, iv);
+                File.WriteAllBytes("ffff.bnd", decrypted);
+                return BND4.Read(decrypted);
+            }
+        }
+
+        public static void EncryptDS2Regulation(string path, BND4 bnd)
+        {
+            //var rand = new Random();
+            //byte[] iv = new byte[16];
+            //byte[] ivPart = new byte[11];
+            //rand.NextBytes(ivPart);
+            //iv[0] = 0x80;
+            //Array.Copy(ivPart, 0, iv, 1, 11);
+            //iv[15] = 1;
+            //byte[] decrypted = bnd.Write();
+            //byte[] encrypted = CryptographyUtility.EncryptAesCtr(decrypted, ds2RegulationKey, iv);
+            //byte[] output = new byte[encrypted.Length + 11];
+
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            bnd.Write(path); // xddddd
         }
 
         public static void ShowError(string message)

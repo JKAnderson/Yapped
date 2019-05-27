@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using CellType = SoulsFormats.PARAM64.CellType;
+using GameType = Yapped.GameMode.GameType;
 
 namespace Yapped
 {
@@ -44,13 +45,18 @@ namespace Yapped
         private async void FormMain_Load(object sender, EventArgs e)
         {
             Text = "Yapped " + Application.ProductVersion;
+
             Location = settings.WindowLocation;
             if (settings.WindowSize.Width >= MinimumSize.Width && settings.WindowSize.Height >= MinimumSize.Height)
                 Size = settings.WindowSize;
             if (settings.WindowMaximized)
                 WindowState = FormWindowState.Maximized;
 
-            toolStripComboBoxGame.SelectedIndex = settings.GameIndex;
+            toolStripComboBoxGame.ComboBox.DisplayMember = "Name";
+            toolStripComboBoxGame.Items.AddRange(GameMode.Modes);
+            var game = (GameType)Enum.Parse(typeof(GameType), settings.GameType);
+            toolStripComboBoxGame.SelectedIndex = Array.FindIndex(GameMode.Modes, m => m.Game == game);
+
             regulationPath = settings.RegulationPath;
             hideUnusedParamsToolStripMenuItem.Checked = settings.HideUnusedParams;
             verifyDeletionsToolStripMenuItem.Checked = settings.VerifyRowDeletion;
@@ -102,7 +108,7 @@ namespace Yapped
                 settings.WindowSize = RestoreBounds.Size;
             }
 
-            settings.GameIndex = toolStripComboBoxGame.SelectedIndex;
+            settings.GameType = ((GameMode)toolStripComboBoxGame.SelectedItem).Game.ToString();
             settings.RegulationPath = regulationPath;
             settings.HideUnusedParams = hideUnusedParamsToolStripMenuItem.Checked;
             settings.VerifyRowDeletion = verifyDeletionsToolStripMenuItem.Checked;
@@ -126,7 +132,8 @@ namespace Yapped
             string resDir = GetResRoot();
             Dictionary<string, PARAM64.Layout> layouts = Util.LoadLayouts($@"{resDir}\Layouts");
             Dictionary<string, ParamInfo> paramInfo = ParamInfo.ReadParamInfo($@"{resDir}\ParamInfo.xml");
-            LoadParamsResult result = Util.LoadParams(regulationPath, paramInfo, layouts, hideUnusedParamsToolStripMenuItem.Checked);
+            var gameMode = (GameMode)toolStripComboBoxGame.SelectedItem;
+            LoadParamsResult result = Util.LoadParams(regulationPath, paramInfo, layouts, gameMode, hideUnusedParamsToolStripMenuItem.Checked);
 
             if (result == null)
             {
@@ -241,9 +248,9 @@ namespace Yapped
 
         private void dgvCells_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            PARAM64.Cell cell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             if (e.ColumnIndex == 2)
             {
+                PARAM64.Cell cell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
                 if (cell.Type == CellType.x8)
                     e.Value = $"0x{e.Value:X2}";
                 else if (cell.Type == CellType.x16)
@@ -275,12 +282,23 @@ namespace Yapped
                 }
             }
 
+            var gameMode = (GameMode)toolStripComboBoxGame.SelectedItem;
             if (!File.Exists(regulationPath + ".bak"))
                 File.Copy(regulationPath, regulationPath + ".bak");
+
             if (encrypted)
-                SFUtil.EncryptDS3Regulation(regulationPath, regulation);
+            {
+                if (gameMode.Game == GameType.DarkSouls2)
+                    Util.EncryptDS2Regulation(regulationPath, regulation);
+                else if (gameMode.Game == GameType.DarkSouls3)
+                    SFUtil.EncryptDS3Regulation(regulationPath, regulation);
+                else
+                    Util.ShowError("Encryption is only valid for DS2 and DS3.");
+            }
             else
+            {
                 regulation.Write(regulationPath);
+            }
             SystemSounds.Asterisk.Play();
         }
 
@@ -702,11 +720,11 @@ namespace Yapped
 
         private string GetResRoot()
         {
-            int gameIndex = toolStripComboBoxGame.SelectedIndex;
+            var gameMode = (GameMode)toolStripComboBoxGame.SelectedItem;
 #if DEBUG
-            return gameIndex == 0 ? @"..\..\..\..\dist\res\DS3" : @"..\..\..\..\dist\res\SDT";
+            return $@"..\..\..\..\dist\res\{gameMode.Directory}";
 #else
-            return gameIndex == 0 ? @"res\DS3" : @"res\SDT";
+            return $@"res\{gameMode.Directory}";
 #endif
         }
     }

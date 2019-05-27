@@ -168,9 +168,6 @@
             // toolStripComboBoxGame
             // 
             this.toolStripComboBoxGame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.toolStripComboBoxGame.Items.AddRange(new object[] {
-            "Dark Souls 3",
-            "Sekiro"});
             this.toolStripComboBoxGame.Name = "toolStripComboBoxGame";
             this.toolStripComboBoxGame.Size = new System.Drawing.Size(121, 23);
             // 

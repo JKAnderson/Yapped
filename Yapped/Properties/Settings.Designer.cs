@@ -158,13 +158,13 @@ namespace Yapped.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int GameIndex {
+        [global::System.Configuration.DefaultSettingValueAttribute("DarkSouls3")]
+        public string GameType {
             get {
-                return ((int)(this["GameIndex"]));
+                return ((string)(this["GameType"]));
             }
             set {
-                this["GameIndex"] = value;
+                this["GameType"] = value;
             }
         }
     }
