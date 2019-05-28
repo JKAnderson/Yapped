@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using CellType = SoulsFormats.PARAM64.CellType;
+using CellType = SoulsFormats.PARAM.CellType;
 
 namespace Yapped
 {
     internal static class Util
     {
-        public static Dictionary<string, PARAM64.Layout> LoadLayouts(string directory)
+        public static Dictionary<string, PARAM.Layout> LoadLayouts(string directory)
         {
-            var layouts = new Dictionary<string, PARAM64.Layout>();
+            var layouts = new Dictionary<string, PARAM.Layout>();
             if (Directory.Exists(directory))
             {
                 foreach (string path in Directory.GetFiles(directory, "*.xml"))
@@ -20,7 +20,7 @@ namespace Yapped
                     string paramID = Path.GetFileNameWithoutExtension(path);
                     try
                     {
-                        PARAM64.Layout layout = PARAM64.Layout.ReadXMLFile(path);
+                        PARAM.Layout layout = PARAM.Layout.ReadXMLFile(path);
                         layouts[paramID] = layout;
                     }
                     catch (Exception ex)
@@ -33,7 +33,7 @@ namespace Yapped
         }
 
         public static LoadParamsResult LoadParams(string paramPath, Dictionary<string, ParamInfo> paramInfo,
-            Dictionary<string, PARAM64.Layout> layouts, GameMode gameMode, bool hideUnusedParams)
+            Dictionary<string, PARAM.Layout> layouts, GameMode gameMode, bool hideUnusedParams)
         {
             if (!File.Exists(paramPath))
             {
@@ -92,16 +92,16 @@ namespace Yapped
 
                 try
                 {
-                    PARAM64 param = PARAM64.Read(file.Bytes);
-                    PARAM64.Layout layout = null;
+                    PARAM param = PARAM.Read(file.Bytes);
+                    PARAM.Layout layout = null;
                     if (layouts.ContainsKey(param.ID))
                     {
                         layout = layouts[param.ID];
                     }
                     if (layout == null || layout.Size != param.DetectedSize)
                     {
-                        layout = new PARAM64.Layout();
-                        layout.Add(new PARAM64.Layout.Entry(CellType.dummy8, "Unknown", (int)param.DetectedSize, null));
+                        layout = new PARAM.Layout();
+                        layout.Add(new PARAM.Layout.Entry(CellType.dummy8, "Unknown", (int)param.DetectedSize, null));
                     }
 
                     string description = null;

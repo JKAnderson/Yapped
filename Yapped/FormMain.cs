@@ -10,7 +10,7 @@ using System.Media;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using CellType = SoulsFormats.PARAM64.CellType;
+using CellType = SoulsFormats.PARAM.CellType;
 using GameType = Yapped.GameMode.GameType;
 
 namespace Yapped
@@ -23,7 +23,7 @@ namespace Yapped
         private string regulationPath;
         private IBinder regulation;
         private bool encrypted;
-        private Dictionary<string, PARAM64.Layout> layouts;
+        private Dictionary<string, PARAM.Layout> layouts;
         private BindingSource rowSource;
         private Dictionary<string, (int Row, int Cell)> dgvIndices;
         private string lastFindRowPattern, lastFindFieldPattern;
@@ -32,7 +32,7 @@ namespace Yapped
         {
             InitializeComponent();
             regulation = null;
-            layouts = new Dictionary<string, PARAM64.Layout>();
+            layouts = new Dictionary<string, PARAM.Layout>();
             rowSource = new BindingSource();
             dgvIndices = new Dictionary<string, (int Row, int Cell)>();
             dgvRows.DataSource = rowSource;
@@ -132,7 +132,7 @@ namespace Yapped
         private void LoadParams()
         {
             string resDir = GetResRoot();
-            Dictionary<string, PARAM64.Layout> layouts = Util.LoadLayouts($@"{resDir}\Layouts");
+            Dictionary<string, PARAM.Layout> layouts = Util.LoadLayouts($@"{resDir}\Layouts");
             Dictionary<string, ParamInfo> paramInfo = ParamInfo.ReadParamInfo($@"{resDir}\ParamInfo.xml");
             var gameMode = (GameMode)toolStripComboBoxGame.SelectedItem;
             LoadParamsResult result = Util.LoadParams(regulationPath, paramInfo, layouts, gameMode, hideUnusedParamsToolStripMenuItem.Checked);
@@ -209,7 +209,7 @@ namespace Yapped
                 if (dgvCells.FirstDisplayedScrollingRowIndex >= 0)
                     indices.Cell = dgvCells.FirstDisplayedScrollingRowIndex;
 
-                PARAM64.Row row = (PARAM64.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
+                PARAM.Row row = (PARAM.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
                 dgvCells.DataSource = row.Cells.Where(cell => cell.Type != CellType.dummy8).ToArray();
 
                 if (indices.Cell >= dgvCells.RowCount)
@@ -226,9 +226,9 @@ namespace Yapped
 
         private void dgvCells_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            PARAM64.Cell paramCell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+            PARAM.Cell paramCell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             DataGridViewCell dgvCell = dgvCells.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            paramCell.Value = PARAM64.Layout.ParseParamValue(paramCell.Type, dgvCell.Value.ToString(), CultureInfo.CurrentCulture);
+            paramCell.Value = PARAM.Layout.ParseParamValue(paramCell.Type, dgvCell.Value.ToString(), CultureInfo.CurrentCulture);
         }
 
         private void dgvCells_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -236,7 +236,7 @@ namespace Yapped
             if (e.ColumnIndex != 2)
                 return;
 
-            PARAM64.Cell paramCell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+            PARAM.Cell paramCell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             CellType type = paramCell.Type;
             string value = e.FormattedValue.ToString();
 
@@ -252,7 +252,7 @@ namespace Yapped
         {
             if (e.ColumnIndex == 2)
             {
-                PARAM64.Cell cell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+                PARAM.Cell cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
                 if (cell.Type == CellType.x8)
                     e.Value = $"0x{e.Value:X2}";
                 else if (cell.Type == CellType.x16)
@@ -365,8 +365,8 @@ namespace Yapped
 
             int index = dgvRows.SelectedCells[0].RowIndex;
             ParamWrapper wrapper = (ParamWrapper)rowSource.DataSource;
-            PARAM64.Row oldRow = wrapper.Rows[index];
-            PARAM64.Row newRow;
+            PARAM.Row oldRow = wrapper.Rows[index];
+            PARAM.Row newRow;
             if ((newRow = CreateRow("Duplicate a row...")) != null)
             {
                 for (int i = 0; i < oldRow.Cells.Count; i++)
@@ -376,7 +376,7 @@ namespace Yapped
             }
         }
 
-        private PARAM64.Row CreateRow(string prompt)
+        private PARAM.Row CreateRow(string prompt)
         {
             if (rowSource.DataSource == null)
             {
@@ -384,7 +384,7 @@ namespace Yapped
                 return null;
             }
 
-            PARAM64.Row result = null;
+            PARAM.Row result = null;
             var newRowForm = new FormNewRow(prompt);
             if (newRowForm.ShowDialog() == DialogResult.OK)
             {
@@ -397,7 +397,7 @@ namespace Yapped
                 }
                 else
                 {
-                    result = new PARAM64.Row(id, name, paramWrapper.Layout);
+                    result = new PARAM.Row(id, name, paramWrapper.Layout);
                     rowSource.Add(result);
                     paramWrapper.Rows.Sort((r1, r2) => r1.ID.CompareTo(r2.ID));
 
@@ -464,7 +464,7 @@ namespace Yapped
                         }
                     }
 
-                    foreach (PARAM64.Row row in paramFile.Param.Rows)
+                    foreach (PARAM.Row row in paramFile.Param.Rows)
                     {
                         if (names.ContainsKey(row.ID))
                         {
@@ -499,7 +499,7 @@ namespace Yapped
             foreach (ParamWrapper paramFile in paramFiles)
             {
                 StringBuilder sb = new StringBuilder();
-                foreach (PARAM64.Row row in paramFile.Param.Rows)
+                foreach (PARAM.Row row in paramFile.Param.Rows)
                 {
                     string name = (row.Name ?? "").Trim();
                     if (name != "")
@@ -525,7 +525,7 @@ namespace Yapped
             for (int i = 0; i < e.RowCount; i++)
             {
                 DataGridViewRow row = dgvCells.Rows[e.RowIndex + i];
-                PARAM64.Cell paramCell = (PARAM64.Cell)row.DataBoundItem;
+                PARAM.Cell paramCell = (PARAM.Cell)row.DataBoundItem;
                 if (paramCell.Type == CellType.b8 || paramCell.Type == CellType.b32)
                 {
                     // Value
@@ -557,7 +557,7 @@ namespace Yapped
             }
 
             int startIndex = dgvRows.SelectedCells.Count > 0 ? dgvRows.SelectedCells[0].RowIndex + 1 : 0;
-            List<PARAM64.Row> rows = ((ParamWrapper)rowSource.DataSource).Rows;
+            List<PARAM.Row> rows = ((ParamWrapper)rowSource.DataSource).Rows;
             int index = -1;
 
             for (int i = 0; i < rows.Count; i++)
@@ -595,7 +595,7 @@ namespace Yapped
                 }
 
                 long id = gotoForm.ResultID;
-                List<PARAM64.Row> rows = ((ParamWrapper)rowSource.DataSource).Rows;
+                List<PARAM.Row> rows = ((ParamWrapper)rowSource.DataSource).Rows;
                 int index = rows.FindIndex(row => row.ID == id);
 
                 if (index != -1)
@@ -639,7 +639,7 @@ namespace Yapped
         {
             if (e.RowIndex >= 0 && e.ColumnIndex == 1)
             {
-                var cell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+                var cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
                 e.ToolTipText = cell.Description;
             }
         }
@@ -653,7 +653,7 @@ namespace Yapped
             }
 
             int startIndex = dgvCells.SelectedCells.Count > 0 ? dgvCells.SelectedCells[0].RowIndex + 1 : 0;
-            var cells = (PARAM64.Cell[])dgvCells.DataSource;
+            var cells = (PARAM.Cell[])dgvCells.DataSource;
             int index = -1;
 
             for (int i = 0; i < cells.Length; i++)

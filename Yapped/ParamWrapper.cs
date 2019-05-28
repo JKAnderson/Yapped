@@ -10,13 +10,13 @@ namespace Yapped
 
         public string Description { get; }
 
-        public PARAM64 Param;
+        public PARAM Param;
 
-        public PARAM64.Layout Layout;
+        public PARAM.Layout Layout;
 
-        public List<PARAM64.Row> Rows => Param.Rows;
+        public List<PARAM.Row> Rows => Param.Rows;
 
-        public ParamWrapper(string name, PARAM64 param, PARAM64.Layout layout, string description)
+        public ParamWrapper(string name, PARAM param, PARAM.Layout layout, string description)
         {
             Name = name;
             Param = param;

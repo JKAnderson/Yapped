@@ -7,7 +7,7 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using System.Xml;
-using CellType = SoulsFormats.PARAM64.CellType;
+using CellType = SoulsFormats.PARAM.CellType;
 
 namespace Yapped.Dump
 {
@@ -48,45 +48,45 @@ namespace Yapped.Dump
             {
                 if (Path.GetExtension(file.Name) == ".param")
                 {
-                    PARAM64 param = PARAM64.Read(file.Bytes);
+                    PARAM param = PARAM.Read(file.Bytes);
                     string layoutPath = $"Layouts\\{param.ID}.xml";
 
                     txtStatus.AppendText(file.Name + "\r\n");
 
                     var worksheet = package.Workbook.Worksheets.Add(Path.GetFileNameWithoutExtension(file.Name));
 
-                    PARAM64.Layout layout;
+                    PARAM.Layout layout;
                     if (File.Exists(layoutPath))
                     {
-                        layout = PARAM64.Layout.ReadXMLFile(layoutPath);
+                        layout = PARAM.Layout.ReadXMLFile(layoutPath);
                         if (layout.Size != param.DetectedSize)
                         {
-                            layout = new PARAM64.Layout();
+                            layout = new PARAM.Layout();
                             for (int i = 0; i < param.DetectedSize / 4; i++)
-                                layout.Add(new PARAM64.Layout.Entry(CellType.u32, $"unk0x{i * 4:X4}", (uint)0));
+                                layout.Add(new PARAM.Layout.Entry(CellType.u32, $"unk0x{i * 4:X4}", (uint)0));
                             for (int i = 0; i < param.DetectedSize % 4; i++)
-                                layout.Add(new PARAM64.Layout.Entry(CellType.u8, "unkb" + i, (byte)0));
+                                layout.Add(new PARAM.Layout.Entry(CellType.u8, "unkb" + i, (byte)0));
                         }
                     }
                     else
                     {
-                        layout = new PARAM64.Layout();
+                        layout = new PARAM.Layout();
                     }
 
                     param.SetLayout(layout);
-                    List<PARAM64.Row> rows = param.Rows;
+                    List<PARAM.Row> rows = param.Rows;
 
                     worksheet.Cells[1, 1].Value = "ID";
                     worksheet.Cells[1, 2].Value = "Name";
                     worksheet.Cells[1, 3].Value = "Translated";
                     int columnCount = 3;
-                    foreach (PARAM64.Layout.Entry lv in layout)
+                    foreach (PARAM.Layout.Entry lv in layout)
                         if (lv.Type != CellType.dummy8)
                             worksheet.Cells[1, ++columnCount].Value = lv.Name;
 
                     for (int i = 0; i < rows.Count; i++)
                     {
-                        PARAM64.Row row = rows[i];
+                        PARAM.Row row = rows[i];
                         worksheet.Cells[i + 2, 1].Value = row.ID;
                         if (row.Name != null)
                         {
@@ -107,7 +107,7 @@ namespace Yapped.Dump
                         }
                         columnCount = 3;
 
-                        foreach (PARAM64.Cell cell in row.Cells)
+                        foreach (PARAM.Cell cell in row.Cells)
                         {
                             CellType type = cell.Type;
                             if (type != CellType.dummy8)
