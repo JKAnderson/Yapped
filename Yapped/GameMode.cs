@@ -4,7 +4,10 @@
     {
         public enum GameType
         {
+            DemonsSouls,
+            DarkSouls1,
             DarkSouls2,
+            Bloodborne,
             DarkSouls3,
             Sekiro
         }
@@ -22,8 +25,11 @@
 
         public static readonly GameMode[] Modes =
         {
+            //new GameMode(GameType.DarkSouls1, "Dark Souls 1", "DS1"),
             new GameMode(GameType.DarkSouls2, "Dark Souls 2", "DS2"),
             new GameMode(GameType.DarkSouls3, "Dark Souls 3", "DS3"),
+            //new GameMode(GameType.DemonsSouls, "Demon's Souls", "DES"),
+            //new GameMode(GameType.Bloodborne, "Bloodborne", "BB"),
             new GameMode(GameType.Sekiro, "Sekiro", "SDT"),
         };
     }

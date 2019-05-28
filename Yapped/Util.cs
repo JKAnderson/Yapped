@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CellType = SoulsFormats.PARAM64.CellType;
 
@@ -51,6 +49,11 @@ namespace Yapped
                     result.ParamBND = BND4.Read(paramPath);
                     result.Encrypted = false;
                 }
+                else if (BND3.Is(paramPath))
+                {
+                    result.ParamBND = BND3.Read(paramPath);
+                    result.Encrypted = false;
+                }
                 else if (gameMode.Game == GameMode.GameType.DarkSouls2)
                 {
                     result.ParamBND = DecryptDS2Regulation(paramPath);
@@ -90,23 +93,23 @@ namespace Yapped
                 try
                 {
                     PARAM64 param = PARAM64.Read(file.Bytes);
+                    PARAM64.Layout layout = null;
                     if (layouts.ContainsKey(param.ID))
                     {
-                        PARAM64.Layout layout = layouts[param.ID];
-                        if (layout.Size == param.DetectedSize)
-                        {
-                            string description = null;
-                            if (paramInfo.ContainsKey(name))
-                                description = paramInfo[name].Description;
-
-                            var wrapper = new ParamWrapper(name, param, layout, description);
-                            result.ParamWrappers.Add(wrapper);
-                        }
-                        else
-                        {
-
-                        }
+                        layout = layouts[param.ID];
                     }
+                    if (layout == null || layout.Size != param.DetectedSize)
+                    {
+                        layout = new PARAM64.Layout();
+                        layout.Add(new PARAM64.Layout.Entry(CellType.dummy8, "Unknown", (int)param.DetectedSize, null));
+                    }
+
+                    string description = null;
+                    if (paramInfo.ContainsKey(name))
+                        description = paramInfo[name].Description;
+
+                    var wrapper = new ParamWrapper(name, param, layout, description);
+                    result.ParamWrappers.Add(wrapper);
                 }
                 catch (Exception ex)
                 {
@@ -266,7 +269,7 @@ namespace Yapped
     {
         public bool Encrypted { get; set; }
 
-        public BND4 ParamBND { get; set; }
+        public IBinder ParamBND { get; set; }
 
         public List<ParamWrapper> ParamWrappers { get; set; }
     }

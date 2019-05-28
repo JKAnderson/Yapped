@@ -21,7 +21,7 @@ namespace Yapped
         private static Properties.Settings settings = Properties.Settings.Default;
 
         private string regulationPath;
-        private BND4 regulation;
+        private IBinder regulation;
         private bool encrypted;
         private Dictionary<string, PARAM64.Layout> layouts;
         private BindingSource rowSource;
@@ -56,6 +56,8 @@ namespace Yapped
             toolStripComboBoxGame.Items.AddRange(GameMode.Modes);
             var game = (GameType)Enum.Parse(typeof(GameType), settings.GameType);
             toolStripComboBoxGame.SelectedIndex = Array.FindIndex(GameMode.Modes, m => m.Game == game);
+            if (toolStripComboBoxGame.SelectedIndex == -1)
+                toolStripComboBoxGame.SelectedIndex = 0;
 
             regulationPath = settings.RegulationPath;
             hideUnusedParamsToolStripMenuItem.Checked = settings.HideUnusedParams;
@@ -289,15 +291,18 @@ namespace Yapped
             if (encrypted)
             {
                 if (gameMode.Game == GameType.DarkSouls2)
-                    Util.EncryptDS2Regulation(regulationPath, regulation);
+                    Util.EncryptDS2Regulation(regulationPath, regulation as BND4);
                 else if (gameMode.Game == GameType.DarkSouls3)
-                    SFUtil.EncryptDS3Regulation(regulationPath, regulation);
+                    SFUtil.EncryptDS3Regulation(regulationPath, regulation as BND4);
                 else
                     Util.ShowError("Encryption is only valid for DS2 and DS3.");
             }
             else
             {
-                regulation.Write(regulationPath);
+                if (regulation is BND3 bnd3)
+                    bnd3.Write(regulationPath);
+                else if (regulation is BND4 bnd4)
+                    bnd4.Write(regulationPath);
             }
             SystemSounds.Asterisk.Play();
         }
@@ -676,6 +681,7 @@ namespace Yapped
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var bnd4 = regulation as BND4;
             fbdExport.SelectedPath = Path.GetDirectoryName(regulationPath);
             if (fbdExport.ShowDialog() == DialogResult.OK)
             {
@@ -687,7 +693,7 @@ namespace Yapped
                     Flag1 = false,
                     Flag2 = false,
                     Format = Binder.Format.x74,
-                    Timestamp = regulation.Timestamp,
+                    Timestamp = bnd4.Timestamp,
                     Unicode = true,
                     Files = regulation.Files.Where(f => f.Name.EndsWith(".param")).ToList()
                 };
@@ -700,7 +706,7 @@ namespace Yapped
                     Flag1 = false,
                     Flag2 = false,
                     Format = Binder.Format.x74,
-                    Timestamp = regulation.Timestamp,
+                    Timestamp = bnd4.Timestamp,
                     Unicode = true,
                     Files = regulation.Files.Where(f => f.Name.EndsWith(".stayparam")).ToList()
                 };
