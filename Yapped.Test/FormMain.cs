@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using CellType = SoulsFormats.PARAM64.CellType;
+using CellType = SoulsFormats.PARAM.CellType;
 
 namespace Yapped.Test
 {
@@ -13,7 +13,7 @@ namespace Yapped.Test
 
         private string regulationPath;
         private List<ParamFile> paramFiles;
-        private Dictionary<string, PARAM64.Layout> layouts;
+        private Dictionary<string, PARAM.Layout> layouts;
 
         public FormMain()
         {
@@ -25,11 +25,11 @@ namespace Yapped.Test
             dgvLayout.AutoGenerateColumns = false;
             dgvLayoutTypeCol.DataSource = Enum.GetValues(typeof(CellType));
 
-            layouts = new Dictionary<string, PARAM64.Layout>();
+            layouts = new Dictionary<string, PARAM.Layout>();
             foreach (string path in Directory.GetFiles("Layouts", "*.xml"))
             {
                 string format = Path.GetFileNameWithoutExtension(path);
-                layouts[format] = PARAM64.Layout.ReadXMLFile(path);
+                layouts[format] = PARAM.Layout.ReadXMLFile(path);
             }
         }
 
@@ -90,7 +90,7 @@ namespace Yapped.Test
                 {
                     try
                     {
-                        PARAM64 param = PARAM64.Read(file.Bytes);
+                        PARAM param = PARAM.Read(file.Bytes);
                         paramFiles.Add(new ParamFile(Path.GetFileNameWithoutExtension(file.Name), param, layouts));
                     }
                     catch
@@ -112,17 +112,17 @@ namespace Yapped.Test
         public class ParamFile
         {
             public string Name { get; set; }
-            public PARAM64.Layout Layout;
-            public PARAM64 Param;
-            public List<PARAM64.Row> Rows { get; set; }
+            public PARAM.Layout Layout;
+            public PARAM Param;
+            public List<PARAM.Row> Rows { get; set; }
 
-            public ParamFile(string name, PARAM64 param, Dictionary<string, PARAM64.Layout> layouts)
+            public ParamFile(string name, PARAM param, Dictionary<string, PARAM.Layout> layouts)
             {
                 Name = name;
                 Param = param;
                 string format = Param.ID;
                 if (!layouts.ContainsKey(format))
-                    layouts[format] = new PARAM64.Layout();
+                    layouts[format] = new PARAM.Layout();
 
                 try
                 {
@@ -132,7 +132,7 @@ namespace Yapped.Test
                 }
                 catch (Exception ex)
                 {
-                    Rows = new List<PARAM64.Row>();
+                    Rows = new List<PARAM.Row>();
                     ShowError($"Error in layout {format}, please try again.\r\n\r\n{ex}");
                 }
             }
@@ -167,7 +167,7 @@ namespace Yapped.Test
         {
             if (dgvRows.SelectedCells.Count > 0)
             {
-                PARAM64.Row row = (PARAM64.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
+                PARAM.Row row = (PARAM.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
                 dgvCells.DataSource = row;
                 dgvCells.DataMember = "Cells";
             }
@@ -175,7 +175,7 @@ namespace Yapped.Test
 
         private void dgvCells_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            PARAM64.Cell cell = (PARAM64.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+            PARAM.Cell cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             if (e.ColumnIndex == 1)
             {
                 if (cell.Type == CellType.x8)
@@ -189,7 +189,7 @@ namespace Yapped.Test
 
         private void dgvLayout_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            PARAM64.Layout.Entry entry = (PARAM64.Layout.Entry)dgvLayout.Rows[e.RowIndex].DataBoundItem;
+            PARAM.Layout.Entry entry = (PARAM.Layout.Entry)dgvLayout.Rows[e.RowIndex].DataBoundItem;
 
             // Type
             if (e.ColumnIndex == 0)
@@ -202,7 +202,7 @@ namespace Yapped.Test
                 try
                 {
                     if (entry.Type != CellType.dummy8)
-                        PARAM64.Layout.ParseParamValue(entry.Type, e.FormattedValue.ToString());
+                        PARAM.Layout.ParseParamValue(entry.Type, e.FormattedValue.ToString());
                 }
                 catch
                 {
@@ -217,7 +217,7 @@ namespace Yapped.Test
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
                 return;
 
-            PARAM64.Layout.Entry entry = (PARAM64.Layout.Entry)dgvLayout.Rows[e.RowIndex].DataBoundItem;
+            PARAM.Layout.Entry entry = (PARAM.Layout.Entry)dgvLayout.Rows[e.RowIndex].DataBoundItem;
             DataGridViewCell cell = dgvLayout.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
             // Size
@@ -250,7 +250,7 @@ namespace Yapped.Test
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ParamFile selectedParam = (ParamFile)dgvRows.DataSource;
-            PARAM64.Row selectedRow = (PARAM64.Row)dgvCells.DataSource;
+            PARAM.Row selectedRow = (PARAM.Row)dgvCells.DataSource;
 
             LoadRegulation(regulationPath);
 
@@ -261,7 +261,7 @@ namespace Yapped.Test
 
             dgvRows.ClearSelection();
             foreach (DataGridViewRow row in dgvRows.Rows)
-                if (((PARAM64.Row)row.DataBoundItem).ID == selectedRow.ID)
+                if (((PARAM.Row)row.DataBoundItem).ID == selectedRow.ID)
                     row.Cells[0].Selected = true;
         }
 
@@ -275,8 +275,8 @@ namespace Yapped.Test
 
         private void addEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var layout = (PARAM64.Layout)dgvLayout.DataSource;
-            var entry = new PARAM64.Layout.Entry(CellType.u8, "name", 0);
+            var layout = (PARAM.Layout)dgvLayout.DataSource;
+            var entry = new PARAM.Layout.Entry(CellType.u8, "name", 0);
             if (dgvLayout.SelectedCells.Count == 0)
                 layout.Add(entry);
             else
@@ -290,7 +290,7 @@ namespace Yapped.Test
         {
             if (dgvLayout.SelectedCells.Count > 0)
             {
-                var layout = (PARAM64.Layout)dgvLayout.DataSource;
+                var layout = (PARAM.Layout)dgvLayout.DataSource;
                 int rangeStart = layout.Count;
                 int rangeEnd = 0;
                 foreach (DataGridViewCell cell in dgvLayout.SelectedCells)
