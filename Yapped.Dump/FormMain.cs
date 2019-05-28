@@ -114,8 +114,10 @@ namespace Yapped.Dump
                             {
                                 var range = worksheet.Cells[i + 2, ++columnCount];
                                 if (type == CellType.f32)
+                                {
                                     range.Value = (double)(float)cell.Value;
-                                else if (type == CellType.b8 || type == CellType.b32)
+                                }
+                                else if (type == CellType.b8 || type == CellType.b16 || type == CellType.b32)
                                 {
                                     bool b = (bool)cell.Value;
                                     range.Value = b.ToString();
@@ -138,7 +140,9 @@ namespace Yapped.Dump
                                     range.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
                                 }
                                 else
+                                {
                                     range.Value = cell.Value;
+                                }
                             }
                         }
                     }

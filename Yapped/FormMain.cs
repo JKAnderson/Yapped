@@ -526,7 +526,7 @@ namespace Yapped
             {
                 DataGridViewRow row = dgvCells.Rows[e.RowIndex + i];
                 PARAM.Cell paramCell = (PARAM.Cell)row.DataBoundItem;
-                if (paramCell.Type == CellType.b8 || paramCell.Type == CellType.b32)
+                if (paramCell.Type == CellType.b8 || paramCell.Type == CellType.b16 || paramCell.Type == CellType.b32)
                 {
                     // Value
                     row.Cells[2] = new DataGridViewCheckBoxCell();

@@ -205,7 +205,7 @@ namespace Yapped
                     return "Invalid value for float.";
                 }
             }
-            else if (type == CellType.b8 || type == CellType.b32)
+            else if (type == CellType.b8 || type == CellType.b16 || type == CellType.b32)
             {
                 if (!bool.TryParse(text, out _))
                 {
