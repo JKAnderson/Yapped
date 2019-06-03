@@ -3,7 +3,7 @@ using SoulsFormats;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -23,7 +23,6 @@ namespace Yapped
         private string regulationPath;
         private IBinder regulation;
         private bool encrypted;
-        private Dictionary<string, PARAM.Layout> layouts;
         private BindingSource rowSource;
         private Dictionary<string, (int Row, int Cell)> dgvIndices;
         private string lastFindRowPattern, lastFindFieldPattern;
@@ -32,7 +31,6 @@ namespace Yapped
         {
             InitializeComponent();
             regulation = null;
-            layouts = new Dictionary<string, PARAM.Layout>();
             rowSource = new BindingSource();
             dgvIndices = new Dictionary<string, (int Row, int Cell)>();
             dgvRows.DataSource = rowSource;
@@ -156,113 +154,8 @@ namespace Yapped
             }
         }
 
-        private void dgvParams_SelectionChanged(object sender, EventArgs e)
-        {
-            if (rowSource.DataSource != null)
-            {
-                ParamWrapper paramFile = (ParamWrapper)rowSource.DataSource;
-                (int Row, int Cell) indices = (0, 0);
-
-                if (dgvRows.SelectedCells.Count > 0)
-                    indices.Row = dgvRows.SelectedCells[0].RowIndex;
-                else if (dgvRows.FirstDisplayedScrollingRowIndex >= 0)
-                    indices.Row = dgvRows.FirstDisplayedScrollingRowIndex;
-
-                if (dgvCells.FirstDisplayedScrollingRowIndex >= 0)
-                    indices.Cell = dgvCells.FirstDisplayedScrollingRowIndex;
-
-                dgvIndices[paramFile.Name] = indices;
-            }
-
-            rowSource.DataSource = null;
-            dgvCells.DataSource = null;
-            if (dgvParams.SelectedCells.Count > 0)
-            {
-                ParamWrapper paramFile = (ParamWrapper)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
-                // Yes, I need to set this again every time because it gets cleared out when you null the DataSource for some stupid reason
-                rowSource.DataMember = "Rows";
-                rowSource.DataSource = paramFile;
-                (int Row, int Cell) indices = dgvIndices[paramFile.Name];
-
-                if (indices.Row >= dgvRows.RowCount)
-                    indices.Row = dgvRows.RowCount - 1;
-
-                if (indices.Row < 0)
-                    indices.Row = 0;
-
-                dgvIndices[paramFile.Name] = indices;
-                dgvRows.ClearSelection();
-                if (dgvRows.RowCount > 0)
-                {
-                    dgvRows.FirstDisplayedScrollingRowIndex = indices.Row;
-                    dgvRows.Rows[indices.Row].Selected = true;
-                }
-            }
-        }
-
-        private void dgvRows_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvRows.SelectedCells.Count > 0)
-            {
-                ParamWrapper paramFile = (ParamWrapper)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
-                (int Row, int Cell) indices = dgvIndices[paramFile.Name];
-                if (dgvCells.FirstDisplayedScrollingRowIndex >= 0)
-                    indices.Cell = dgvCells.FirstDisplayedScrollingRowIndex;
-
-                PARAM.Row row = (PARAM.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
-                dgvCells.DataSource = row.Cells.Where(cell => cell.Type != CellType.dummy8).ToArray();
-
-                if (indices.Cell >= dgvCells.RowCount)
-                    indices.Cell = dgvCells.RowCount - 1;
-
-                if (indices.Cell < 0)
-                    indices.Cell = 0;
-
-                dgvIndices[paramFile.Name] = indices;
-                if (dgvCells.RowCount > 0)
-                    dgvCells.FirstDisplayedScrollingRowIndex = indices.Cell;
-            }
-        }
-
-        private void dgvCells_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            PARAM.Cell paramCell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
-            DataGridViewCell dgvCell = dgvCells.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            paramCell.Value = PARAM.Layout.ParseParamValue(paramCell.Type, dgvCell.Value.ToString(), CultureInfo.CurrentCulture);
-        }
-
-        private void dgvCells_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            if (e.ColumnIndex != 2)
-                return;
-
-            PARAM.Cell paramCell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
-            CellType type = paramCell.Type;
-            string value = e.FormattedValue.ToString();
-
-            string error = Util.ValidateCell(type, value);
-            if (error != null)
-            {
-                Util.ShowError(error);
-                e.Cancel = true;
-            }
-        }
-
-        private void dgvCells_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex == 2)
-            {
-                PARAM.Cell cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
-                if (cell.Type == CellType.x8)
-                    e.Value = $"0x{e.Value:X2}";
-                else if (cell.Type == CellType.x16)
-                    e.Value = $"0x{e.Value:X4}";
-                else if (cell.Type == CellType.x32)
-                    e.Value = $"0x{e.Value:X8}";
-            }
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        #region File Menu
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ofdRegulation.FileName = regulationPath;
             if (ofdRegulation.ShowDialog() == DialogResult.OK)
@@ -272,7 +165,7 @@ namespace Yapped
             }
         }
 
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (BinderFile file in regulation.Files)
             {
@@ -307,7 +200,7 @@ namespace Yapped
             SystemSounds.Asterisk.Play();
         }
 
-        private void restoreToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists(regulationPath + ".bak"))
             {
@@ -333,7 +226,7 @@ namespace Yapped
             }
         }
 
-        private void exploreToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExploreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -345,17 +238,59 @@ namespace Yapped
             }
         }
 
-        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(UPDATE_URL);
-        }
+            var bnd4 = regulation as BND4;
+            fbdExport.SelectedPath = Path.GetDirectoryName(regulationPath);
+            if (fbdExport.ShowDialog() == DialogResult.OK)
+            {
+                BND4 paramBND = new BND4
+                {
+                    BigEndian = false,
+                    Compression = DCX.Type.DarkSouls3,
+                    Extended = 0x04,
+                    Flag1 = false,
+                    Flag2 = false,
+                    Format = Binder.Format.x74,
+                    Timestamp = bnd4.Timestamp,
+                    Unicode = true,
+                    Files = regulation.Files.Where(f => f.Name.EndsWith(".param")).ToList()
+                };
 
-        private void addRowToolStripMenuItem_Click(object sender, EventArgs e)
+                BND4 stayBND = new BND4
+                {
+                    BigEndian = false,
+                    Compression = DCX.Type.DarkSouls3,
+                    Extended = 0x04,
+                    Flag1 = false,
+                    Flag2 = false,
+                    Format = Binder.Format.x74,
+                    Timestamp = bnd4.Timestamp,
+                    Unicode = true,
+                    Files = regulation.Files.Where(f => f.Name.EndsWith(".stayparam")).ToList()
+                };
+
+                string dir = fbdExport.SelectedPath;
+                try
+                {
+                    paramBND.Write($@"{dir}\gameparam_dlc2.parambnd.dcx");
+                    stayBND.Write($@"{dir}\stayparam.parambnd.dcx");
+                }
+                catch (Exception ex)
+                {
+                    Util.ShowError($"Failed to write exported parambnds.\r\n\r\n{ex}");
+                }
+            }
+        }
+        #endregion
+
+        #region Edit Menu
+        private void AddRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CreateRow("Add a new row...");
         }
 
-        private void duplicateRowToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DuplicateRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dgvRows.SelectedCells.Count == 0)
             {
@@ -412,7 +347,7 @@ namespace Yapped
             return result;
         }
 
-        private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DeleteRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dgvRows.SelectedCells.Count > 0)
             {
@@ -439,7 +374,7 @@ namespace Yapped
             }
         }
 
-        private void importNamesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ImportNamesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             bool replace = MessageBox.Show("If a row already has a name, would you like to skip it?\r\n" +
                 "Click Yes to skip existing names.\r\nClick No to replace existing names.",
@@ -478,21 +413,7 @@ namespace Yapped
             dgvRows.Refresh();
         }
 
-        private void dgvRows_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-        {
-            // ID
-            if (e.ColumnIndex == 0)
-            {
-                bool parsed = int.TryParse((string)e.FormattedValue, out int value);
-                if (!parsed || value < 0)
-                {
-                    Util.ShowError("Row ID must be a positive integer.\r\nEnter a valid number or press Esc to cancel.");
-                    e.Cancel = true;
-                }
-            }
-        }
-
-        private void exportNamesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExportNamesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string namesDir = $@"{GetResRoot()}\Names";
             List<ParamWrapper> paramFiles = (List<ParamWrapper>)dgvParams.DataSource;
@@ -520,21 +441,7 @@ namespace Yapped
             }
         }
 
-        private void dgvCells_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            for (int i = 0; i < e.RowCount; i++)
-            {
-                DataGridViewRow row = dgvCells.Rows[e.RowIndex + i];
-                PARAM.Cell paramCell = (PARAM.Cell)row.DataBoundItem;
-                if (paramCell.Type == CellType.b8 || paramCell.Type == CellType.b16 || paramCell.Type == CellType.b32)
-                {
-                    // Value
-                    row.Cells[2] = new DataGridViewCheckBoxCell();
-                }
-            }
-        }
-
-        private void findRowToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var findForm = new FormFind("Find row with name...");
             if (findForm.ShowDialog() == DialogResult.OK)
@@ -543,7 +450,7 @@ namespace Yapped
             }
         }
 
-        private void findNextRowToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindNextRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FindRow(lastFindRowPattern);
         }
@@ -583,7 +490,7 @@ namespace Yapped
             }
         }
 
-        private void gotoRowToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GotoRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var gotoForm = new FormGoto();
             if (gotoForm.ShowDialog() == DialogResult.OK)
@@ -612,7 +519,7 @@ namespace Yapped
             }
         }
 
-        private void findFieldToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindFieldToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var findForm = new FormFind("Find field with name...");
             if (findForm.ShowDialog() == DialogResult.OK)
@@ -621,27 +528,9 @@ namespace Yapped
             }
         }
 
-        private void findNextFieldToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindNextFieldToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FindField(lastFindFieldPattern);
-        }
-
-        private void dgvParams_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                var paramWrapper = (ParamWrapper)dgvParams.Rows[e.RowIndex].DataBoundItem;
-                e.ToolTipText = paramWrapper.Description;
-            }
-        }
-
-        private void dgvCells_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
-            {
-                var cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
-                e.ToolTipText = cell.Description;
-            }
         }
 
         private void FindField(string pattern)
@@ -678,51 +567,203 @@ namespace Yapped
                 Util.ShowError($"No field found matching: {pattern}");
             }
         }
+        #endregion
 
-        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void UpdateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var bnd4 = regulation as BND4;
-            fbdExport.SelectedPath = Path.GetDirectoryName(regulationPath);
-            if (fbdExport.ShowDialog() == DialogResult.OK)
+            Process.Start(UPDATE_URL);
+        }
+
+        #region dgvParams
+        private void DgvParams_SelectionChanged(object sender, EventArgs e)
+        {
+            if (rowSource.DataSource != null)
             {
-                BND4 paramBND = new BND4
-                {
-                    BigEndian = false,
-                    Compression = DCX.Type.DarkSouls3,
-                    Extended = 0x04,
-                    Flag1 = false,
-                    Flag2 = false,
-                    Format = Binder.Format.x74,
-                    Timestamp = bnd4.Timestamp,
-                    Unicode = true,
-                    Files = regulation.Files.Where(f => f.Name.EndsWith(".param")).ToList()
-                };
+                ParamWrapper paramFile = (ParamWrapper)rowSource.DataSource;
+                (int Row, int Cell) indices = (0, 0);
 
-                BND4 stayBND = new BND4
-                {
-                    BigEndian = false,
-                    Compression = DCX.Type.DarkSouls3,
-                    Extended = 0x04,
-                    Flag1 = false,
-                    Flag2 = false,
-                    Format = Binder.Format.x74,
-                    Timestamp = bnd4.Timestamp,
-                    Unicode = true,
-                    Files = regulation.Files.Where(f => f.Name.EndsWith(".stayparam")).ToList()
-                };
+                if (dgvRows.SelectedCells.Count > 0)
+                    indices.Row = dgvRows.SelectedCells[0].RowIndex;
+                else if (dgvRows.FirstDisplayedScrollingRowIndex >= 0)
+                    indices.Row = dgvRows.FirstDisplayedScrollingRowIndex;
 
-                string dir = fbdExport.SelectedPath;
-                try
+                if (dgvCells.FirstDisplayedScrollingRowIndex >= 0)
+                    indices.Cell = dgvCells.FirstDisplayedScrollingRowIndex;
+
+                dgvIndices[paramFile.Name] = indices;
+            }
+
+            rowSource.DataSource = null;
+            dgvCells.DataSource = null;
+            if (dgvParams.SelectedCells.Count > 0)
+            {
+                ParamWrapper paramFile = (ParamWrapper)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
+                // Yes, I need to set this again every time because it gets cleared out when you null the DataSource for some stupid reason
+                rowSource.DataMember = "Rows";
+                rowSource.DataSource = paramFile;
+                (int Row, int Cell) indices = dgvIndices[paramFile.Name];
+
+                if (indices.Row >= dgvRows.RowCount)
+                    indices.Row = dgvRows.RowCount - 1;
+
+                if (indices.Row < 0)
+                    indices.Row = 0;
+
+                dgvIndices[paramFile.Name] = indices;
+                dgvRows.ClearSelection();
+                if (dgvRows.RowCount > 0)
                 {
-                    paramBND.Write($@"{dir}\gameparam_dlc2.parambnd.dcx");
-                    stayBND.Write($@"{dir}\stayparam.parambnd.dcx");
-                }
-                catch (Exception ex)
-                {
-                    Util.ShowError($"Failed to write exported parambnds.\r\n\r\n{ex}");
+                    dgvRows.FirstDisplayedScrollingRowIndex = indices.Row;
+                    dgvRows.Rows[indices.Row].Selected = true;
                 }
             }
         }
+
+        private void DgvParams_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                var paramWrapper = (ParamWrapper)dgvParams.Rows[e.RowIndex].DataBoundItem;
+                e.ToolTipText = paramWrapper.Description;
+            }
+        }
+        #endregion
+
+        #region dgvRows
+        private void DgvRows_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvRows.SelectedCells.Count > 0)
+            {
+                ParamWrapper paramFile = (ParamWrapper)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
+                (int Row, int Cell) indices = dgvIndices[paramFile.Name];
+                if (dgvCells.FirstDisplayedScrollingRowIndex >= 0)
+                    indices.Cell = dgvCells.FirstDisplayedScrollingRowIndex;
+
+                PARAM.Row row = (PARAM.Row)dgvRows.SelectedCells[0].OwningRow.DataBoundItem;
+                dgvCells.DataSource = row.Cells.Where(cell => cell.Type != CellType.dummy8).ToArray();
+
+                if (indices.Cell >= dgvCells.RowCount)
+                    indices.Cell = dgvCells.RowCount - 1;
+
+                if (indices.Cell < 0)
+                    indices.Cell = 0;
+
+                dgvIndices[paramFile.Name] = indices;
+                if (dgvCells.RowCount > 0)
+                    dgvCells.FirstDisplayedScrollingRowIndex = indices.Cell;
+            }
+        }
+
+        private void DgvRows_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            // ID
+            if (e.ColumnIndex == 0)
+            {
+                bool parsed = int.TryParse((string)e.FormattedValue, out int value);
+                if (!parsed || value < 0)
+                {
+                    Util.ShowError("Row ID must be a positive integer.\r\nEnter a valid number or press Esc to cancel.");
+                    e.Cancel = true;
+                }
+            }
+        }
+        #endregion
+
+        #region dgvCells
+        private void DgvCells_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            foreach (DataGridViewRow row in dgvCells.Rows)
+            {
+                var cell = (PARAM.Cell)row.DataBoundItem;
+                if (cell.Type == CellType.b8 || cell.Type == CellType.b16 || cell.Type == CellType.b32)
+                {
+                    row.Cells[2] = new DataGridViewCheckBoxCell();
+                }
+                else
+                {
+                    row.Cells[2].ValueType = cell.Value.GetType();
+                }
+            }
+        }
+
+        private void DgvCells_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex != 2)
+                return;
+
+            PARAM.Cell cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+            if (cell.Type == CellType.x8)
+                e.Value = $"0x{e.Value:X2}";
+            else if (cell.Type == CellType.x16)
+                e.Value = $"0x{e.Value:X4}";
+            else if (cell.Type == CellType.x32)
+                e.Value = $"0x{e.Value:X8}";
+        }
+
+        private void DgvCells_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            if (e.ColumnIndex != 2)
+                return;
+
+            var cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+            try
+            {
+                if (cell.Type == CellType.x8)
+                    Convert.ToByte((string)e.FormattedValue, 16);
+                else if (cell.Type == CellType.x16)
+                    Convert.ToUInt16((string)e.FormattedValue, 16);
+                else if (cell.Type == CellType.x32)
+                    Convert.ToUInt32((string)e.FormattedValue, 16);
+            }
+            catch
+            {
+                e.Cancel = true;
+                dgvCells.EditingPanel.BackColor = Color.Pink;
+                dgvCells.EditingControl.BackColor = Color.Pink;
+                SystemSounds.Hand.Play();
+            }
+        }
+
+        private void DgvCells_CellParsing(object sender, DataGridViewCellParsingEventArgs e)
+        {
+            if (e.ColumnIndex != 2)
+                return;
+
+            var cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+            if (cell.Type == CellType.x8)
+            {
+                e.Value = Convert.ToByte((string)e.Value, 16);
+                e.ParsingApplied = true;
+            }
+            else if (cell.Type == CellType.x16)
+            {
+                e.Value = Convert.ToUInt16((string)e.Value, 16);
+                e.ParsingApplied = true;
+            }
+            else if (cell.Type == CellType.x32)
+            {
+                e.Value = Convert.ToUInt32((string)e.Value, 16);
+                e.ParsingApplied = true;
+            }
+        }
+
+        private void DgvCells_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+            dgvCells.EditingPanel.BackColor = Color.Pink;
+            dgvCells.EditingControl.BackColor = Color.Pink;
+            SystemSounds.Hand.Play();
+        }
+
+        private void DgvCells_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == 1)
+            {
+                var cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+                e.ToolTipText = cell.Description;
+            }
+        }
+        #endregion
 
         private string GetResRoot()
         {

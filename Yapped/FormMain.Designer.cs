@@ -125,7 +125,7 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.ToolTipText = "Browse for a regulation file to edit.";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -134,7 +134,7 @@
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.ToolTipText = "Save changes to the regulation file.";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // restoreToolStripMenuItem
             // 
@@ -142,7 +142,7 @@
             this.restoreToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.restoreToolStripMenuItem.Text = "Restore";
             this.restoreToolStripMenuItem.ToolTipText = "Restore the regulation file backup.";
-            this.restoreToolStripMenuItem.Click += new System.EventHandler(this.restoreToolStripMenuItem_Click);
+            this.restoreToolStripMenuItem.Click += new System.EventHandler(this.RestoreToolStripMenuItem_Click);
             // 
             // exploreToolStripMenuItem
             // 
@@ -150,7 +150,7 @@
             this.exploreToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.exploreToolStripMenuItem.Text = "Explore";
             this.exploreToolStripMenuItem.ToolTipText = "Open the regulation file directory in Explorer.";
-            this.exploreToolStripMenuItem.Click += new System.EventHandler(this.exploreToolStripMenuItem_Click);
+            this.exploreToolStripMenuItem.Click += new System.EventHandler(this.ExploreToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
@@ -158,7 +158,7 @@
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.ToolTipText = "Export an encrypted Data0.bdt to decrypted parambnds.";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.ExportToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -207,7 +207,7 @@
             this.addRowToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.addRowToolStripMenuItem.Text = "Add Row";
             this.addRowToolStripMenuItem.ToolTipText = "Add a new row to the active param.";
-            this.addRowToolStripMenuItem.Click += new System.EventHandler(this.addRowToolStripMenuItem_Click);
+            this.addRowToolStripMenuItem.Click += new System.EventHandler(this.AddRowToolStripMenuItem_Click);
             // 
             // duplicateRowToolStripMenuItem
             // 
@@ -217,7 +217,7 @@
             this.duplicateRowToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.duplicateRowToolStripMenuItem.Text = "Duplicate Row";
             this.duplicateRowToolStripMenuItem.ToolTipText = "Create a new row with values identical to the selected one";
-            this.duplicateRowToolStripMenuItem.Click += new System.EventHandler(this.duplicateRowToolStripMenuItem_Click);
+            this.duplicateRowToolStripMenuItem.Click += new System.EventHandler(this.DuplicateRowToolStripMenuItem_Click);
             // 
             // deleteRowToolStripMenuItem
             // 
@@ -226,7 +226,7 @@
             this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.deleteRowToolStripMenuItem.Text = "Delete Row";
             this.deleteRowToolStripMenuItem.ToolTipText = "Delete the currently selected row";
-            this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
+            this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.DeleteRowToolStripMenuItem_Click);
             // 
             // findRowToolStripMenuItem
             // 
@@ -235,7 +235,7 @@
             this.findRowToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.findRowToolStripMenuItem.Text = "&Find Row";
             this.findRowToolStripMenuItem.ToolTipText = "Search for a row with a matching name";
-            this.findRowToolStripMenuItem.Click += new System.EventHandler(this.findRowToolStripMenuItem_Click);
+            this.findRowToolStripMenuItem.Click += new System.EventHandler(this.FindRowToolStripMenuItem_Click);
             // 
             // findNextRowToolStripMenuItem
             // 
@@ -244,7 +244,7 @@
             this.findNextRowToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.findNextRowToolStripMenuItem.Text = "Find Next Row";
             this.findNextRowToolStripMenuItem.ToolTipText = "Search again with the previous pattern";
-            this.findNextRowToolStripMenuItem.Click += new System.EventHandler(this.findNextRowToolStripMenuItem_Click);
+            this.findNextRowToolStripMenuItem.Click += new System.EventHandler(this.FindNextRowToolStripMenuItem_Click);
             // 
             // gotoRowToolStripMenuItem
             // 
@@ -253,7 +253,7 @@
             this.gotoRowToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.gotoRowToolStripMenuItem.Text = "&Goto Row";
             this.gotoRowToolStripMenuItem.ToolTipText = "Go to a row with a certain ID";
-            this.gotoRowToolStripMenuItem.Click += new System.EventHandler(this.gotoRowToolStripMenuItem_Click);
+            this.gotoRowToolStripMenuItem.Click += new System.EventHandler(this.GotoRowToolStripMenuItem_Click);
             // 
             // findFieldToolStripMenuItem
             // 
@@ -263,7 +263,7 @@
             this.findFieldToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.findFieldToolStripMenuItem.Text = "Find Field";
             this.findFieldToolStripMenuItem.ToolTipText = "Search for a field with a matching name";
-            this.findFieldToolStripMenuItem.Click += new System.EventHandler(this.findFieldToolStripMenuItem_Click);
+            this.findFieldToolStripMenuItem.Click += new System.EventHandler(this.FindFieldToolStripMenuItem_Click);
             // 
             // findNextFieldToolStripMenuItem
             // 
@@ -272,7 +272,7 @@
             this.findNextFieldToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.findNextFieldToolStripMenuItem.Text = "Find Next Field";
             this.findNextFieldToolStripMenuItem.ToolTipText = "Search again with the previous pattern";
-            this.findNextFieldToolStripMenuItem.Click += new System.EventHandler(this.findNextFieldToolStripMenuItem_Click);
+            this.findNextFieldToolStripMenuItem.Click += new System.EventHandler(this.FindNextFieldToolStripMenuItem_Click);
             // 
             // importNamesToolStripMenuItem
             // 
@@ -280,7 +280,7 @@
             this.importNamesToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.importNamesToolStripMenuItem.Text = "Import Names";
             this.importNamesToolStripMenuItem.ToolTipText = "Insert known row names to their corresponding IDs";
-            this.importNamesToolStripMenuItem.Click += new System.EventHandler(this.importNamesToolStripMenuItem_Click);
+            this.importNamesToolStripMenuItem.Click += new System.EventHandler(this.ImportNamesToolStripMenuItem_Click);
             // 
             // exportNamesToolStripMenuItem
             // 
@@ -288,7 +288,7 @@
             this.exportNamesToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.exportNamesToolStripMenuItem.Text = "Export Names";
             this.exportNamesToolStripMenuItem.ToolTipText = "Export row names from the params to text files";
-            this.exportNamesToolStripMenuItem.Click += new System.EventHandler(this.exportNamesToolStripMenuItem_Click);
+            this.exportNamesToolStripMenuItem.Click += new System.EventHandler(this.ExportNamesToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -314,7 +314,7 @@
             this.updateToolStripMenuItem.Text = "Update";
             this.updateToolStripMenuItem.ToolTipText = "An update is available! Click to download it.";
             this.updateToolStripMenuItem.Visible = false;
-            this.updateToolStripMenuItem.Click += new System.EventHandler(this.updateToolStripMenuItem_Click);
+            this.updateToolStripMenuItem.Click += new System.EventHandler(this.UpdateToolStripMenuItem_Click);
             // 
             // splitContainer2
             // 
@@ -351,8 +351,8 @@
             this.dgvParams.RowHeadersVisible = false;
             this.dgvParams.Size = new System.Drawing.Size(249, 500);
             this.dgvParams.TabIndex = 0;
-            this.dgvParams.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgvParams_CellToolTipTextNeeded);
-            this.dgvParams.SelectionChanged += new System.EventHandler(this.dgvParams_SelectionChanged);
+            this.dgvParams.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgvParams_CellToolTipTextNeeded);
+            this.dgvParams.SelectionChanged += new System.EventHandler(this.DgvParams_SelectionChanged);
             // 
             // dgvParamsParamCol
             // 
@@ -396,8 +396,8 @@
             this.dgvRows.RowHeadersVisible = false;
             this.dgvRows.Size = new System.Drawing.Size(250, 500);
             this.dgvRows.TabIndex = 1;
-            this.dgvRows.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvRows_CellValidating);
-            this.dgvRows.SelectionChanged += new System.EventHandler(this.dgvRows_SelectionChanged);
+            this.dgvRows.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvRows_CellValidating);
+            this.dgvRows.SelectionChanged += new System.EventHandler(this.DgvRows_SelectionChanged);
             // 
             // dgvRowsIDCol
             // 
@@ -433,11 +433,12 @@
             this.dgvCells.RowHeadersVisible = false;
             this.dgvCells.Size = new System.Drawing.Size(253, 500);
             this.dgvCells.TabIndex = 2;
-            this.dgvCells.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCells_CellEndEdit);
-            this.dgvCells.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCells_CellFormatting);
-            this.dgvCells.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.dgvCells_CellToolTipTextNeeded);
-            this.dgvCells.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvCells_CellValidating);
-            this.dgvCells.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvCells_RowsAdded);
+            this.dgvCells.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvCells_CellFormatting);
+            this.dgvCells.CellParsing += new System.Windows.Forms.DataGridViewCellParsingEventHandler(this.DgvCells_CellParsing);
+            this.dgvCells.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.DgvCells_CellToolTipTextNeeded);
+            this.dgvCells.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvCells_CellValidating);
+            this.dgvCells.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DgvCells_DataBindingComplete);
+            this.dgvCells.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DgvCells_DataError);
             // 
             // dgvCellsTypeCol
             // 
