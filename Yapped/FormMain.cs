@@ -675,7 +675,19 @@ namespace Yapped
             foreach (DataGridViewRow row in dgvCells.Rows)
             {
                 var cell = (PARAM.Cell)row.DataBoundItem;
-                if (cell.Type == CellType.b8 || cell.Type == CellType.b16 || cell.Type == CellType.b32)
+                if (cell.Enum != null)
+                {
+                    var paramWrapper = (ParamWrapper)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
+                    PARAM.Layout layout = paramWrapper.Layout;
+                    row.Cells[2] = new DataGridViewComboBoxCell
+                    {
+                        DataSource = layout.Enums[cell.Enum],
+                        DisplayMember = "Name",
+                        ValueMember = "Value",
+                        ValueType = cell.Value.GetType()
+                    };
+                }
+                else if (cell.Type == CellType.b8 || cell.Type == CellType.b16 || cell.Type == CellType.b32)
                 {
                     row.Cells[2] = new DataGridViewCheckBoxCell();
                 }
@@ -692,12 +704,24 @@ namespace Yapped
                 return;
 
             PARAM.Cell cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
-            if (cell.Type == CellType.x8)
-                e.Value = $"0x{e.Value:X2}";
-            else if (cell.Type == CellType.x16)
-                e.Value = $"0x{e.Value:X4}";
-            else if (cell.Type == CellType.x32)
-                e.Value = $"0x{e.Value:X8}";
+            if (cell.Enum == null)
+            {
+                if (cell.Type == CellType.x8)
+                {
+                    e.Value = $"0x{e.Value:X2}";
+                    e.FormattingApplied = true;
+                }
+                else if (cell.Type == CellType.x16)
+                {
+                    e.Value = $"0x{e.Value:X4}";
+                    e.FormattingApplied = true;
+                }
+                else if (cell.Type == CellType.x32)
+                {
+                    e.Value = $"0x{e.Value:X8}";
+                    e.FormattingApplied = true;
+                }
+            }
         }
 
         private void DgvCells_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
@@ -708,12 +732,15 @@ namespace Yapped
             var cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
             try
             {
-                if (cell.Type == CellType.x8)
-                    Convert.ToByte((string)e.FormattedValue, 16);
-                else if (cell.Type == CellType.x16)
-                    Convert.ToUInt16((string)e.FormattedValue, 16);
-                else if (cell.Type == CellType.x32)
-                    Convert.ToUInt32((string)e.FormattedValue, 16);
+                if (cell.Enum == null)
+                {
+                    if (cell.Type == CellType.x8)
+                        Convert.ToByte((string)e.FormattedValue, 16);
+                    else if (cell.Type == CellType.x16)
+                        Convert.ToUInt16((string)e.FormattedValue, 16);
+                    else if (cell.Type == CellType.x32)
+                        Convert.ToUInt32((string)e.FormattedValue, 16);
+                }
             }
             catch
             {
@@ -730,20 +757,23 @@ namespace Yapped
                 return;
 
             var cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
-            if (cell.Type == CellType.x8)
+            if (cell.Enum == null)
             {
-                e.Value = Convert.ToByte((string)e.Value, 16);
-                e.ParsingApplied = true;
-            }
-            else if (cell.Type == CellType.x16)
-            {
-                e.Value = Convert.ToUInt16((string)e.Value, 16);
-                e.ParsingApplied = true;
-            }
-            else if (cell.Type == CellType.x32)
-            {
-                e.Value = Convert.ToUInt32((string)e.Value, 16);
-                e.ParsingApplied = true;
+                if (cell.Type == CellType.x8)
+                {
+                    e.Value = Convert.ToByte((string)e.Value, 16);
+                    e.ParsingApplied = true;
+                }
+                else if (cell.Type == CellType.x16)
+                {
+                    e.Value = Convert.ToUInt16((string)e.Value, 16);
+                    e.ParsingApplied = true;
+                }
+                else if (cell.Type == CellType.x32)
+                {
+                    e.Value = Convert.ToUInt32((string)e.Value, 16);
+                    e.ParsingApplied = true;
+                }
             }
         }
 

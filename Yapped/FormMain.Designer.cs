@@ -428,6 +428,7 @@
             this.dgvCellsNameCol,
             this.dgvCellsValueCol});
             this.dgvCells.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCells.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvCells.Location = new System.Drawing.Point(0, 0);
             this.dgvCells.Name = "dgvCells";
             this.dgvCells.RowHeadersVisible = false;
