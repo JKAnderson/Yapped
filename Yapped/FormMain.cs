@@ -151,6 +151,13 @@ namespace Yapped
                 }
                 dgvParams.DataSource = result.ParamWrappers;
                 toolStripStatusLabel1.Text = regulationPath;
+
+                foreach (DataGridViewRow row in dgvParams.Rows)
+                {
+                    var wrapper = (ParamWrapper)row.DataBoundItem;
+                    if (wrapper.Error)
+                        row.Cells[0].Style.BackColor = Color.Pink;
+                }
             }
         }
 
@@ -679,13 +686,17 @@ namespace Yapped
                 {
                     var paramWrapper = (ParamWrapper)dgvParams.SelectedCells[0].OwningRow.DataBoundItem;
                     PARAM.Layout layout = paramWrapper.Layout;
-                    row.Cells[2] = new DataGridViewComboBoxCell
+                    PARAM.Enum pnum = layout.Enums[cell.Enum];
+                    if (pnum.Any(v => v.Value.Equals(cell.Value)))
                     {
-                        DataSource = layout.Enums[cell.Enum],
-                        DisplayMember = "Name",
-                        ValueMember = "Value",
-                        ValueType = cell.Value.GetType()
-                    };
+                        row.Cells[2] = new DataGridViewComboBoxCell
+                        {
+                            DataSource = pnum,
+                            DisplayMember = "Name",
+                            ValueMember = "Value",
+                            ValueType = cell.Value.GetType()
+                        };
+                    }
                 }
                 else if (cell.Type == CellType.b8 || cell.Type == CellType.b16 || cell.Type == CellType.b32)
                 {
@@ -703,9 +714,10 @@ namespace Yapped
             if (e.ColumnIndex != 2)
                 return;
 
-            PARAM.Cell cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
-            if (cell.Enum == null)
+            DataGridViewRow row = dgvCells.Rows[e.RowIndex];
+            if (!(row.Cells[2] is DataGridViewComboBoxCell))
             {
+                var cell = (PARAM.Cell)row.DataBoundItem;
                 if (cell.Type == CellType.x8)
                 {
                     e.Value = $"0x{e.Value:X2}";
@@ -729,11 +741,12 @@ namespace Yapped
             if (e.ColumnIndex != 2)
                 return;
 
-            var cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
+            DataGridViewRow row = dgvCells.Rows[e.RowIndex];
             try
             {
-                if (cell.Enum == null)
+                if (!(row.Cells[2] is DataGridViewComboBoxCell))
                 {
+                    var cell = (PARAM.Cell)row.DataBoundItem;
                     if (cell.Type == CellType.x8)
                         Convert.ToByte((string)e.FormattedValue, 16);
                     else if (cell.Type == CellType.x16)
@@ -756,9 +769,10 @@ namespace Yapped
             if (e.ColumnIndex != 2)
                 return;
 
-            var cell = (PARAM.Cell)dgvCells.Rows[e.RowIndex].DataBoundItem;
-            if (cell.Enum == null)
+            DataGridViewRow row = dgvCells.Rows[e.RowIndex];
+            if (!(row.Cells[2] is DataGridViewComboBoxCell))
             {
+                var cell = (PARAM.Cell)row.DataBoundItem;
                 if (cell.Type == CellType.x8)
                 {
                     e.Value = Convert.ToByte((string)e.Value, 16);
@@ -780,8 +794,11 @@ namespace Yapped
         private void DgvCells_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
-            dgvCells.EditingPanel.BackColor = Color.Pink;
-            dgvCells.EditingControl.BackColor = Color.Pink;
+            if (dgvCells.EditingPanel != null)
+            {
+                dgvCells.EditingPanel.BackColor = Color.Pink;
+                dgvCells.EditingControl.BackColor = Color.Pink;
+            }
             SystemSounds.Hand.Play();
         }
 

@@ -95,14 +95,7 @@ namespace Yapped
                     PARAM param = PARAM.Read(file.Bytes);
                     PARAM.Layout layout = null;
                     if (layouts.ContainsKey(param.ID))
-                    {
                         layout = layouts[param.ID];
-                    }
-                    if (layout == null || layout.Size != param.DetectedSize)
-                    {
-                        layout = new PARAM.Layout();
-                        layout.Add(new PARAM.Layout.Entry(CellType.dummy8, "Unknown", (int)param.DetectedSize, null));
-                    }
 
                     string description = null;
                     if (paramInfo.ContainsKey(name))
