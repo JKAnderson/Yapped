@@ -448,6 +448,164 @@ namespace Yapped
             }
         }
 
+        private void ImportDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string dataDir = $@"{GetResRoot()}\Data";
+
+            DataGridViewRow paramRow = dgvParams.CurrentRow;
+            string paramName = ((ParamWrapper)paramRow.DataBoundItem).Name;
+            string paramFile = $@"{paramName}.csv";
+            string paramPath = $@"{dataDir}\{paramFile}";
+
+            if (!File.Exists(paramPath))
+            {
+                MessageBox.Show($@"{paramFile} does not exist.", "Import Data");
+                return;
+            }
+
+            dgvRows.Rows.Clear();
+
+            var reader = new StreamReader(File.OpenRead(paramPath));
+            // ignore the headers
+            _ = reader.ReadLine();
+
+            while (!reader.EndOfStream)
+            {
+                var line = reader.ReadLine();
+                string[] values = line.Split(',');
+
+                // The first two pieces are ID and Name, which
+                // go into dgvRows. The rest go into dgvCells.
+
+                long id = long.Parse(values[0]);
+                string name = values[1];
+                PARAM.Row newRow = null;
+
+                ParamWrapper paramWrapper = (ParamWrapper)rowSource.DataSource;
+
+                newRow = new PARAM.Row(id, name, paramWrapper.Layout);
+                rowSource.Add(newRow);
+                paramWrapper.Rows.Sort((r1, r2) => r1.ID.CompareTo(r2.ID));
+
+                int index = paramWrapper.Rows.FindIndex(row => ReferenceEquals(row, newRow));
+                int displayedRows = dgvRows.DisplayedRowCount(false);
+                dgvRows.FirstDisplayedScrollingRowIndex = Math.Max(0, index - displayedRows / 2);
+                dgvRows.ClearSelection();
+                dgvRows.Rows[index].Selected = true;
+                dgvRows.Refresh();
+
+                // Now add the rest of the values to dgvCells
+                foreach (DataGridViewRow row in dgvCells.Rows)
+                {
+                    var cell = (PARAM.Cell)row.DataBoundItem;
+                    string value = values[row.Index + 2];
+
+                    switch (cell.Type)
+                    {
+                        case CellType.b8:
+                        case CellType.b16:
+                        case CellType.b32:
+                            row.Cells[2].Value = bool.Parse(value);
+                            break;
+                        case CellType.f32:
+                            row.Cells[2].Value = float.Parse(value);
+                            break;
+                        case CellType.s8:
+                            row.Cells[2].Value = sbyte.Parse(value);
+                            break;
+                        case CellType.s16:
+                            row.Cells[2].Value = short.Parse(value);
+                            break;
+                        case CellType.s32:
+                            row.Cells[2].Value = int.Parse(value);
+                            break;
+                        case CellType.u8:
+                        case CellType.x8:
+                            row.Cells[2].Value = byte.Parse(value);
+                            break;
+                        case CellType.u16:
+                        case CellType.x16:
+                            row.Cells[2].Value = ushort.Parse(value);
+                            break;
+                        case CellType.u32:
+                        case CellType.x32:
+                            row.Cells[2].Value = uint.Parse(value);
+                            break;
+                        default:
+                            row.Cells[2].Value = value;
+                            break;
+                    }
+                }
+
+                dgvCells.Refresh();
+                Application.DoEvents();
+            }
+
+            reader.Close();
+
+            MessageBox.Show($@"{paramName} data import complete!", "Data Import");
+        }
+
+        private void ExportDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string dataDir = $@"{GetResRoot()}\Data";
+            DataGridViewRow paramRow = dgvParams.CurrentRow;
+
+            string paramName = ((ParamWrapper)paramRow.DataBoundItem).Name;
+            string paramFile = $@"{paramName}.csv";
+            string paramPath = $@"{dataDir}\{paramFile}";
+
+            if (File.Exists(paramPath))
+            {
+                string message = $@"{paramFile} exists. Overwrite?";
+                DialogResult answer = MessageBox.Show(message, "Export Data", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (answer == DialogResult.No)
+                    return;
+            }
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (DataGridViewRow rowRow in dgvRows.Rows)
+            {
+                rowRow.Selected = true;
+
+                if (rowRow.Index == 0)
+                {
+                    string header = "ID,Name";
+                    foreach (DataGridViewRow cellRow in dgvCells.Rows)
+                    {
+                        var cell = (PARAM.Cell)cellRow.DataBoundItem;
+                        header = $"{header},{cell.Name}";
+                    }
+
+                    sb.AppendLine(header);
+                }
+
+                var row = (PARAM.Row)rowRow.DataBoundItem;
+                string line = $"{row.ID},{row.Name}";
+
+                foreach (DataGridViewRow cellRow in dgvCells.Rows)
+                {
+                    var cell = (PARAM.Cell)cellRow.DataBoundItem;
+                    line = $"{line},{cell.Value}";
+                }
+
+                sb.AppendLine(line);
+                Application.DoEvents();
+            }
+
+            try
+            {
+                File.WriteAllText(paramPath, sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                Util.ShowError($"Failed to write name file: {paramFile}\r\n\r\n{ex}");
+            }
+
+            MessageBox.Show($@"{paramName} data export complete!", "Data Export");
+        }
+
         private void FindRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var findForm = new FormFind("Find row with name...");
