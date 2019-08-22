@@ -465,7 +465,18 @@ namespace Yapped
 
             dgvRows.Rows.Clear();
 
-            var reader = new StreamReader(File.OpenRead(paramPath));
+            StreamReader reader = null;
+
+            try
+            {
+                reader = new StreamReader(File.OpenRead(paramPath));
+            }
+            catch (Exception ex)
+            {
+                Util.ShowError($"Failed to open {paramFile}.\r\n\r\n{ex}");
+                return;
+            }
+
             // ignore the headers
             _ = reader.ReadLine();
 
