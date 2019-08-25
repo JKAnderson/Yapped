@@ -463,6 +463,11 @@ namespace Yapped
                 return;
             }
 
+            string message = $@"Importing will overwrite {paramName} data. Continue?";
+            DialogResult answer = MessageBox.Show(message, "Import Data", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            if (answer == DialogResult.No)
+                return;
+
             dgvRows.Rows.Clear();
 
             StreamReader reader = null;
