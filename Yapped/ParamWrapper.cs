@@ -20,7 +20,7 @@ namespace Yapped
 
         public ParamWrapper(string name, PARAM param, PARAM.Layout layout, string description)
         {
-            if (layout.Size != param.DetectedSize)
+            if (layout == null || layout.Size != param.DetectedSize)
             {
                 layout = new PARAM.Layout();
                 layout.Add(new PARAM.Layout.Entry(PARAM.CellType.dummy8, "Unknown", (int)param.DetectedSize, null));
